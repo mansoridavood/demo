@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>پنل اپراتور بچینگ — سامانه بچینگ پارس</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/core.css">
+<link rel="stylesheet" href="assets/operator.css">
+</head>
+<body class="op">
+
+<div class="op-wrap">
+
+  <!-- ============ STATUS BAR ============ -->
+  <div class="op-bar">
+    <div class="op-brand">
+      <div class="op-mark">بچ</div>
+      <div><b>پنل اپراتور بچینگ</b><span>علی نوروزی · شیفت صبح</span></div>
+    </div>
+
+    <div class="op-status" id="devStatus"><span class="pulse"></span> دستگاه آنلاین · تأخیر ۲۴ms</div>
+
+    <div class="op-meta">
+      <div><b class="mono" id="clock">۱۴:۱۸</b><span>ساعت</span></div>
+      <div><b class="mono">۴۲</b><span>بچ امروز</span></div>
+      <div><b class="mono">۳۸۶ m³</b><span>حجم امروز</span></div>
+      <div><b class="mono">۲</b><span>سفارش در صف</span></div>
+    </div>
+  </div>
+
+  <!-- ============ BIG TABS ============ -->
+  <div class="op-tabs">
+    <button class="op-tab active" data-screen="queue">صف تولید <span class="n mono">۳</span></button>
+    <button class="op-tab" data-screen="batch">بچ جاری</button>
+    <button class="op-tab" data-screen="receipt">رسید بارگیری</button>
+    <button class="op-tab" data-screen="log">رخدادها و توقف‌ها</button>
+  </div>
+
+  <!-- ================= SCREEN: QUEUE ================= -->
+  <section class="op-screen active" id="screen-queue">
+    <div class="card-head" style="margin-bottom:14px">
+      <div><h3 style="font-size:15px">سفارش‌های تأییدشده</h3><div class="hint">برای شروع، سفارش را انتخاب کنید</div></div>
+      <span class="badge b-blue">به‌روزرسانی خودکار هر ۳۰ ثانیه</span>
+    </div>
+
+    <div class="q-grid">
+      <div class="q-card live">
+        <div class="qh">
+          <div><div class="code mono">ORD-1042</div><div class="cust">شرکت راهسازی البرز · روگذر میدان آزادی</div></div>
+          <span class="badge b-blue">در حال تولید</span>
+        </div>
+        <div class="qrow">
+          <div><b class="mono">C30</b><span>طرح اختلاط</span></div>
+          <div><b class="mono">۶۰ m³</b><span>حجم سفارش</span></div>
+          <div><b class="mono">۹ / ۲۰</b><span>بچ</span></div>
+        </div>
+        <div class="track"><i style="width:45%"></i></div>
+        <button class="btn btn-lg btn-full" style="background:#fff;color:#0D47A1;margin-top:16px" data-screen-go="batch">ادامه در پنل بچ</button>
+      </div>
+
+      <div class="q-card">
+        <div class="qh">
+          <div><div class="code mono">ORD-1043</div><div class="cust">انبوه‌سازان مهرگان · برج نگین شمال</div></div>
+          <span class="badge b-deep">تأیید شده</span>
+        </div>
+        <div class="qrow">
+          <div><b class="mono">C25</b><span>طرح اختلاط</span></div>
+          <div><b class="mono">۴۵ m³</b><span>حجم سفارش</span></div>
+          <div><b class="mono">۱۵:۳۰</b><span>تحویل</span></div>
+        </div>
+        <button class="btn btn-primary btn-lg btn-full" style="margin-top:16px" data-toast="تولید سفارش ORD-1043 آغاز شد">شروع تولید</button>
+      </div>
+
+      <div class="q-card">
+        <div class="qh">
+          <div><div class="code mono">ORD-1044</div><div class="cust">انبوه‌سازان مهرگان · برج نگین شمال</div></div>
+          <span class="badge b-deep">تأیید شده</span>
+        </div>
+        <div class="qrow">
+          <div><b class="mono">C35</b><span>طرح اختلاط</span></div>
+          <div><b class="mono">۸۰ m³</b><span>حجم سفارش</span></div>
+          <div><b class="mono">۱۶:۰۰</b><span>تحویل</span></div>
+        </div>
+        <button class="btn btn-ghost btn-lg btn-full" style="margin-top:16px" data-toast="تولید سفارش ORD-1044 آغاز شد">شروع تولید</button>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <div class="card-head"><h3>موجودی لحظه‌ای مواد</h3><span class="hint">در صورت کمبود، تولید متوقف می‌شود</span></div>
+      <div class="grid g4">
+        <div><div class="row" style="justify-content:space-between"><span>سیمان تیپ ۲</span><b class="mono">۱۸.۴ t</b></div><div class="track" style="margin-top:8px"><i style="width:41%"></i></div></div>
+        <div><div class="row" style="justify-content:space-between"><span>شن ۰-۲۵</span><b class="mono">۱۴۰ t</b></div><div class="track" style="margin-top:8px"><i style="width:70%"></i></div></div>
+        <div><div class="row" style="justify-content:space-between"><span>ماسه</span><b class="mono">۶۰ t</b></div><div class="track" style="margin-top:8px"><i style="width:50%;background:linear-gradient(90deg,#F0B33F,#E39A16)"></i></div></div>
+        <div><div class="row" style="justify-content:space-between"><span>افزودنی</span><b class="mono" style="color:var(--err)">۹۰ lit</b></div><div class="track" style="margin-top:8px"><i style="width:15%;background:linear-gradient(90deg,#FF7B70,#D8564C)"></i></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SCREEN: LIVE BATCH ================= -->
+  <section class="op-screen" id="screen-batch">
+    <div class="live-grid">
+      <div class="stack">
+        <div class="big-panel">
+          <div class="bp-head">
+            <div>
+              <div class="eyebrow" style="color:#90CAF9">در حال اجرا</div>
+              <div class="no mono">بچ #۴۳</div>
+              <div class="of">سفارش ORD-1042 · طرح C30 · راهسازی البرز</div>
+            </div>
+            <span class="badge b-blue" style="background:rgba(144,202,249,.22);color:#DCEBFB">بارگیری مواد</span>
+          </div>
+
+          <div class="bp-figure">
+            <div>
+              <div class="ring" style="width:118px;height:118px">
+                <svg width="118" height="118" viewBox="0 0 118 118">
+                  <circle cx="59" cy="59" r="50" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="11"/>
+                  <circle id="progRing" cx="59" cy="59" r="50" fill="none" stroke="#90CAF9" stroke-width="11" stroke-linecap="round" stroke-dasharray="314.2" stroke-dashoffset="100"/>
+                </svg>
+                <span class="lbl" style="color:#fff;font-size:24px;font-weight:800" id="progText">۶۸٪</span>
+              </div>
+              <div class="lbl-under">پیشرفت بچ</div>
+            </div>
+
+            <div class="bp-stats">
+              <div><b class="mono">۳.۰ m³</b><span>حجم هدف بچ</span></div>
+              <div><b class="mono">۱۳:۵۸:۰۲</b><span>زمان شروع</span></div>
+              <div><b class="mono" id="elapsed">۰۰:۵۸</b><span>زمان سپری‌شده</span></div>
+              <div><b class="mono">۹۰ ثانیه</b><span>زمان اختلاط</span></div>
+            </div>
+          </div>
+
+          <div class="op-actions">
+            <button class="btn act-stop" data-toast="تولید متوقف شد — دلیل توقف را ثبت کنید">⏸ توقف</button>
+            <button class="btn act-end" data-toast="بچ #۴۳ بسته شد و رسید بارگیری صادر شد">✔ پایان بچ</button>
+            <button class="btn act-print" data-screen-go="receipt">⎙ رسید بارگیری</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head"><h3>پیشرفت سفارش ORD-1042</h3><span class="hint">۹ بچ از ۲۰ بچ</span></div>
+          <div class="track" style="height:10px"><i style="width:45%"></i></div>
+          <div class="row" style="justify-content:space-between;margin-top:12px">
+            <span class="muted">تولید شده: <b class="mono">۲۷ m³</b></span>
+            <span class="muted">باقی‌مانده: <b class="mono">۳۳ m³</b></span>
+            <span class="muted">تخمین پایان: <b class="mono">۱۵:۱۰</b></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="stack">
+        <div class="card">
+          <div class="card-head">
+            <div><h3>وزن اسمی در برابر واقعی</h3><div class="hint">تلرانس مجاز ۱.۵٪</div></div>
+            <span class="badge b-warn">۱ انحراف</span>
+          </div>
+
+          <div class="w-row"><span class="wn">سیمان</span><span class="wbar"><i style="width:99%"></i></span><span class="wv"><b class="mono">۳۴۸</b> <span class="mono">/ ۳۵۰ kg</span> <span class="dev ok">۰.۶-٪</span></span></div>
+          <div class="w-row"><span class="wn">شن ۰-۲۵</span><span class="wbar"><i style="width:100%"></i></span><span class="wv"><b class="mono">۱۰۵۵</b> <span class="mono">/ ۱۰۵۰ kg</span> <span class="dev ok">۰.۵+٪</span></span></div>
+          <div class="w-row"><span class="wn">ماسه</span><span class="wbar"><i style="width:99%"></i></span><span class="wv"><b class="mono">۷۱۸</b> <span class="mono">/ ۷۲۰ kg</span> <span class="dev ok">۰.۳-٪</span></span></div>
+          <div class="w-row"><span class="wn">آب</span><span class="wbar"><i style="width:100%"></i></span><span class="wv"><b class="mono">۱۷۶</b> <span class="mono">/ ۱۷۵ lit</span> <span class="dev ok">۰.۶+٪</span></span></div>
+          <div class="w-row"><span class="wn">افزودنی</span><span class="wbar over"><i style="width:97%"></i></span><span class="wv"><b class="mono">۴.۱</b> <span class="mono">/ ۴.۲ kg</span> <span class="dev hi">۲.۴-٪</span></span></div>
+
+          <p style="font-size:12px;color:var(--warn);margin:14px 0 0;">
+            انحراف افزودنی بیشتر از تلرانس است. پیش از بچ بعدی، کالیبراسیون پمپ افزودنی را بررسی کنید.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="card-head"><h3>ثبت مقادیر دستی</h3><span class="hint">در صورت خطای سنسور</span></div>
+          <div class="f-row">
+            <div class="field"><label>ماده</label><select><option>سیمان</option><option>شن ۰-۲۵</option><option>ماسه</option><option>آب</option><option>افزودنی</option></select></div>
+            <div class="field"><label>مقدار واقعی</label><input type="text" class="mono" placeholder="۰"></div>
+          </div>
+          <button class="btn btn-soft btn-full" data-toast="مقدار دستی برای بچ #۴۳ ثبت شد">ثبت مقدار</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SCREEN: RECEIPT ================= -->
+  <section class="op-screen" id="screen-receipt">
+    <div class="grid g2">
+      <div class="stack">
+        <div class="card-head" style="margin:0"><h3>رسید بارگیری بچ #۴۳</h3><span class="badge b-ok">آماده چاپ</span></div>
+        <div class="receipt" style="background:#fff;color:#0B1F33">
+          <div class="r-head">
+            <div><h4>سامانه بچینگ پارس</h4><div class="no mono">رسید بارگیری · LD-2292</div></div>
+            <div class="mark">بچ</div>
+          </div>
+          <div class="r-row"><span>مشتری</span><span>شرکت راهسازی البرز</span></div>
+          <div class="r-row"><span>پروژه</span><span>روگذر میدان آزادی</span></div>
+          <div class="r-row"><span>طرح اختلاط</span><span class="mono">C30 — نسخه ۲</span></div>
+          <div class="r-row"><span>تاریخ و ساعت</span><span class="mono">۱۴۰۴/۰۵/۲۷ — ۱۴:۱۸</span></div>
+          <div class="r-row"><span>راننده</span><span>علی صادقی</span></div>
+          <div class="r-row"><span>خودرو</span><span class="mono">۳۳ ایران ۸۸۱ ج ۱۲</span></div>
+          <div class="r-vol"><div class="n mono">۶.۰</div><div class="u">متر مکعب بارگیری شد</div></div>
+          <div class="r-sign"><div>امضای اپراتور</div><div>امضای راننده</div></div>
+        </div>
+        <div class="row no-print">
+          <button class="btn btn-primary btn-lg" onclick="window.print()">⎙ چاپ رسید</button>
+          <button class="btn btn-ghost btn-lg" data-toast="فایل PDF رسید ساخته شد">خروجی PDF</button>
+        </div>
+      </div>
+
+      <div class="stack">
+        <div class="card">
+          <div class="card-head"><h3>تحویل بار به راننده</h3><span class="hint">پیش از چاپ تکمیل کنید</span></div>
+          <div class="field"><label>راننده</label><select><option>علی صادقی — DR-11</option><option>رضا کریمی — DR-05</option><option>محمد رستمی — DR-03</option></select></div>
+          <div class="field"><label>خودرو</label><select><option>۳۳ ایران ۸۸۱ ج ۱۲ — میکسر ۸ m³</option><option>۱۲ ایران ۴۴۵ ب ۶۷ — میکسر ۶ m³</option></select></div>
+          <div class="f-row">
+            <div class="field"><label>حجم بارگیری <em>متر مکعب</em></label><input type="text" class="mono" value="۶.۰"></div>
+            <div class="field"><label>زمان خروج</label><input type="text" class="mono" value="۱۴:۲۰"></div>
+          </div>
+          <button class="btn btn-primary btn-full" data-toast="بار تحویل راننده شد و در اپلیکیشن راننده نمایش داده می‌شود">ثبت تحویل به راننده</button>
+        </div>
+
+        <div class="card flush">
+          <div class="card-head"><h3>رسیدهای امروز</h3></div>
+          <div class="t-scroll">
+            <table>
+              <thead><tr><th>شماره</th><th>بچ</th><th>راننده</th><th>حجم</th><th>ساعت</th></tr></thead>
+              <tbody>
+                <tr><td class="mono">LD-2292</td><td class="mono">#۴۳</td><td>علی صادقی</td><td class="mono">۶.۰ m³</td><td class="mono">۱۴:۱۸</td></tr>
+                <tr><td class="mono">LD-2291</td><td class="mono">#۴۲</td><td>رضا کریمی</td><td class="mono">۶.۰ m³</td><td class="mono">۱۳:۴۹</td></tr>
+                <tr><td class="mono">LD-2290</td><td class="mono">#۴۱</td><td>رضا کریمی</td><td class="mono">۶.۰ m³</td><td class="mono">۱۳:۴۰</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SCREEN: LOG ================= -->
+  <section class="op-screen" id="screen-log">
+    <div class="grid g-main">
+      <div class="card flush">
+        <div class="card-head"><h3>رخدادهای امروز</h3><span class="hint">۳ مورد</span></div>
+        <div class="t-scroll">
+          <table>
+            <thead><tr><th>ساعت</th><th>بچ</th><th>نوع</th><th>شرح</th><th>مدت</th><th>منبع</th></tr></thead>
+            <tbody>
+              <tr><td class="mono">۰۸:۱۱</td><td class="mono">#۳۸</td><td><span class="badge b-warn">خطای سنسور</span></td><td>خطای موقت سنسور وزن شن</td><td class="mono">۲ دقیقه</td><td class="mono">PLC</td></tr>
+              <tr><td class="mono">۱۰:۲۲</td><td class="mono">#۴۰</td><td><span class="badge b-err">کمبود ماده</span></td><td>افزودنی روان‌کننده زیر حد هشدار</td><td class="mono">—</td><td class="mono">SYSTEM</td></tr>
+              <tr><td class="mono">۱۲:۰۰</td><td class="mono">#۴۱</td><td><span class="badge b-mute">توقف برنامه‌ریزی‌شده</span></td><td>تعویض شیفت اپراتور</td><td class="mono">۶ دقیقه</td><td class="mono">OPERATOR</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><h3>ثبت رخداد جدید</h3></div>
+        <div class="field"><label>نوع رخداد</label><select><option>توقف برنامه‌ریزی‌شده</option><option>خطای دستگاه</option><option>کمبود ماده اولیه</option><option>خطای سنسور وزن</option></select></div>
+        <div class="field"><label>بچ مرتبط</label><select><option>بچ #۴۳ (جاری)</option><option>بچ #۴۲</option><option>بدون بچ</option></select></div>
+        <div class="f-row">
+          <div class="field"><label>شروع</label><input type="text" class="mono" value="۱۴:۱۸"></div>
+          <div class="field"><label>مدت <em>دقیقه</em></label><input type="text" class="mono" placeholder="۰"></div>
+        </div>
+        <div class="field"><label>شرح</label><textarea placeholder="چه اتفاقی افتاد و چطور رفع شد؟"></textarea></div>
+        <button class="btn btn-primary btn-full" data-toast="رخداد ثبت شد و به مدیر کارگاه اطلاع داده شد">ثبت رخداد</button>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<div class="toasts" id="toasts"></div>
+
+<script>
+(function(){
+  'use strict';
+  const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>Array.from(r.querySelectorAll(s));
+  const FA='۰۱۲۳۴۵۶۷۸۹';
+  const toFa=n=>String(n).replace(/\d/g,d=>FA[+d]);
+
+  /* ---- screens ---- */
+  function show(name){
+    $$('.op-tab').forEach(t=>t.classList.toggle('active',t.dataset.screen===name));
+    $$('.op-screen').forEach(s=>s.classList.toggle('active',s.id==='screen-'+name));
+    window.scrollTo(0,0);
+  }
+  $$('.op-tab').forEach(t=>t.addEventListener('click',()=>show(t.dataset.screen)));
+  $$('[data-screen-go]').forEach(b=>b.addEventListener('click',()=>show(b.dataset.screenGo)));
+
+  /* ---- toasts ---- */
+  function toast(msg){
+    const el=document.createElement('div');
+    el.className='toast'; el.innerHTML='<i></i><span></span>';
+    el.querySelector('span').textContent=msg;
+    $('#toasts').appendChild(el);
+    setTimeout(()=>{el.style.transition='.25s';el.style.opacity='0';el.style.transform='translateY(8px)';},2800);
+    setTimeout(()=>el.remove(),3150);
+  }
+  $$('[data-toast]').forEach(b=>b.addEventListener('click',()=>toast(b.dataset.toast)));
+
+  /* ---- live batch simulation (فقط برای نمایش) ---- */
+  let progress=68, seconds=58;
+  const ring=$('#progRing'), ringLen=314.2;
+  function paint(){
+    ring.setAttribute('stroke-dashoffset', ringLen*(1-progress/100));
+    $('#progText').textContent=toFa(progress)+'٪';
+    const m=String(Math.floor(seconds/60)).padStart(2,'0'), s=String(seconds%60).padStart(2,'0');
+    $('#elapsed').textContent=toFa(m)+':'+toFa(s);
+  }
+  paint();
+  setInterval(()=>{
+    seconds++;
+    if(progress<100) progress=Math.min(100, progress+0.4);
+    paint();
+  },1000);
+
+  /* ---- clock ---- */
+  function tick(){
+    const d=new Date();
+    $('#clock').textContent=toFa(String(d.getHours()).padStart(2,'0'))+':'+toFa(String(d.getMinutes()).padStart(2,'0'));
+  }
+  tick(); setInterval(tick,20000);
+})();
+</script>
+</body>
+</html>

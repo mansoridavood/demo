@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>پنل ادمین سامانه — سامانه بچینگ پارس</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/core.css">
+<link rel="stylesheet" href="assets/admin.css">
+</head>
+<body>
+
+<div class="scrim" id="scrim"></div>
+
+<div class="shell">
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="brand-mark">بچ</div>
+      <div>
+        <b>سامانه بچینگ پارس</b>
+        <span>پنل ادمین سامانه</span>
+      </div>
+      <span class="tag">ADMIN</span>
+    </div>
+
+    <div class="scope">
+      <button id="scopeBtn">
+        <span class="ic">▣</span>
+        <span>
+          <span class="t">همه کارخانه‌ها</span>
+          <span class="d">۶ کارخانه · ۵ فعال</span>
+        </span>
+        <span class="ar">▾</span>
+      </button>
+    </div>
+
+    <nav class="nav">
+      <div class="nav-label">نمای کلی</div>
+      <button class="nav-item active" data-page="dashboard"><span class="nav-ico">◱</span> داشبورد سامانه</button>
+      <button class="nav-item" data-page="plants"><span class="nav-ico">▣</span> کارخانه‌ها <span class="nav-count">۶</span></button>
+
+      <div class="nav-label">دسترسی</div>
+      <button class="nav-item" data-page="users"><span class="nav-ico">◧</span> کاربران <span class="nav-count">۳۸</span></button>
+      <button class="nav-item" data-page="roles"><span class="nav-ico">▥</span> نقش‌ها و دسترسی‌ها</button>
+
+      <div class="nav-label">زیرساخت</div>
+      <button class="nav-item" data-page="devices"><span class="nav-ico">⛭</span> دستگاه‌ها و اتصال‌ها</button>
+      <button class="nav-item" data-page="templates"><span class="nav-ico">▦</span> قالب‌های چاپ</button>
+      <button class="nav-item" data-page="backup"><span class="nav-ico">▧</span> پشتیبان‌گیری و امنیت</button>
+
+      <div class="nav-label">پایش</div>
+      <button class="nav-item" data-page="logs"><span class="nav-ico">◫</span> لاگ و ممیزی</button>
+      <button class="nav-item" data-page="alerts"><span class="nav-ico">◔</span> رخدادهای سامانه <span class="nav-count alert">۴</span></button>
+      <button class="nav-item" data-page="settings"><span class="nav-ico">⚙</span> تنظیمات سامانه</button>
+    </nav>
+
+    <div class="sidebar-foot"><span class="pulse"></span> نسخه ۱.۴.۲ · آخرین استقرار ۲۵ مرداد</div>
+  </aside>
+
+  <!-- ============ MAIN ============ -->
+  <div class="main">
+    <header class="topbar">
+      <div style="display:flex;align-items:center;gap:12px;min-width:0;">
+        <button class="ibtn burger" id="burger" aria-label="باز کردن منو">☰</button>
+        <div class="tb-title">
+          <h1 id="pageTitle">داشبورد سامانه</h1>
+          <div class="crumb" id="pageCrumb">نمای کلی / داشبورد سامانه</div>
+        </div>
+      </div>
+      <div class="tb-actions">
+        <label class="search">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.2-3.2"/></svg>
+          <input type="search" id="globalSearch" placeholder="جستجو در جدول‌های این صفحه…">
+          <kbd>/</kbd>
+        </label>
+        <button class="ibtn" id="bellBtn" aria-label="رخدادها">◔<span class="dot"></span></button>
+        <div class="user">
+          <div class="avatar">م.ط</div>
+          <div><div class="n">مهدی طاهری</div><div class="r">ادمین سامانه</div></div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ================= DASHBOARD ================= -->
+    <section class="page active" id="page-dashboard">
+      <div class="grid g4" style="margin-bottom:16px;">
+        <div class="stat accent">
+          <div class="top"><span class="label">تولید امروز همه کارخانه‌ها</span><span class="chip">◱</span></div>
+          <div class="value">۱,۸۴۲ <u>m³</u></div>
+          <div class="sub">۲۰۶ بچ · ۱۴۷ بار ارسالی</div>
+          <div class="track" style="background:rgba(255,255,255,.16)"><i style="width:78%;background:linear-gradient(90deg,#90CAF9,#fff)"></i></div>
+        </div>
+        <div class="stat">
+          <div class="top"><span class="label">کارخانه‌های در حال تولید</span><span class="chip">▣</span></div>
+          <div class="value">۴ <u>از ۶</u></div><div class="sub">۱ متوقف برای سرویس · ۱ راه‌اندازی نشده</div>
+        </div>
+        <div class="stat">
+          <div class="top"><span class="label">کاربران فعال امروز</span><span class="chip">◧</span></div>
+          <div class="value">۳۱</div><div class="sub up">۱۲ راننده در مأموریت</div>
+        </div>
+        <div class="stat">
+          <div class="top"><span class="label">رخدادهای باز</span><span class="chip" style="background:var(--err-bg);color:var(--err)">!</span></div>
+          <div class="value">۴</div><div class="sub down">۱ بحرانی · ۳ هشدار</div>
+        </div>
+      </div>
+
+      <!-- عنصر شاخص: سلامت سرویس‌های سامانه در ۲۴ ساعت گذشته -->
+      <div class="card" style="margin-bottom:16px">
+        <div class="card-head">
+          <div><h3>سلامت سرویس‌ها در ۲۴ ساعت گذشته</h3><div class="hint">هر میله یک بازه نیم‌ساعته است</div></div>
+          <span class="badge b-ok">پایداری کلی ۹۹.۶٪</span>
+        </div>
+        <div class="health" id="healthRail">
+          <div class="hs"><div class="hn">سرویس اصلی (API)<span>api.parsbatching.ir</span></div><div class="ticks" data-pattern="ok"></div><div class="hv">۹۹.۹٪<span>بدون قطعی</span></div></div>
+          <div class="hs"><div class="hn">پایگاه داده<span>PostgreSQL — کلاستر اصلی</span></div><div class="ticks" data-pattern="ok"></div><div class="hv">۱۰۰٪<span>تأخیر ۴ms</span></div></div>
+          <div class="hs"><div class="hn">درگاه دستگاه‌ها<span>PLC Gateway</span></div><div class="ticks" data-pattern="warn"></div><div class="hv">۹۸.۲٪<span>۲ قطع کوتاه</span></div></div>
+          <div class="hs"><div class="hn">سرویس پیامک و اعلان<span>SMS / Push</span></div><div class="ticks" data-pattern="err"></div><div class="hv">۹۵.۴٪<span>قطعی ۱۸ دقیقه</span></div></div>
+        </div>
+      </div>
+
+      <div class="grid g-main" style="margin-bottom:16px;">
+        <div class="card">
+          <div class="card-head">
+            <div><h3>تولید امروز به تفکیک کارخانه</h3><div class="hint">متر مکعب · تا ساعت ۱۴</div></div>
+            <button class="btn btn-ghost btn-sm" data-goto="plants">مدیریت کارخانه‌ها</button>
+          </div>
+          <svg viewBox="0 0 640 220" width="100%" height="220" role="img" aria-label="نمودار تولید به تفکیک کارخانه">
+            <g stroke="#E5EEF7" stroke-width="1">
+              <line x1="40" y1="24" x2="620" y2="24"/><line x1="40" y1="64" x2="620" y2="64"/>
+              <line x1="40" y1="104" x2="620" y2="104"/><line x1="40" y1="144" x2="620" y2="144"/><line x1="40" y1="176" x2="620" y2="176"/>
+            </g>
+            <g fill="#2196F3">
+              <rect x="70"  y="52"  width="52" height="124" rx="7"/>
+              <rect x="170" y="86"  width="52" height="90"  rx="7"/>
+              <rect x="270" y="66"  width="52" height="110" rx="7"/>
+              <rect x="370" y="118" width="52" height="58"  rx="7"/>
+              <rect x="470" y="146" width="52" height="30"  rx="7" fill="#90CAF9"/>
+              <rect x="560" y="170" width="52" height="6"   rx="3" fill="#D2E9FC"/>
+            </g>
+            <g font-size="11" fill="#0B1F33" font-family="Vazirmatn" text-anchor="middle" font-weight="700">
+              <text x="96" y="44">۵۲۰</text><text x="196" y="78">۳۸۶</text><text x="296" y="58">۴۵۲</text>
+              <text x="396" y="110">۲۴۰</text><text x="496" y="138">۱۲۴</text><text x="586" y="162">۰</text>
+            </g>
+            <g font-size="10.5" fill="#8299AE" font-family="Vazirmatn" text-anchor="middle">
+              <text x="96" y="196">پرند</text><text x="196" y="196">تهران ۱</text><text x="296" y="196">اصفهان</text>
+              <text x="396" y="196">کرج</text><text x="496" y="196">مشهد</text><text x="586" y="196">تبریز</text>
+              <text x="586" y="210" fill="#B0C2D2">راه‌اندازی</text>
+            </g>
+          </svg>
+        </div>
+
+        <div class="card">
+          <div class="card-head"><h3>رخدادهای بحرانی</h3><button class="btn btn-ghost btn-sm" data-goto="alerts">همه رخدادها</button></div>
+          <div class="alert"><span class="ic err">!</span><div><div class="t">قطع ارتباط PLC — کارخانه کرج</div><div class="d">۱۲ دقیقه بدون پاسخ؛ تولید متوقف شد</div></div><span class="time mono">۱۳:۴۸</span></div>
+          <div class="alert"><span class="ic warn">◔</span><div><div class="t">فضای دیسک سرور گزارش‌ها ۸۶٪</div><div class="d">پیش‌بینی پر شدن تا ۹ روز دیگر</div></div><span class="time mono">۱۲:۲۰</span></div>
+          <div class="alert"><span class="ic warn">◧</span><div><div class="t">۵ تلاش ناموفق ورود — کاربر operator.esf</div><div class="d">حساب به مدت ۱۵ دقیقه قفل شد</div></div><span class="time mono">۱۱:۰۵</span></div>
+          <div class="alert"><span class="ic ok">✓</span><div><div class="t">پشتیبان‌گیری شبانه کامل شد</div><div class="d">۴.۲ گیگابایت · همه کارخانه‌ها</div></div><span class="time mono">۰۳:۰۰</span></div>
+        </div>
+      </div>
+
+      <div class="grid g-main">
+        <div class="card flush">
+          <div class="card-head"><h3>وضعیت کارخانه‌ها</h3><button class="btn btn-primary btn-sm" data-open="ovNewPlant">افزودن کارخانه</button></div>
+          <div class="t-scroll">
+            <table data-searchable>
+              <thead><tr><th>کارخانه</th><th>مدیر کارگاه</th><th>تولید امروز</th><th>سفارش باز</th><th>دستگاه</th><th>وضعیت</th></tr></thead>
+              <tbody>
+                <tr class="clickable" data-plant="1"><td><div class="person"><span class="av">پر</span> بچینگ پرند</div></td><td>حسین محمدی</td><td class="mono">۵۲۰ m³</td><td class="mono">۷</td><td><span class="badge b-ok">آنلاین</span></td><td><span class="badge b-blue">در حال تولید</span></td></tr>
+                <tr class="clickable" data-plant="2"><td><div class="person"><span class="av">ته</span> بچینگ تهران ۱</div></td><td>سعید افشار</td><td class="mono">۳۸۶ m³</td><td class="mono">۶</td><td><span class="badge b-ok">آنلاین</span></td><td><span class="badge b-blue">در حال تولید</span></td></tr>
+                <tr class="clickable" data-plant="3"><td><div class="person"><span class="av">اص</span> بچینگ اصفهان</div></td><td>مرتضی نجفی</td><td class="mono">۴۵۲ m³</td><td class="mono">۵</td><td><span class="badge b-ok">آنلاین</span></td><td><span class="badge b-blue">در حال تولید</span></td></tr>
+                <tr class="clickable" data-plant="4"><td><div class="person"><span class="av">کر</span> بچینگ کرج</div></td><td>امیر رستگار</td><td class="mono">۲۴۰ m³</td><td class="mono">۳</td><td><span class="badge b-err">قطع ارتباط</span></td><td><span class="badge b-warn">توقف تولید</span></td></tr>
+                <tr class="clickable" data-plant="5"><td><div class="person"><span class="av">مش</span> بچینگ مشهد</div></td><td>یاسر قنبری</td><td class="mono">۱۲۴ m³</td><td class="mono">۲</td><td><span class="badge b-ok">آنلاین</span></td><td><span class="badge b-blue">در حال تولید</span></td></tr>
+                <tr class="clickable" data-plant="6"><td><div class="person"><span class="av">تب</span> بچینگ تبریز</div></td><td>—</td><td class="mono">۰ m³</td><td class="mono">۰</td><td><span class="badge b-mute">تعریف نشده</span></td><td><span class="badge b-mute">در حال راه‌اندازی</span></td></tr>
+              </tbody>
+            </table>
+            <div class="empty"><b>کارخانه‌ای پیدا نشد</b><span>عبارت جستجو را تغییر دهید.</span></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head"><h3>آخرین تغییرات کاربران</h3><button class="btn btn-ghost btn-sm" data-goto="logs">لاگ کامل</button></div>
+          <div class="rel"><span class="v mono">۱۳:۵۵</span><div><div class="t">راننده جدید ثبت شد</div><div class="d">مجید ابراهیمی · بچینگ اصفهان — توسط مرتضی نجفی</div></div></div>
+          <div class="rel"><span class="v mono">۱۲:۳۰</span><div><div class="t">دسترسی «حذف سفارش» از نقش اپراتور برداشته شد</div><div class="d">همه کارخانه‌ها — توسط شما</div></div></div>
+          <div class="rel"><span class="v mono">۱۰:۱۲</span><div><div class="t">کاربر غیرفعال شد</div><div class="d">reza.kh · بچینگ کرج — پایان همکاری</div></div></div>
+          <div class="rel"><span class="v mono">۰۹:۴۰</span><div><div class="t">قالب رسید بارگیری به‌روزرسانی شد</div><div class="d">نسخه ۳ — افزودن لوگوی جدید</div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= PLANTS ================= -->
+    <section class="page" id="page-plants">
+      <div class="card-head" style="margin-bottom:16px">
+        <div><h3 style="font-size:15px">کارخانه‌ها و کارگاه‌ها</h3><div class="hint">هر کارخانه داده، کاربران و تنظیمات مستقل دارد</div></div>
+        <button class="btn btn-primary btn-sm" data-open="ovNewPlant">افزودن کارخانه</button>
+      </div>
+
+      <div class="grid g3" style="margin-bottom:16px">
+        <div class="plant" data-plant="1">
+          <div class="ph"><div class="pm">پر</div><div><div class="pn">بچینگ پرند</div><div class="pl">تهران، شهر جدید پرند · PL-01</div></div><span class="badge b-blue" style="margin-inline-start:auto">فعال</span></div>
+          <div class="pgrid">
+            <div><b class="mono">۵۲۰</b><span>تولید امروز m³</span></div>
+            <div><b class="mono">۱۲</b><span>کاربر</span></div>
+            <div><b class="mono">۹</b><span>خودرو</span></div>
+          </div>
+          <div class="track"><i style="width:82%"></i></div>
+          <div class="pf"><span>ظرفیت روزانه ۶۴۰ m³</span><span class="mono">۸۲٪</span></div>
+        </div>
+
+        <div class="plant" data-plant="2">
+          <div class="ph"><div class="pm">ته</div><div><div class="pn">بچینگ تهران ۱</div><div class="pl">تهران، جاده قدیم کرج · PL-02</div></div><span class="badge b-blue" style="margin-inline-start:auto">فعال</span></div>
+          <div class="pgrid">
+            <div><b class="mono">۳۸۶</b><span>تولید امروز m³</span></div>
+            <div><b class="mono">۱۰</b><span>کاربر</span></div>
+            <div><b class="mono">۷</b><span>خودرو</span></div>
+          </div>
+          <div class="track"><i style="width:64%"></i></div>
+          <div class="pf"><span>ظرفیت روزانه ۶۰۰ m³</span><span class="mono">۶۴٪</span></div>
+        </div>
+
+        <div class="plant" data-plant="3">
+          <div class="ph"><div class="pm">اص</div><div><div class="pn">بچینگ اصفهان</div><div class="pl">اصفهان، شهرک صنعتی جی · PL-03</div></div><span class="badge b-blue" style="margin-inline-start:auto">فعال</span></div>
+          <div class="pgrid">
+            <div><b class="mono">۴۵۲</b><span>تولید امروز m³</span></div>
+            <div><b class="mono">۸</b><span>کاربر</span></div>
+            <div><b class="mono">۶</b><span>خودرو</span></div>
+          </div>
+          <div class="track"><i style="width:75%"></i></div>
+          <div class="pf"><span>ظرفیت روزانه ۶۰۰ m³</span><span class="mono">۷۵٪</span></div>
+        </div>
+
+        <div class="plant" data-plant="4">
+          <div class="ph"><div class="pm">کر</div><div><div class="pn">بچینگ کرج</div><div class="pl">البرز، ماهدشت · PL-04</div></div><span class="badge b-warn" style="margin-inline-start:auto">قطع دستگاه</span></div>
+          <div class="pgrid">
+            <div><b class="mono">۲۴۰</b><span>تولید امروز m³</span></div>
+            <div><b class="mono">۵</b><span>کاربر</span></div>
+            <div><b class="mono">۴</b><span>خودرو</span></div>
+          </div>
+          <div class="track"><i style="width:40%;background:linear-gradient(90deg,#F0B33F,#E39A16)"></i></div>
+          <div class="pf"><span>آخرین پاسخ دستگاه ۱۳:۴۸</span><span class="mono">۴۰٪</span></div>
+        </div>
+
+        <div class="plant" data-plant="5">
+          <div class="ph"><div class="pm">مش</div><div><div class="pn">بچینگ مشهد</div><div class="pl">خراسان رضوی، جاده سنتو · PL-05</div></div><span class="badge b-blue" style="margin-inline-start:auto">فعال</span></div>
+          <div class="pgrid">
+            <div><b class="mono">۱۲۴</b><span>تولید امروز m³</span></div>
+            <div><b class="mono">۳</b><span>کاربر</span></div>
+            <div><b class="mono">۲</b><span>خودرو</span></div>
+          </div>
+          <div class="track"><i style="width:31%"></i></div>
+          <div class="pf"><span>ظرفیت روزانه ۴۰۰ m³</span><span class="mono">۳۱٪</span></div>
+        </div>
+
+        <div class="plant off" data-plant="6">
+          <div class="ph"><div class="pm">تب</div><div><div class="pn">بچینگ تبریز</div><div class="pl">آذربایجان شرقی · PL-06</div></div><span class="badge b-mute" style="margin-inline-start:auto">راه‌اندازی</span></div>
+          <div class="pgrid">
+            <div><b class="mono">۰</b><span>تولید امروز m³</span></div>
+            <div><b class="mono">۰</b><span>کاربر</span></div>
+            <div><b class="mono">۰</b><span>خودرو</span></div>
+          </div>
+          <div class="muted" style="font-size:11.5px;margin-top:8px">مرحله بعد: تعریف مدیر کارگاه و اتصال دستگاه بچینگ.</div>
+        </div>
+      </div>
+
+      <div class="card flush">
+        <div class="card-head"><h3>اشتراک و ماژول‌های فعال</h3><span class="hint">ماژول‌ها برای هر کارخانه جداگانه فعال می‌شوند</span></div>
+        <div class="t-scroll">
+          <table data-searchable>
+            <thead><tr><th>کارخانه</th><th>سطح اشتراک</th><th>مالی</th><th>انبار</th><th>اپ راننده</th><th>اعتبار تا</th></tr></thead>
+            <tbody>
+              <tr><td>بچینگ پرند</td><td><span class="badge b-deep">حرفه‌ای</span></td><td><span class="badge b-ok">فعال</span></td><td><span class="badge b-ok">فعال</span></td><td><span class="badge b-ok">فعال</span></td><td class="mono">۱۴۰۵/۰۴/۳۱</td></tr>
+              <tr><td>بچینگ تهران ۱</td><td><span class="badge b-deep">حرفه‌ای</span></td><td><span class="badge b-ok">فعال</span></td><td><span class="badge b-ok">فعال</span></td><td><span class="badge b-ok">فعال</span></td><td class="mono">۱۴۰۵/۰۴/۳۱</td></tr>
+              <tr><td>بچینگ اصفهان</td><td><span class="badge b-blue">پایه</span></td><td><span class="badge b-mute">غیرفعال</span></td><td><span class="badge b-ok">فعال</span></td><td><span class="badge b-ok">فعال</span></td><td class="mono">۱۴۰۵/۰۲/۱۵</td></tr>
+              <tr><td>بچینگ کرج</td><td><span class="badge b-blue">پایه</span></td><td><span class="badge b-mute">غیرفعال</span></td><td><span class="badge b-mute">غیرفعال</span></td><td><span class="badge b-ok">فعال</span></td><td class="mono">۱۴۰۴/۱۲/۲۹</td></tr>
+              <tr><td>بچینگ مشهد</td><td><span class="badge b-blue">پایه</span></td><td><span class="badge b-mute">غیرفعال</span></td><td><span class="badge b-ok">فعال</span></td><td><span class="badge b-mute">غیرفعال</span></td><td class="mono">۱۴۰۵/۰۱/۱۰</td></tr>
+              <tr><td>بچینگ تبریز</td><td><span class="badge b-mute">تعریف نشده</span></td><td><span class="badge b-mute">—</span></td><td><span class="badge b-mute">—</span></td><td><span class="badge b-mute">—</span></td><td class="mono">—</td></tr>
+            </tbody>
+          </table>
+          <div class="empty"><b>موردی پیدا نشد</b><span>عبارت دیگری را جستجو کنید.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= USERS ================= -->
+    <section class="page" id="page-users">
+      <div class="grid g4" style="margin-bottom:16px">
+        <div class="stat"><div class="top"><span class="label">کل کاربران</span><span class="chip">◧</span></div><div class="value">۳۸</div><div class="sub">در ۵ کارخانه</div></div>
+        <div class="stat"><div class="top"><span class="label">راننده</span><span class="chip">▥</span></div><div class="value">۱۹</div><div class="sub">۱۲ در مأموریت</div></div>
+        <div class="stat"><div class="top"><span class="label">اپراتور</span><span class="chip">⛭</span></div><div class="value">۹</div><div class="sub">۴ در شیفت</div></div>
+        <div class="stat"><div class="top"><span class="label">حساب غیرفعال</span><span class="chip">◌</span></div><div class="value">۳</div><div class="sub">۱ قفل‌شده امنیتی</div></div>
+      </div>
+
+      <div class="card flush">
+        <div class="card-head">
+          <div><h3>کاربران سامانه</h3><div class="hint">هر کاربر می‌تواند در چند کارخانه نقش داشته باشد</div></div>
+          <div class="row">
+            <select id="userPlant" style="border:1px solid var(--line-2);border-radius:10px;padding:7px 11px;font-size:12.5px;background:var(--surface-2)">
+              <option>همه کارخانه‌ها</option><option>بچینگ پرند</option><option>بچینگ تهران ۱</option>
+              <option>بچینگ اصفهان</option><option>بچینگ کرج</option><option>بچینگ مشهد</option>
+            </select>
+            <button class="btn btn-primary btn-sm" data-open="ovNewUser">افزودن کاربر</button>
+          </div>
+        </div>
+        <div class="t-scroll">
+          <table data-searchable>
+            <thead><tr><th>کاربر</th><th>نام کاربری</th><th>موبایل</th><th>کارخانه</th><th>نقش</th><th>آخرین ورود</th><th>وضعیت</th><th></th></tr></thead>
+            <tbody>
+              <tr><td><div class="person"><span class="av">ح.م</span> حسین محمدی</div></td><td class="mono">hossein.m</td><td class="mono">۰۹۱۲۱۱۱۲۲۳۳</td><td>بچینگ پرند</td><td><span class="badge b-deep">مدیر کارگاه</span></td><td class="mono">امروز ۰۷:۵۰</td><td><span class="badge b-ok">فعال</span></td><td><button class="btn btn-ghost btn-sm" data-toast="فرم ویرایش کاربر باز شد">ویرایش</button></td></tr>
+              <tr><td><div class="person"><span class="av">ع.ن</span> علی نوروزی</div></td><td class="mono">ali.n</td><td class="mono">۰۹۱۲۳۳۳۴۴۵۵</td><td>بچینگ پرند</td><td><span class="badge b-blue">اپراتور</span></td><td class="mono">امروز ۰۶:۱۰</td><td><span class="badge b-ok">فعال</span></td><td><button class="btn btn-ghost btn-sm" data-toast="فرم ویرایش کاربر باز شد">ویرایش</button></td></tr>
+              <tr><td><div class="person"><span class="av">ر.ک</span> رضا کریمی</div></td><td class="mono">reza.k</td><td class="mono">۰۹۱۲۳۴۵۶۷۸۹</td><td>بچینگ پرند</td><td><span class="badge b-blue">راننده</span></td><td class="mono">امروز ۱۴:۲۰</td><td><span class="badge b-ok">فعال</span></td><td><button class="btn btn-ghost btn-sm" data-toast="فرم ویرایش کاربر باز شد">ویرایش</button></td></tr>
+              <tr><td><div class="person"><span class="av">س.ا</span> سعید افشار</div></td><td class="mono">saeed.a</td><td class="mono">۰۹۱۹۸۸۷۷۶۶۵</td><td>بچینگ تهران ۱</td><td><span class="badge b-deep">مدیر کارگاه</span></td><td class="mono">امروز ۰۸:۰۵</td><td><span class="badge b-ok">فعال</span></td><td><button class="btn btn-ghost btn-sm" data-toast="فرم ویرایش کاربر باز شد">ویرایش</button></td></tr>
+              <tr><td><div class="person"><span class="av">م.ن</span> مرتضی نجفی</div></td><td class="mono">morteza.n</td><td class="mono">۰۹۱۳۴۴۵۵۶۶۷</td><td>بچینگ اصفهان</td><td><span class="badge b-deep">مدیر کارگاه</span></td><td class="mono">امروز ۰۷:۳۰</td><td><span class="badge b-ok">فعال</span></td><td><button class="btn btn-ghost btn-sm" data-toast="فرم ویرایش کاربر باز شد">ویرایش</button></td></tr>
+              <tr><td><div class="person"><span class="av">ا.ر</span> امیر رستگار</div></td><td class="mono">amir.r</td><td class="mono">۰۹۱۲۷۷۷۸۸۹۹</td><td>بچینگ کرج</td><td><span class="badge b-deep">مدیر کارگاه</span></td><td class="mono">امروز ۱۳:۴۰</td><td><span class="badge b-ok">فعال</span></td><td><button class="btn btn-ghost btn-sm" data-toast="فرم ویرایش کاربر باز شد">ویرایش</button></td></tr>
+              <tr><td><div class="person"><span class="av">ع.ص</span> علی صادقی</div></td><td class="mono">ali.s</td><td class="mono">۰۹۱۹۸۷۶۵۴۳۲</td><td>بچینگ تهران ۱</td><td><span class="badge b-blue">راننده</span></td><td class="mono">امروز ۱۳:۱۲</td><td><span class="badge b-ok">فعال</span></td><td><button class="btn btn-ghost btn-sm" data-toast="فرم ویرایش کاربر باز شد">ویرایش</button></td></tr>
+              <tr><td><div class="person"><span class="av">ر.خ</span> رضا خدایی</div></td><td class="mono">reza.kh</td><td class="mono">۰۹۱۲۵۵۵۴۴۳۳</td><td>بچینگ کرج</td><td><span class="badge b-blue">راننده</span></td><td class="mono">۲۵ مرداد</td><td><span class="badge b-mute">غیرفعال</span></td><td><button class="btn btn-ghost btn-sm" data-toast="حساب کاربر دوباره فعال شد">فعال‌سازی</button></td></tr>
+              <tr><td><div class="person"><span class="av">ا.اص</span> operator.esf</div></td><td class="mono">operator.esf</td><td class="mono">۰۹۱۳۲۲۲۱۱۰۰</td><td>بچینگ اصفهان</td><td><span class="badge b-blue">اپراتور</span></td><td class="mono">امروز ۱۱:۰۵</td><td><span class="badge b-err">قفل امنیتی</span></td><td><button class="btn btn-ghost btn-sm" data-toast="قفل حساب برداشته شد">رفع قفل</button></td></tr>
+            </tbody>
+          </table>
+          <div class="empty"><b>کاربری پیدا نشد</b><span>عبارت دیگری را جستجو کنید.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= ROLES ================= -->
+    <section class="page" id="page-roles">
+      <div class="grid g-side">
+        <div class="stack">
+          <div class="card-head" style="margin:0"><h3>نقش‌ها</h3><button class="btn btn-primary btn-sm" data-toast="فرم تعریف نقش جدید باز شد">نقش جدید</button></div>
+          <div class="card">
+            <div class="kv"><span><b>مدیر کارگاه</b><span class="t-sub mono">WORKSHOP_MANAGER</span></span><span class="mono">۵ کاربر</span></div>
+            <div class="kv"><span><b>اپراتور بچینگ</b><span class="t-sub mono">OPERATOR</span></span><span class="mono">۹ کاربر</span></div>
+            <div class="kv"><span><b>راننده</b><span class="t-sub mono">DRIVER</span></span><span class="mono">۱۹ کاربر</span></div>
+            <div class="kv"><span><b>حسابدار</b><span class="t-sub mono">ACCOUNTANT</span></span><span class="mono">۳ کاربر</span></div>
+            <div class="kv"><span><b>ادمین سامانه</b><span class="t-sub mono">ADMIN</span></span><span class="mono">۲ کاربر</span></div>
+          </div>
+          <div class="card">
+            <div class="card-head" style="margin-bottom:8px"><h3>قواعد امنیتی نقش‌ها</h3></div>
+            <div class="toggle"><div><div class="tt">ورود دو مرحله‌ای برای مدیران</div><div class="td">پیامک تأیید در هر ورود جدید</div></div><button class="switch on" aria-pressed="true"><i></i></button></div>
+            <div class="toggle"><div><div class="tt">محدودیت ورود راننده به موبایل</div><div class="td">اپ راننده فقط روی یک دستگاه فعال باشد</div></div><button class="switch on" aria-pressed="true"><i></i></button></div>
+            <div class="toggle"><div><div class="tt">دسترسی اپراتور به داده کارخانه‌های دیگر</div><div class="td">پیشنهاد می‌شود خاموش بماند</div></div><button class="switch" aria-pressed="false"><i></i></button></div>
+          </div>
+        </div>
+
+        <div class="card flush">
+          <div class="card-head">
+            <div><h3>ماتریس دسترسی</h3><div class="hint">تغییرات بلافاصله روی همه کارخانه‌ها اعمال می‌شود</div></div>
+            <button class="btn btn-primary btn-sm" data-toast="دسترسی‌ها ذخیره شد">ذخیره تغییرات</button>
+          </div>
+          <div class="t-scroll">
+            <table class="perm">
+              <thead><tr><th>دسترسی</th><th>مدیر کارگاه</th><th>اپراتور</th><th>راننده</th><th>حسابدار</th></tr></thead>
+              <tbody>
+                <tr><td class="pg" colspan="5">سفارش و تولید</td></tr>
+                <tr><td>ثبت و ویرایش سفارش</td><td><button class="switch on" aria-pressed="true"><i></i></button></td><td><button class="switch" aria-pressed="false"><i></i></button></td><td><span class="lock">—</span></td><td><button class="switch" aria-pressed="false"><i></i></button></td></tr>
+                <tr><td>تأیید سفارش</td><td><button class="switch on" aria-pressed="true"><i></i></button></td><td><button class="switch" aria-pressed="false"><i></i></button></td><td><span class="lock">—</span></td><td><span class="lock">—</span></td></tr>
+                <tr><td>شروع و پایان بچ</td><td><button class="switch on" aria-pressed="true"><i></i></button></td><td><button class="switch on" aria-pressed="true"><i></i></button></td><td><span class="lock">—</span></td><td><span class="lock">—</span></td></tr>
+                <tr><td>ویرایش وزن واقعی مواد</td><td><button class="switch" aria-pressed="false"><i></i></button></td><td><button class="switch on" aria-pressed="true"><i></i></button></td><td><span class="lock">—</span></td><td><span class="lock">—</span></td></tr>
+
+                <tr><td class="pg" colspan="5">حمل و رسیدها</td></tr>
+                <tr><td>تخصیص بار به راننده</td><td><button class="switch on" aria-pressed="true"><i></i></button></td><td><button class="switch on" aria-pressed="true"><i></i></button></td><td><span class="lock">—</span></td><td><span class="lock">—</span></td></tr>
+                <tr><td>ثبت تحویل در مقصد</td><td><button class="switch on" aria-pressed="true"><i></i></button></td><td><button class="switch" aria-pressed="false"><i></i></button></td><td><button class="switch on" aria-pressed="true"><i></i></button></td><td><span class="lock">—</span></td></tr>
+                <tr><td>چاپ مجدد رسید</td><td><button class="switch on" aria-pressed="true"><i></i></button></td><td><button class="switch on" aria-pressed="true"><i></i></button></td><td><button class="switch" aria-pressed="false"><i></i></button></td><td><button class="switch on" aria-pressed="true"><i></i></button></td></tr>
+
+                <tr><td class="pg" colspan="5">مالی و انبار</td></tr>
+                <tr><td>ثبت تراکنش مالی</td><td><button class="switch on" aria-pressed="true"><i></i></button></td><td><span class="lock">—</span></td><td><span class="lock">—</span></td><td><button class="switch on" aria-pressed="true"><i></i></button></td></tr>
+                <tr><td>تعریف قیمت هر متر مکعب</td><td><button class="switch on" aria-pressed="true"><i></i></button></td><td><span class="lock">—</span></td><td><span class="lock">—</span></td><td><button class="switch on" aria-pressed="true"><i></i></button></td></tr>
+                <tr><td>ثبت ورود مواد به انبار</td><td><button class="switch on" aria-pressed="true"><i></i></button></td><td><button class="switch on" aria-pressed="true"><i></i></button></td><td><span class="lock">—</span></td><td><button class="switch" aria-pressed="false"><i></i></button></td></tr>
+
+                <tr><td class="pg" colspan="5">مدیریت</td></tr>
+                <tr><td>تعریف کاربر و نقش</td><td><button class="switch on" aria-pressed="true"><i></i></button></td><td><span class="lock">—</span></td><td><span class="lock">—</span></td><td><span class="lock">—</span></td></tr>
+                <tr><td>مشاهده گزارش‌های مدیریتی</td><td><button class="switch on" aria-pressed="true"><i></i></button></td><td><button class="switch" aria-pressed="false"><i></i></button></td><td><span class="lock">—</span></td><td><button class="switch on" aria-pressed="true"><i></i></button></td></tr>
+                <tr><td>حذف سفارش</td><td><button class="switch" aria-pressed="false"><i></i></button></td><td><span class="lock">—</span></td><td><span class="lock">—</span></td><td><span class="lock">—</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= DEVICES ================= -->
+    <section class="page" id="page-devices">
+      <div class="grid g-main">
+        <div class="card flush">
+          <div class="card-head"><h3>دستگاه‌های بچینگ</h3><button class="btn btn-primary btn-sm" data-toast="فرم اتصال دستگاه جدید باز شد">اتصال دستگاه</button></div>
+          <div class="t-scroll">
+            <table data-searchable>
+              <thead><tr><th>کارخانه</th><th>مدل کنترلر</th><th>آدرس</th><th>آخرین پاسخ</th><th>تأخیر</th><th>وضعیت</th></tr></thead>
+              <tbody>
+                <tr><td>بچینگ پرند</td><td>Siemens S7-1200</td><td class="mono">۱۰.۲۰.۱.۱۱</td><td class="mono">۱۴:۱۸:۰۲</td><td class="mono">۲۴ms</td><td><span class="badge b-ok">آنلاین</span></td></tr>
+                <tr><td>بچینگ تهران ۱</td><td>Siemens S7-1200</td><td class="mono">۱۰.۲۱.۱.۱۱</td><td class="mono">۱۴:۱۸:۰۰</td><td class="mono">۳۱ms</td><td><span class="badge b-ok">آنلاین</span></td></tr>
+                <tr><td>بچینگ اصفهان</td><td>Delta DVP-ES3</td><td class="mono">۱۰.۲۲.۱.۱۰</td><td class="mono">۱۴:۱۷:۵۸</td><td class="mono">۵۸ms</td><td><span class="badge b-ok">آنلاین</span></td></tr>
+                <tr><td>بچینگ کرج</td><td>Siemens S7-300</td><td class="mono">۱۰.۲۳.۱.۱۲</td><td class="mono">۱۳:۴۸:۱۱</td><td class="mono">—</td><td><span class="badge b-err">قطع ارتباط</span></td></tr>
+                <tr><td>بچینگ مشهد</td><td>Delta DVP-ES3</td><td class="mono">۱۰.۲۴.۱.۱۰</td><td class="mono">۱۴:۱۷:۵۵</td><td class="mono">۴۷ms</td><td><span class="badge b-ok">آنلاین</span></td></tr>
+                <tr><td>بچینگ تبریز</td><td>—</td><td class="mono">—</td><td class="mono">—</td><td class="mono">—</td><td><span class="badge b-mute">تعریف نشده</span></td></tr>
+              </tbody>
+            </table>
+            <div class="empty"><b>دستگاهی پیدا نشد</b><span>عبارت دیگری را جستجو کنید.</span></div>
+          </div>
+        </div>
+
+        <div class="stack">
+          <div class="card">
+            <div class="card-head"><h3>عیب‌یابی کارخانه کرج</h3><span class="badge b-err">قطع ارتباط</span></div>
+            <div class="kv"><span>آخرین بچ موفق</span><span class="mono">#۲۲ — ۱۳:۴۵</span></div>
+            <div class="kv"><span>مدت قطعی</span><span class="mono">۳۰ دقیقه</span></div>
+            <div class="kv"><span>خطای گزارش‌شده</span><span class="mono">TIMEOUT — MODBUS</span></div>
+            <div class="row" style="margin-top:14px">
+              <button class="btn btn-primary btn-sm" data-toast="درخواست اتصال دوباره ارسال شد">تلاش دوباره برای اتصال</button>
+              <button class="btn btn-ghost btn-sm" data-toast="اعلان برای مدیر کارگاه کرج ارسال شد">اطلاع به مدیر کارگاه</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-head" style="margin-bottom:8px"><h3>تنظیم اتصال</h3></div>
+            <div class="field"><label>پروتکل</label><select><option>Modbus TCP</option><option>OPC UA</option><option>S7 Protocol</option></select></div>
+            <div class="f-row">
+              <div class="field"><label>بازه نمونه‌برداری <em>ثانیه</em></label><input type="text" class="mono" value="۱"></div>
+              <div class="field"><label>مهلت پاسخ <em>ثانیه</em></label><input type="text" class="mono" value="۵"></div>
+            </div>
+            <div class="toggle"><div><div class="tt">توقف خودکار تولید هنگام قطعی</div><div class="td">جلوگیری از ثبت وزن نامعتبر</div></div><button class="switch on" aria-pressed="true"><i></i></button></div>
+            <button class="btn btn-primary btn-full" style="margin-top:14px" data-toast="تنظیمات اتصال ذخیره شد">ذخیره تنظیمات</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= PRINT TEMPLATES ================= -->
+    <section class="page" id="page-templates">
+      <div class="grid g-side">
+        <div class="stack">
+          <div class="card flush">
+            <div class="card-head"><h3>قالب‌های چاپ</h3><button class="btn btn-primary btn-sm" data-toast="قالب جدید ساخته شد">قالب جدید</button></div>
+            <div class="t-scroll">
+              <table data-searchable>
+                <thead><tr><th>نام قالب</th><th>نوع</th><th>کارخانه</th><th>نسخه</th><th>پیش‌فرض</th></tr></thead>
+                <tbody>
+                  <tr class="clickable"><td>رسید بارگیری استاندارد</td><td class="mono">LoadingReceipt</td><td>همه</td><td class="mono">v۳</td><td><span class="badge b-ok">بله</span></td></tr>
+                  <tr class="clickable"><td>رسید تحویل مقصد</td><td class="mono">DeliveryReceipt</td><td>همه</td><td class="mono">v۲</td><td><span class="badge b-ok">بله</span></td></tr>
+                  <tr class="clickable"><td>فاکتور ساده مشتری</td><td class="mono">Invoice</td><td>پرند، تهران ۱</td><td class="mono">v۱</td><td><span class="badge b-mute">خیر</span></td></tr>
+                  <tr class="clickable"><td>رسید بارگیری اصفهان</td><td class="mono">LoadingReceipt</td><td>اصفهان</td><td class="mono">v۱</td><td><span class="badge b-mute">خیر</span></td></tr>
+                </tbody>
+              </table>
+              <div class="empty"><b>قالبی پیدا نشد</b><span>عبارت دیگری را جستجو کنید.</span></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-head" style="margin-bottom:8px"><h3>سربرگ و متن ثابت</h3></div>
+            <div class="f-row">
+              <div class="field"><label>نام روی رسید</label><input type="text" value="سامانه بچینگ پارس"></div>
+              <div class="field"><label>شماره تماس</label><input type="text" class="mono" value="۰۲۱-۴۴۵۵۶۶۷۷"></div>
+            </div>
+            <div class="field"><label>متن پایین رسید</label><textarea>این رسید بدون امضای راننده و نماینده کارفرما معتبر نیست.</textarea></div>
+            <div class="toggle"><div><div class="tt">درج لوگو در بالای رسید</div><div class="td">لوگوی هر کارخانه جداگانه بارگذاری می‌شود</div></div><button class="switch on" aria-pressed="true"><i></i></button></div>
+            <div class="toggle"><div><div class="tt">درج بارکد شماره رسید</div><div class="td">برای اسکن سریع در کارگاه</div></div><button class="switch on" aria-pressed="true"><i></i></button></div>
+            <button class="btn btn-primary btn-full" style="margin-top:14px" data-toast="قالب چاپ ذخیره و برای همه کارخانه‌ها منتشر شد">ذخیره و انتشار قالب</button>
+          </div>
+        </div>
+
+        <div class="stack">
+          <div class="card-head" style="margin:0"><h3>پیش‌نمایش</h3><span class="badge b-blue">رسید بارگیری v۳</span></div>
+          <div class="receipt">
+            <div class="r-head">
+              <div><h4>سامانه بچینگ پارس</h4><div class="no mono">رسید بارگیری · LD-2292</div></div>
+              <div class="mark">بچ</div>
+            </div>
+            <div class="r-row"><span>کارخانه</span><span>بچینگ پرند</span></div>
+            <div class="r-row"><span>مشتری</span><span>شرکت راهسازی البرز</span></div>
+            <div class="r-row"><span>پروژه</span><span>روگذر میدان آزادی</span></div>
+            <div class="r-row"><span>طرح اختلاط</span><span class="mono">C30 — نسخه ۲</span></div>
+            <div class="r-row"><span>راننده و خودرو</span><span class="mono">رضا کریمی · ۱۲ ایران ۴۴۵ ب ۶۷</span></div>
+            <div class="r-vol"><div class="n mono">۶.۰</div><div class="u">متر مکعب بارگیری شد</div></div>
+            <div class="r-sign"><div>امضای اپراتور</div><div>امضای راننده</div></div>
+          </div>
+          <div class="row no-print">
+            <button class="btn btn-deep btn-sm" onclick="window.print()">چاپ آزمایشی</button>
+            <button class="btn btn-ghost btn-sm" data-toast="فایل PDF نمونه ساخته شد">خروجی PDF</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= BACKUP & SECURITY ================= -->
+    <section class="page" id="page-backup">
+      <div class="grid g-main">
+        <div class="card flush">
+          <div class="card-head"><h3>نسخه‌های پشتیبان</h3><button class="btn btn-primary btn-sm" data-toast="پشتیبان‌گیری دستی آغاز شد">پشتیبان‌گیری الان</button></div>
+          <div class="t-scroll">
+            <table data-searchable>
+              <thead><tr><th>تاریخ</th><th>نوع</th><th>حجم</th><th>مدت</th><th>محل ذخیره</th><th>وضعیت</th><th></th></tr></thead>
+              <tbody>
+                <tr><td class="mono">۱۴۰۴/۰۵/۲۷ — ۰۳:۰۰</td><td>کامل</td><td class="mono">۴.۲ GB</td><td class="mono">۶ دقیقه</td><td>سرور محلی + فضای ابری</td><td><span class="badge b-ok">موفق</span></td><td><button class="btn btn-ghost btn-sm" data-toast="فایل پشتیبان در حال دانلود است">دانلود</button></td></tr>
+                <tr><td class="mono">۱۴۰۴/۰۵/۲۶ — ۰۳:۰۰</td><td>کامل</td><td class="mono">۴.۱ GB</td><td class="mono">۶ دقیقه</td><td>سرور محلی + فضای ابری</td><td><span class="badge b-ok">موفق</span></td><td><button class="btn btn-ghost btn-sm" data-toast="فایل پشتیبان در حال دانلود است">دانلود</button></td></tr>
+                <tr><td class="mono">۱۴۰۴/۰۵/۲۵ — ۰۳:۰۰</td><td>افزایشی</td><td class="mono">۳۸۰ MB</td><td class="mono">۱ دقیقه</td><td>سرور محلی</td><td><span class="badge b-warn">بدون نسخه ابری</span></td><td><button class="btn btn-ghost btn-sm" data-toast="فایل پشتیبان در حال دانلود است">دانلود</button></td></tr>
+                <tr><td class="mono">۱۴۰۴/۰۵/۲۴ — ۰۳:۰۰</td><td>کامل</td><td class="mono">۴.۰ GB</td><td class="mono">۷ دقیقه</td><td>سرور محلی + فضای ابری</td><td><span class="badge b-ok">موفق</span></td><td><button class="btn btn-ghost btn-sm" data-toast="فایل پشتیبان در حال دانلود است">دانلود</button></td></tr>
+              </tbody>
+            </table>
+            <div class="empty"><b>نسخه‌ای پیدا نشد</b><span>عبارت دیگری را جستجو کنید.</span></div>
+          </div>
+        </div>
+
+        <div class="stack">
+          <div class="card">
+            <div class="card-head" style="margin-bottom:8px"><h3>زمان‌بندی پشتیبان‌گیری</h3></div>
+            <div class="f-row">
+              <div class="field"><label>ساعت اجرا</label><input type="text" class="mono" value="۰۳:۰۰"></div>
+              <div class="field"><label>نگهداری <em>روز</em></label><input type="text" class="mono" value="۳۰"></div>
+            </div>
+            <div class="toggle"><div><div class="tt">ارسال نسخه به فضای ابری</div><div class="td">پس از هر پشتیبان‌گیری موفق</div></div><button class="switch on" aria-pressed="true"><i></i></button></div>
+            <div class="toggle"><div><div class="tt">اطلاع در صورت شکست</div><div class="td">پیامک به ادمین سامانه</div></div><button class="switch on" aria-pressed="true"><i></i></button></div>
+            <button class="btn btn-primary btn-full" style="margin-top:14px" data-toast="زمان‌بندی ذخیره شد">ذخیره زمان‌بندی</button>
+          </div>
+
+          <div class="card">
+            <div class="card-head" style="margin-bottom:8px"><h3>امنیت ورود</h3></div>
+            <div class="toggle"><div><div class="tt">قفل حساب پس از ۵ تلاش ناموفق</div><div class="td">مدت قفل ۱۵ دقیقه</div></div><button class="switch on" aria-pressed="true"><i></i></button></div>
+            <div class="toggle"><div><div class="tt">پایان خودکار نشست پس از ۳۰ دقیقه بی‌کاری</div><div class="td">برای پنل مدیر و ادمین</div></div><button class="switch on" aria-pressed="true"><i></i></button></div>
+            <div class="toggle"><div><div class="tt">محدودسازی ورود به IP کارگاه</div><div class="td">اپ راننده از این قاعده مستثنی است</div></div><button class="switch" aria-pressed="false"><i></i></button></div>
+            <div class="field" style="margin-top:14px"><label>حداقل طول رمز عبور</label><input type="text" class="mono" value="۸"></div>
+            <button class="btn btn-primary btn-full" data-toast="سیاست‌های امنیتی به‌روزرسانی شد">ذخیره سیاست‌ها</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= LOGS ================= -->
+    <section class="page" id="page-logs">
+      <div class="card flush">
+        <div class="card-head">
+          <div><h3>لاگ ممیزی</h3><div class="hint">هر تغییر داده با کاربر و زمان ثبت می‌شود</div></div>
+          <div class="row">
+            <select style="border:1px solid var(--line-2);border-radius:10px;padding:7px 11px;font-size:12.5px;background:var(--surface-2)">
+              <option>همه رویدادها</option><option>ورود و خروج</option><option>تغییر داده</option><option>خطای سامانه</option><option>تغییر دسترسی</option>
+            </select>
+            <button class="btn btn-ghost btn-sm" data-toast="خروجی Excel لاگ ساخته شد">خروجی Excel</button>
+          </div>
+        </div>
+        <div class="t-scroll">
+          <table data-searchable>
+            <thead><tr><th>زمان</th><th>کاربر</th><th>کارخانه</th><th>نوع</th><th>شرح</th><th>IP</th></tr></thead>
+            <tbody>
+              <tr><td class="mono">۱۴:۱۸:۰۴</td><td class="mono">ali.n</td><td>پرند</td><td><span class="badge b-blue">تغییر داده</span></td><td>بچ #۴۳ بسته شد و رسید LD-2292 صادر شد</td><td class="mono">۱۰.۲۰.۵.۴</td></tr>
+              <tr><td class="mono">۱۴:۰۲:۳۳</td><td class="mono">reza.k</td><td>پرند</td><td><span class="badge b-blue">تغییر داده</span></td><td>تأیید دریافت بار برای بچ #۴۳ از اپ راننده</td><td class="mono">موبایل</td></tr>
+              <tr><td class="mono">۱۳:۴۸:۱۱</td><td class="mono">system</td><td>کرج</td><td><span class="badge b-err">خطای سامانه</span></td><td>قطع ارتباط با کنترلر — MODBUS TIMEOUT</td><td class="mono">۱۰.۲۳.۱.۱۲</td></tr>
+              <tr><td class="mono">۱۲:۳۰:۵۰</td><td class="mono">mehdi.t</td><td>همه</td><td><span class="badge b-warn">تغییر دسترسی</span></td><td>دسترسی «حذف سفارش» از نقش اپراتور برداشته شد</td><td class="mono">۱۹۲.۱۶۸.۱.۲۰</td></tr>
+              <tr><td class="mono">۱۱:۰۵:۱۹</td><td class="mono">operator.esf</td><td>اصفهان</td><td><span class="badge b-err">ورود ناموفق</span></td><td>۵ تلاش ناموفق — حساب قفل شد</td><td class="mono">۱۰.۲۲.۴.۹</td></tr>
+              <tr><td class="mono">۱۰:۱۲:۰۷</td><td class="mono">amir.r</td><td>کرج</td><td><span class="badge b-blue">تغییر داده</span></td><td>کاربر reza.kh غیرفعال شد</td><td class="mono">۱۰.۲۳.۴.۲</td></tr>
+              <tr><td class="mono">۰۹:۴۰:۴۵</td><td class="mono">mehdi.t</td><td>همه</td><td><span class="badge b-blue">تغییر داده</span></td><td>قالب رسید بارگیری به نسخه ۳ به‌روزرسانی شد</td><td class="mono">۱۹۲.۱۶۸.۱.۲۰</td></tr>
+              <tr><td class="mono">۰۷:۵۰:۰۲</td><td class="mono">hossein.m</td><td>پرند</td><td><span class="badge b-mute">ورود</span></td><td>ورود موفق به پنل مدیر کارگاه</td><td class="mono">۱۰.۲۰.۴.۱</td></tr>
+              <tr><td class="mono">۰۳:۰۶:۱۲</td><td class="mono">system</td><td>همه</td><td><span class="badge b-ok">پشتیبان‌گیری</span></td><td>پشتیبان کامل ۴.۲ گیگابایت ذخیره شد</td><td class="mono">—</td></tr>
+            </tbody>
+          </table>
+          <div class="empty"><b>رویدادی پیدا نشد</b><span>عبارت جستجو را تغییر دهید.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= ALERTS ================= -->
+    <section class="page" id="page-alerts">
+      <div class="grid g-main">
+        <div class="card">
+          <div class="card-head"><h3>رخدادهای باز</h3><button class="btn btn-ghost btn-sm" data-toast="همه رخدادها خوانده‌شده علامت خورد">علامت‌گذاری همه</button></div>
+          <div class="alert"><span class="ic err">!</span><div><div class="t">قطع ارتباط PLC — کارخانه کرج</div><div class="d">تولید متوقف شده است. مسئول: امیر رستگار</div>
+            <div class="row" style="margin-top:8px"><button class="btn btn-soft btn-sm" data-goto="devices">رفتن به عیب‌یابی</button><button class="btn btn-ghost btn-sm" data-toast="رخداد بسته شد">بستن رخداد</button></div></div><span class="time mono">۱۳:۴۸</span></div>
+          <div class="alert"><span class="ic warn">▧</span><div><div class="t">فضای دیسک سرور گزارش‌ها ۸۶٪</div><div class="d">پیشنهاد: انتقال گزارش‌های قدیمی‌تر از ۶ ماه به آرشیو</div></div><span class="time mono">۱۲:۲۰</span></div>
+          <div class="alert"><span class="ic warn">◧</span><div><div class="t">۵ تلاش ناموفق ورود — operator.esf</div><div class="d">حساب قفل شده است؛ در صورت تأیید هویت رفع قفل کنید</div>
+            <div class="row" style="margin-top:8px"><button class="btn btn-soft btn-sm" data-toast="قفل حساب برداشته شد">رفع قفل حساب</button></div></div><span class="time mono">۱۱:۰۵</span></div>
+          <div class="alert"><span class="ic warn">◔</span><div><div class="t">اشتراک بچینگ کرج تا ۴ ماه دیگر تمام می‌شود</div><div class="d">اعتبار تا ۱۴۰۴/۱۲/۲۹</div></div><span class="time mono">دیروز</span></div>
+        </div>
+
+        <div class="stack">
+          <div class="card">
+            <div class="card-head" style="margin-bottom:8px"><h3>قواعد اعلان</h3></div>
+            <div class="toggle"><div><div class="tt">قطع ارتباط دستگاه</div><div class="td">پیامک فوری به ادمین و مدیر کارگاه</div></div><button class="switch on" aria-pressed="true"><i></i></button></div>
+            <div class="toggle"><div><div class="tt">کمبود موجودی مواد</div><div class="td">اعلان در پنل مدیر همان کارخانه</div></div><button class="switch on" aria-pressed="true"><i></i></button></div>
+            <div class="toggle"><div><div class="tt">تأخیر در ثبت رسید تحویل</div><div class="td">بیش از ۳۰ دقیقه پس از زمان تحویل</div></div><button class="switch on" aria-pressed="true"><i></i></button></div>
+            <div class="toggle"><div><div class="tt">ورود ناموفق مکرر</div><div class="td">فقط برای ادمین سامانه</div></div><button class="switch on" aria-pressed="true"><i></i></button></div>
+            <div class="toggle"><div><div class="tt">گزارش روزانه تولید</div><div class="td">هر شب ساعت ۲۲ برای مدیران</div></div><button class="switch" aria-pressed="false"><i></i></button></div>
+          </div>
+          <div class="card">
+            <div class="card-head" style="margin-bottom:8px"><h3>کانال‌های ارسال</h3></div>
+            <div class="kv"><span>پیامک</span><span><span class="badge b-ok">متصل</span></span></div>
+            <div class="kv"><span>اعلان اپ راننده</span><span><span class="badge b-ok">متصل</span></span></div>
+            <div class="kv"><span>ایمیل</span><span><span class="badge b-warn">پیکربندی ناقص</span></span></div>
+            <div class="kv"><span>واتساپ</span><span><span class="badge b-mute">غیرفعال</span></span></div>
+            <button class="btn btn-ghost btn-full" style="margin-top:14px" data-goto="settings">تنظیم کانال‌ها</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SETTINGS ================= -->
+    <section class="page" id="page-settings">
+      <div class="tabs">
+        <button class="tab active" data-pane="st-gen">عمومی</button>
+        <button class="tab" data-pane="st-units">واحدها و تلرانس</button>
+        <button class="tab" data-pane="st-int">اتصال‌ها و کلیدها</button>
+      </div>
+
+      <div class="pane active" id="pane-st-gen">
+        <div class="grid g2">
+          <div class="card">
+            <div class="card-head" style="margin-bottom:8px"><h3>مشخصات سازمان</h3></div>
+            <div class="field"><label>نام سازمان</label><input type="text" value="گروه صنعتی بتن پارس"></div>
+            <div class="f-row">
+              <div class="field"><label>شناسه ملی</label><input type="text" class="mono" value="۱۰۱۰۲۳۴۵۶۷۸"></div>
+              <div class="field"><label>تلفن پشتیبانی</label><input type="text" class="mono" value="۰۲۱-۴۴۵۵۶۶۷۷"></div>
+            </div>
+            <div class="field"><label>زبان و تقویم</label><select><option>فارسی — تقویم هجری شمسی</option><option>English — Gregorian</option></select></div>
+            <div class="field"><label>واحد پول</label><select><option>ریال (IRR)</option><option>تومان</option></select></div>
+            <button class="btn btn-primary btn-full" data-toast="مشخصات سازمان ذخیره شد">ذخیره</button>
+          </div>
+
+          <div class="card">
+            <div class="card-head" style="margin-bottom:8px"><h3>رفتار سامانه</h3></div>
+            <div class="toggle"><div><div class="tt">تأیید سفارش پیش از تولید الزامی باشد</div><div class="td">اپراتور فقط سفارش تأییدشده را می‌بیند</div></div><button class="switch on" aria-pressed="true"><i></i></button></div>
+            <div class="toggle"><div><div class="tt">ثبت تحویل بدون عکس رسید ممنوع</div><div class="td">در اپ راننده اجباری می‌شود</div></div><button class="switch on" aria-pressed="true"><i></i></button></div>
+            <div class="toggle"><div><div class="tt">اجازه ویرایش بچ پس از پایان</div><div class="td">فقط با ثبت دلیل در لاگ ممیزی</div></div><button class="switch" aria-pressed="false"><i></i></button></div>
+            <div class="toggle"><div><div class="tt">شماره‌گذاری مستقل رسید برای هر کارخانه</div><div class="td">مثلاً PR-LD-2292 و ESF-LD-1104</div></div><button class="switch on" aria-pressed="true"><i></i></button></div>
+            <button class="btn btn-primary btn-full" style="margin-top:14px" data-toast="تنظیمات رفتار سامانه ذخیره شد">ذخیره</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="pane" id="pane-st-units">
+        <div class="grid g2">
+          <div class="card">
+            <div class="card-head" style="margin-bottom:8px"><h3>واحدهای پیش‌فرض</h3></div>
+            <div class="f-row">
+              <div class="field"><label>حجم بتن</label><select><option>متر مکعب (m³)</option></select></div>
+              <div class="field"><label>وزن مواد</label><select><option>کیلوگرم (kg)</option><option>تن (t)</option></select></div>
+            </div>
+            <div class="f-row">
+              <div class="field"><label>مایعات</label><select><option>لیتر</option><option>کیلوگرم</option></select></div>
+              <div class="field"><label>دقت اعشار</label><select><option>۲ رقم</option><option>۱ رقم</option><option>۰ رقم</option></select></div>
+            </div>
+            <button class="btn btn-primary btn-full" data-toast="واحدها ذخیره شد">ذخیره واحدها</button>
+          </div>
+
+          <div class="card">
+            <div class="card-head" style="margin-bottom:8px"><h3>تلرانس مجاز توزین</h3><span class="hint">پیش‌فرض همه کارخانه‌ها</span></div>
+            <div class="f-row">
+              <div class="field"><label>سیمان <em>± درصد</em></label><input type="text" class="mono" value="۲"></div>
+              <div class="field"><label>شن و ماسه <em>± درصد</em></label><input type="text" class="mono" value="۳"></div>
+            </div>
+            <div class="f-row">
+              <div class="field"><label>آب <em>± درصد</em></label><input type="text" class="mono" value="۱.۵"></div>
+              <div class="field"><label>افزودنی <em>± درصد</em></label><input type="text" class="mono" value="۵"></div>
+            </div>
+            <div class="toggle"><div><div class="tt">هشدار هنگام خروج از تلرانس</div><div class="td">ثبت خودکار در لاگ تولید</div></div><button class="switch on" aria-pressed="true"><i></i></button></div>
+            <button class="btn btn-primary btn-full" style="margin-top:14px" data-toast="تلرانس‌ها ذخیره و به کارخانه‌ها ارسال شد">ذخیره تلرانس‌ها</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="pane" id="pane-st-int">
+        <div class="grid g2">
+          <div class="card">
+            <div class="card-head" style="margin-bottom:10px"><h3>کلیدهای اتصال</h3><span class="hint">برای اتصال سرویس‌های بیرونی</span></div>
+            <div class="section-title" style="margin-top:0">کلید API سامانه</div>
+            <div class="keybox" style="margin-bottom:12px"><code>pb_live_9f3a••••••••••••••••4c21</code><button class="btn btn-ghost btn-sm" data-toast="کلید کپی شد">کپی</button></div>
+            <div class="keybox" style="margin-bottom:12px"><code>webhook: https://api.parsbatching.ir/hooks/delivery</code><button class="btn btn-ghost btn-sm" data-toast="نشانی کپی شد">کپی</button></div>
+            <div class="row">
+              <button class="btn btn-ghost btn-sm" data-toast="کلید تازه ساخته شد؛ کلید قبلی تا ۲۴ ساعت معتبر است">ساخت کلید تازه</button>
+              <button class="btn btn-danger btn-sm" data-toast="کلید باطل شد">ابطال کلید</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-head" style="margin-bottom:8px"><h3>سرویس پیامک و اعلان</h3></div>
+            <div class="field"><label>سرویس‌دهنده پیامک</label><select><option>کاوه‌نگار</option><option>ملی پیامک</option><option>فراز اس‌ام‌اس</option></select></div>
+            <div class="field"><label>شماره فرستنده</label><input type="text" class="mono" value="۱۰۰۰۴۴۵۵۶۶"></div>
+            <div class="field"><label>سرویس اعلان اپ راننده</label><select><option>Firebase Cloud Messaging</option><option>پوش داخلی</option></select></div>
+            <div class="kv"><span>وضعیت اتصال پیامک</span><span><span class="badge b-ok">سالم</span></span></div>
+            <div class="kv"><span>پیامک ارسالی امروز</span><span class="mono">۲۱۴</span></div>
+            <button class="btn btn-primary btn-full" style="margin-top:14px" data-toast="پیامک آزمایشی برای شما ارسال شد">ارسال پیامک آزمایشی</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<!-- ============ DRAWER: plant detail ============ -->
+<div class="overlay side" id="ovPlant">
+  <div class="drawer" role="dialog" aria-modal="true">
+    <div class="ov-head">
+      <div><h2 id="plTitle">بچینگ پرند</h2><div class="sub"><span class="mono" id="plCode">PL-01</span> · تهران، شهر جدید پرند</div></div>
+      <button class="ov-close" data-close="ovPlant" aria-label="بستن">✕</button>
+    </div>
+    <div class="ov-body">
+      <div class="grid g2" style="gap:10px;margin-bottom:18px">
+        <div class="stat" style="padding:12px 14px"><div class="label">تولید امروز</div><div class="value" style="font-size:22px">۵۲۰ <u>m³</u></div></div>
+        <div class="stat" style="padding:12px 14px"><div class="label">سفارش باز</div><div class="value" style="font-size:22px">۷</div></div>
+      </div>
+
+      <div class="section-title">اطلاعات کارخانه</div>
+      <div class="kv"><span>مدیر کارگاه</span><span>حسین محمدی</span></div>
+      <div class="kv"><span>ظرفیت اسمی</span><span class="mono">۶۴۰ m³ در روز</span></div>
+      <div class="kv"><span>تعداد کاربر</span><span class="mono">۱۲</span></div>
+      <div class="kv"><span>ناوگان</span><span class="mono">۹ خودرو · ۶ راننده</span></div>
+      <div class="kv"><span>تاریخ راه‌اندازی</span><span class="mono">۱۴۰۲/۰۹/۱۴</span></div>
+
+      <div class="section-title">ماژول‌های فعال</div>
+      <div class="toggle"><div><div class="tt">مدیریت مالی</div><div class="td">تراکنش‌ها، فاکتور و قیمت‌گذاری</div></div><button class="switch on" aria-pressed="true"><i></i></button></div>
+      <div class="toggle"><div><div class="tt">انبار مواد اولیه</div><div class="td">موجودی، ورود و مصرف مواد</div></div><button class="switch on" aria-pressed="true"><i></i></button></div>
+      <div class="toggle"><div><div class="tt">اپلیکیشن راننده</div><div class="td">مأموریت‌ها و رسید تحویل</div></div><button class="switch on" aria-pressed="true"><i></i></button></div>
+      <div class="toggle"><div><div class="tt">اتصال مستقیم به PLC</div><div class="td">خواندن وزن واقعی از دستگاه</div></div><button class="switch on" aria-pressed="true"><i></i></button></div>
+
+      <div class="section-title">کاربران کلیدی</div>
+      <div class="t-scroll">
+        <table>
+          <thead><tr><th>نام</th><th>نقش</th><th>وضعیت</th></tr></thead>
+          <tbody>
+            <tr><td>حسین محمدی</td><td>مدیر کارگاه</td><td><span class="badge b-ok">فعال</span></td></tr>
+            <tr><td>علی نوروزی</td><td>اپراتور</td><td><span class="badge b-ok">فعال</span></td></tr>
+            <tr><td>رضا کریمی</td><td>راننده</td><td><span class="badge b-blue">در مأموریت</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="ov-foot">
+      <button class="btn btn-primary btn-sm" data-toast="پنل مدیر این کارخانه در تب تازه باز شد">ورود به پنل کارخانه</button>
+      <button class="btn btn-ghost btn-sm" data-toast="فرم ویرایش کارخانه باز شد">ویرایش</button>
+      <button class="btn btn-danger btn-sm" style="margin-inline-start:auto" data-toast="کارخانه غیرفعال شد">غیرفعال‌سازی</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ MODAL: new plant ============ -->
+<div class="overlay mid" id="ovNewPlant">
+  <div class="modal" role="dialog" aria-modal="true">
+    <div class="ov-head">
+      <div><h2 style="font-size:15px">افزودن کارخانه</h2><div class="sub">پس از ثبت، مدیر کارگاه و دستگاه را تعریف کنید</div></div>
+      <button class="ov-close" data-close="ovNewPlant" aria-label="بستن">✕</button>
+    </div>
+    <div class="ov-body">
+      <div class="f-row">
+        <div class="field"><label>نام کارخانه</label><input type="text" placeholder="مثلاً بچینگ تبریز"></div>
+        <div class="field"><label>کد</label><input type="text" class="mono" value="PL-07"></div>
+      </div>
+      <div class="field"><label>آدرس</label><input type="text" placeholder="استان، شهر، نشانی کارگاه"></div>
+      <div class="f-row">
+        <div class="field"><label>ظرفیت روزانه <em>متر مکعب</em></label><input type="text" class="mono" placeholder="۶۰۰"></div>
+        <div class="field"><label>سطح اشتراک</label><select><option>پایه</option><option>حرفه‌ای</option></select></div>
+      </div>
+      <div class="field"><label>مدیر کارگاه</label><select><option>ایجاد کاربر جدید</option><option>حسین محمدی</option><option>سعید افشار</option></select></div>
+      <div class="section-title">ماژول‌های اولیه</div>
+      <div class="toggle"><div><div class="tt">مدیریت مالی</div></div><button class="switch" aria-pressed="false"><i></i></button></div>
+      <div class="toggle"><div><div class="tt">انبار مواد اولیه</div></div><button class="switch on" aria-pressed="true"><i></i></button></div>
+      <div class="toggle"><div><div class="tt">اپلیکیشن راننده</div></div><button class="switch on" aria-pressed="true"><i></i></button></div>
+    </div>
+    <div class="ov-foot">
+      <button class="btn btn-primary btn-sm" data-close="ovNewPlant" data-toast="کارخانه ثبت شد — مرحله بعد: تعریف دستگاه بچینگ">ثبت کارخانه</button>
+      <button class="btn btn-ghost btn-sm" data-close="ovNewPlant">انصراف</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ MODAL: new user ============ -->
+<div class="overlay mid" id="ovNewUser">
+  <div class="modal" role="dialog" aria-modal="true">
+    <div class="ov-head">
+      <div><h2 style="font-size:15px">افزودن کاربر</h2><div class="sub">رمز اولیه پیامک می‌شود</div></div>
+      <button class="ov-close" data-close="ovNewUser" aria-label="بستن">✕</button>
+    </div>
+    <div class="ov-body">
+      <div class="f-row">
+        <div class="field"><label>نام و نام خانوادگی</label><input type="text" placeholder="مثلاً مجید ابراهیمی"></div>
+        <div class="field"><label>نام کاربری</label><input type="text" class="mono" placeholder="majid.e"></div>
+      </div>
+      <div class="f-row">
+        <div class="field"><label>موبایل</label><input type="text" class="mono" placeholder="۰۹۱۲۰۰۰۰۰۰۰"></div>
+        <div class="field"><label>ایمیل <em>اختیاری</em></label><input type="text" class="mono" placeholder="name@company.ir"></div>
+      </div>
+      <div class="f-row">
+        <div class="field"><label>کارخانه</label><select><option>بچینگ پرند</option><option>بچینگ تهران ۱</option><option>بچینگ اصفهان</option><option>بچینگ کرج</option><option>بچینگ مشهد</option></select></div>
+        <div class="field"><label>نقش</label><select><option>راننده</option><option>اپراتور بچینگ</option><option>مدیر کارگاه</option><option>حسابدار</option><option>ادمین سامانه</option></select></div>
+      </div>
+      <div class="toggle"><div><div class="tt">اجبار به تغییر رمز در اولین ورود</div></div><button class="switch on" aria-pressed="true"><i></i></button></div>
+      <div class="toggle"><div><div class="tt">دسترسی به چند کارخانه</div><div class="td">برای مدیران منطقه‌ای</div></div><button class="switch" aria-pressed="false"><i></i></button></div>
+    </div>
+    <div class="ov-foot">
+      <button class="btn btn-primary btn-sm" data-close="ovNewUser" data-toast="کاربر ساخته شد و رمز اولیه پیامک شد">ثبت کاربر</button>
+      <button class="btn btn-ghost btn-sm" data-close="ovNewUser">انصراف</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ MODAL: alerts ============ -->
+<div class="overlay mid" id="ovNotif">
+  <div class="modal" role="dialog" aria-modal="true">
+    <div class="ov-head">
+      <div><h2 style="font-size:15px">رخدادهای تازه</h2><div class="sub">۴ مورد باز</div></div>
+      <button class="ov-close" data-close="ovNotif" aria-label="بستن">✕</button>
+    </div>
+    <div class="ov-body" style="padding:8px 20px;">
+      <div class="alert"><span class="ic err">!</span><div><div class="t">قطع ارتباط PLC — کارخانه کرج</div><div class="d">تولید متوقف است</div></div><span class="time mono">۱۳:۴۸</span></div>
+      <div class="alert"><span class="ic warn">▧</span><div><div class="t">فضای دیسک سرور گزارش‌ها ۸۶٪</div><div class="d">تا ۹ روز دیگر پر می‌شود</div></div><span class="time mono">۱۲:۲۰</span></div>
+      <div class="alert"><span class="ic warn">◧</span><div><div class="t">حساب operator.esf قفل شد</div><div class="d">۵ تلاش ناموفق ورود</div></div><span class="time mono">۱۱:۰۵</span></div>
+      <div class="alert"><span class="ic warn">◔</span><div><div class="t">اشتراک بچینگ کرج رو به پایان</div><div class="d">اعتبار تا ۱۴۰۴/۱۲/۲۹</div></div><span class="time mono">دیروز</span></div>
+    </div>
+    <div class="ov-foot"><button class="btn btn-primary btn-full btn-sm" id="allNotif">رفتن به مرکز رخدادها</button></div>
+  </div>
+</div>
+
+<div class="toasts" id="toasts"></div>
+
+<script>
+(function(){
+  'use strict';
+  const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>Array.from(r.querySelectorAll(s));
+
+  const titles={
+    dashboard:['داشبورد سامانه','نمای کلی'], plants:['کارخانه‌ها','نمای کلی'],
+    users:['کاربران','دسترسی'], roles:['نقش‌ها و دسترسی‌ها','دسترسی'],
+    devices:['دستگاه‌ها و اتصال‌ها','زیرساخت'], templates:['قالب‌های چاپ','زیرساخت'],
+    backup:['پشتیبان‌گیری و امنیت','زیرساخت'], logs:['لاگ و ممیزی','پایش'],
+    alerts:['رخدادهای سامانه','پایش'], settings:['تنظیمات سامانه','پایش']
+  };
+  function go(page){
+    $$('.nav-item').forEach(n=>n.classList.toggle('active',n.dataset.page===page));
+    $$('.page').forEach(p=>p.classList.toggle('active',p.id==='page-'+page));
+    const t=titles[page]||['',''];
+    $('#pageTitle').textContent=t[0];
+    $('#pageCrumb').textContent=t[1]+' / '+t[0];
+    $('#globalSearch').value=''; filterTables('');
+    closeSidebar(); window.scrollTo(0,0);
+  }
+  $$('.nav-item').forEach(n=>n.addEventListener('click',()=>go(n.dataset.page)));
+  $$('[data-goto]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.goto)));
+
+  const sidebar=$('#sidebar'), scrim=$('#scrim');
+  function closeSidebar(){sidebar.classList.remove('open');scrim.classList.remove('open');}
+  $('#burger').addEventListener('click',()=>{sidebar.classList.add('open');scrim.classList.add('open');});
+  scrim.addEventListener('click',closeSidebar);
+
+  /* ---- تب‌ها ---- */
+  $$('.tab').forEach(tab=>tab.addEventListener('click',()=>{
+    const scope=tab.closest('.page');
+    $$('.tab',scope).forEach(t=>t.classList.remove('active'));
+    $$('.pane',scope).forEach(p=>p.classList.remove('active'));
+    tab.classList.add('active');
+    const pane=$('#pane-'+tab.dataset.pane,scope); if(pane) pane.classList.add('active');
+  }));
+
+  /* ---- کلیدهای دوحالته ---- */
+  $$('.switch').forEach(sw=>sw.addEventListener('click',e=>{
+    e.stopPropagation();
+    sw.setAttribute('aria-pressed', sw.classList.toggle('on'));
+  }));
+
+  /* ---- اورلی‌ها ---- */
+  let lastFocus=null;
+  function open(id){lastFocus=document.activeElement;const ov=$('#'+id);ov.classList.add('open');const f=ov.querySelector('button');if(f)f.focus();}
+  function close(id){$('#'+id).classList.remove('open');if(lastFocus)lastFocus.focus();}
+  $$('[data-open]').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();open(b.dataset.open);}));
+  $$('[data-close]').forEach(b=>b.addEventListener('click',()=>close(b.dataset.close)));
+  $$('.overlay').forEach(ov=>ov.addEventListener('click',e=>{if(e.target===ov)ov.classList.remove('open');}));
+  document.addEventListener('keydown',e=>{
+    if(e.key==='Escape'){$$('.overlay.open').forEach(o=>o.classList.remove('open'));closeSidebar();}
+    if(e.key==='/'&&!['INPUT','TEXTAREA'].includes(document.activeElement.tagName)){e.preventDefault();$('#globalSearch').focus();}
+  });
+
+  const plants={
+    1:['بچینگ پرند','PL-01'],2:['بچینگ تهران ۱','PL-02'],3:['بچینگ اصفهان','PL-03'],
+    4:['بچینگ کرج','PL-04'],5:['بچینگ مشهد','PL-05'],6:['بچینگ تبریز','PL-06']
+  };
+  $$('[data-plant]').forEach(el=>el.addEventListener('click',e=>{
+    if(e.target.closest('[data-toast]')) return;
+    const p=plants[el.dataset.plant];
+    $('#plTitle').textContent=p[0]; $('#plCode').textContent=p[1]; open('ovPlant');
+  }));
+  $('#bellBtn').addEventListener('click',()=>open('ovNotif'));
+  $('#allNotif').addEventListener('click',()=>{close('ovNotif');go('alerts');});
+  $('#scopeBtn').addEventListener('click',()=>{go('plants');toast('برای کار روی یک کارخانه، آن را از این صفحه انتخاب کنید');});
+
+  /* ---- نوار سلامت: ساخت میله‌ها ---- */
+  $$('#healthRail .ticks').forEach(rail=>{
+    const p=rail.dataset.pattern;
+    let html='';
+    for(let i=0;i<48;i++){
+      let cls='';
+      if(p==='warn'&&(i===19||i===33)) cls='warn';
+      if(p==='err'&&(i===26||i===27)) cls='err';
+      if(p==='err'&&i===25) cls='warn';
+      if(i>45) cls='idle';
+      html+='<i class="'+cls+'"></i>';
+    }
+    rail.innerHTML=html;
+  });
+
+  /* ---- توست ---- */
+  function toast(msg){
+    const el=document.createElement('div');
+    el.className='toast'; el.innerHTML='<i></i><span></span>';
+    el.querySelector('span').textContent=msg;
+    $('#toasts').appendChild(el);
+    setTimeout(()=>{el.style.transition='.25s';el.style.opacity='0';el.style.transform='translateY(8px)';},2600);
+    setTimeout(()=>el.remove(),2950);
+  }
+  $$('[data-toast]').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();toast(b.dataset.toast);}));
+
+  /* ---- جستجو در جدول‌های صفحه فعال ---- */
+  function filterTables(q){
+    const page=$('.page.active'); if(!page) return;
+    q=q.trim().toLowerCase();
+    $$('table[data-searchable]',page).forEach(tbl=>{
+      let shown=0;
+      $$('tbody tr',tbl).forEach(tr=>{
+        const hit=!q||tr.textContent.toLowerCase().includes(q);
+        tr.style.display=hit?'':'none'; if(hit)shown++;
+      });
+      const wrap=tbl.closest('.t-scroll'), empty=wrap?wrap.querySelector('.empty'):null;
+      if(empty){empty.style.display=shown?'none':'block';tbl.style.display=shown?'':'none';}
+    });
+  }
+  $('#globalSearch').addEventListener('input',e=>filterTables(e.target.value));
+})();
+</script>
+</body>
+</html>

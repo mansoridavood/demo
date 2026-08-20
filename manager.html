@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>پنل مدیر کارگاه — سامانه بچینگ پارس</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/core.css">
+<link rel="stylesheet" href="assets/manager.css">
+</head>
+<body>
+
+<div class="scrim" id="scrim"></div>
+
+<div class="shell">
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="brand-mark">بچ</div>
+      <div>
+        <b>سامانه بچینگ پارس</b>
+        <span>پنل مدیر کارگاه</span>
+      </div>
+    </div>
+
+    <nav class="nav">
+      <div class="nav-label">نمای کلی</div>
+      <button class="nav-item active" data-page="dashboard"><span class="nav-ico">◱</span> داشبورد</button>
+
+      <div class="nav-label">تعریف پایه</div>
+      <button class="nav-item" data-page="customers"><span class="nav-ico">◧</span> مشتریان و پروژه‌ها</button>
+      <button class="nav-item" data-page="formulas"><span class="nav-ico">◨</span> طرح اختلاط</button>
+
+      <div class="nav-label">عملیات</div>
+      <button class="nav-item" data-page="orders"><span class="nav-ico">▤</span> سفارشات <span class="nav-count">۶</span></button>
+      <button class="nav-item" data-page="fleet"><span class="nav-ico">▥</span> رانندگان و ناوگان</button>
+      <button class="nav-item" data-page="receipts"><span class="nav-ico">▦</span> رسیدها و اسناد</button>
+
+      <div class="nav-label">مالی و انبار</div>
+      <button class="nav-item" data-page="finance"><span class="nav-ico">﷼</span> مدیریت مالی</button>
+      <button class="nav-item" data-page="warehouse"><span class="nav-ico">▧</span> انبار مواد اولیه</button>
+
+      <div class="nav-label">مدیریت</div>
+      <button class="nav-item" data-page="reports"><span class="nav-ico">◫</span> گزارش‌ها</button>
+      <button class="nav-item" data-page="notifications"><span class="nav-ico">◔</span> اعلان‌ها <span class="nav-count alert">۳</span></button>
+      <button class="nav-item" data-page="settings"><span class="nav-ico">⚙</span> تنظیمات</button>
+    </nav>
+
+    <div class="sidebar-foot"><span class="pulse"></span> دستگاه بچینگ متصل است</div>
+  </aside>
+
+  <!-- ============ MAIN ============ -->
+  <div class="main">
+    <header class="topbar">
+      <div style="display:flex;align-items:center;gap:12px;min-width:0;">
+        <button class="ibtn burger" id="burger" aria-label="باز کردن منو">☰</button>
+        <div class="tb-title">
+          <h1 id="pageTitle">داشبورد</h1>
+          <div class="crumb" id="pageCrumb">نمای کلی / داشبورد</div>
+        </div>
+      </div>
+      <div class="tb-actions">
+        <label class="search">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.2-3.2"/></svg>
+          <input type="search" id="globalSearch" placeholder="جستجو در جدول‌های این صفحه…">
+          <kbd>/</kbd>
+        </label>
+        <div class="clock"><span>امروز</span><b class="mono" id="clock">۱۴:۱۸</b></div>
+        <button class="ibtn" id="bellBtn" aria-label="اعلان‌ها">◔<span class="dot"></span></button>
+        <div class="user">
+          <div class="avatar">ح.م</div>
+          <div><div class="n">حسین محمدی</div><div class="r">مدیر کارگاه</div></div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ================= DASHBOARD ================= -->
+    <section class="page active" id="page-dashboard">
+      <div class="grid g4" style="margin-bottom:16px;">
+        <div class="stat accent">
+          <div class="top"><span class="label">حجم تولید امروز</span><span class="chip">◱</span></div>
+          <div class="value">۳۸۶ <u>m³</u></div>
+          <div class="sub">۸۶٪ از هدف ۴۵۰ متر مکعب</div>
+          <div class="track" style="background:rgba(255,255,255,.16)"><i style="width:86%;background:linear-gradient(90deg,#90CAF9,#fff)"></i></div>
+        </div>
+        <div class="stat">
+          <div class="top"><span class="label">بچ‌های امروز</span><span class="chip">⛭</span></div>
+          <div class="value">۴۲</div><div class="sub up">▲ ۶ بچ بیشتر از دیروز</div>
+        </div>
+        <div class="stat">
+          <div class="top"><span class="label">بار ارسال‌شده</span><span class="chip">▥</span></div>
+          <div class="value">۲۹</div><div class="sub">۵ راننده در مأموریت</div>
+        </div>
+        <div class="stat">
+          <div class="top"><span class="label">هشدارهای باز</span><span class="chip" style="background:var(--err-bg);color:var(--err)">!</span></div>
+          <div class="value">۳</div><div class="sub down">۱ بحرانی · ۲ هشدار</div>
+        </div>
+      </div>
+
+      <div class="grid g-main" style="margin-bottom:16px;">
+        <div class="card">
+          <div class="card-head">
+            <div><h3>روند تولید هفته</h3><div class="hint">حجم روزانه بر حسب متر مکعب</div></div>
+            <div class="chart-legend"><span><i style="background:var(--b-500)"></i>تولید</span><span><i style="background:var(--b-200)"></i>هدف روزانه</span></div>
+          </div>
+          <svg viewBox="0 0 640 200" width="100%" height="200" role="img" aria-label="نمودار تولید هفتگی">
+            <defs><linearGradient id="area" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#2196F3" stop-opacity=".28"/><stop offset="1" stop-color="#2196F3" stop-opacity="0"/>
+            </linearGradient></defs>
+            <g stroke="#E5EEF7" stroke-width="1">
+              <line x1="30" y1="20" x2="620" y2="20"/><line x1="30" y1="60" x2="620" y2="60"/>
+              <line x1="30" y1="100" x2="620" y2="100"/><line x1="30" y1="140" x2="620" y2="140"/><line x1="30" y1="170" x2="620" y2="170"/>
+            </g>
+            <line x1="30" y1="47" x2="620" y2="47" stroke="#90CAF9" stroke-width="1.5" stroke-dasharray="5 5"/>
+            <path d="M60 105 L153 88 L246 122 L339 65 L432 84 L525 47 L610 70 L610 170 L60 170 Z" fill="url(#area)"/>
+            <path d="M60 105 L153 88 L246 122 L339 65 L432 84 L525 47 L610 70" fill="none" stroke="#2196F3" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+            <g fill="#fff" stroke="#2196F3" stroke-width="2.5">
+              <circle cx="60" cy="105" r="3.5"/><circle cx="153" cy="88" r="3.5"/><circle cx="246" cy="122" r="3.5"/>
+              <circle cx="339" cy="65" r="3.5"/><circle cx="432" cy="84" r="3.5"/><circle cx="525" cy="47" r="3.5"/>
+            </g>
+            <circle cx="610" cy="70" r="6.5" fill="#0D47A1" stroke="#fff" stroke-width="3"/>
+            <g font-size="11" fill="#8299AE" font-family="Vazirmatn" text-anchor="middle">
+              <text x="60" y="192">شنبه</text><text x="153" y="192">یک‌شنبه</text><text x="246" y="192">دوشنبه</text>
+              <text x="339" y="192">سه‌شنبه</text><text x="432" y="192">چهارشنبه</text><text x="525" y="192">پنج‌شنبه</text>
+              <text x="610" y="192" fill="#0D47A1" font-weight="700">امروز</text>
+            </g>
+            <g font-size="10.5" fill="#8299AE" font-family="Vazirmatn" text-anchor="end">
+              <text x="622" y="24">۴۵۰</text><text x="622" y="64">۳۸۰</text><text x="622" y="104">۳۱۰</text><text x="622" y="144">۲۴۰</text>
+            </g>
+          </svg>
+        </div>
+
+        <div class="card">
+          <div class="card-head"><h3>سیلوی سیمان تیپ ۲</h3><span class="badge b-warn">رو به کاهش</span></div>
+          <div class="silo-wrap">
+            <svg class="silo-svg" viewBox="0 0 132 240" role="img" aria-label="سیلوی سیمان، ۴۱ درصد پر">
+              <defs>
+                <linearGradient id="cement" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#64B5F6"/><stop offset="1" stop-color="#0D47A1"/></linearGradient>
+                <clipPath id="siloClip"><path d="M22 34 Q22 16 40 16 L92 16 Q110 16 110 34 L110 150 L74 206 Q66 216 58 206 L22 150 Z"/></clipPath>
+              </defs>
+              <path d="M28 150 L20 214 M104 150 L112 214" stroke="#0B1F33" stroke-width="4" stroke-linecap="round"/>
+              <path d="M22 34 Q22 16 40 16 L92 16 Q110 16 110 34 L110 150 L74 206 Q66 216 58 206 L22 150 Z" fill="#EDF4FB"/>
+              <g clip-path="url(#siloClip)">
+                <rect x="18" y="134" width="96" height="90" fill="url(#cement)"/>
+                <rect x="18" y="134" width="96" height="4" fill="#90CAF9"/>
+              </g>
+              <g stroke="#0B1F33" stroke-width="1.6" opacity=".28">
+                <line x1="22" y1="63" x2="38" y2="63"/><line x1="22" y1="105" x2="38" y2="105"/><line x1="22" y1="147" x2="38" y2="147"/>
+              </g>
+              <path d="M22 34 Q22 16 40 16 L92 16 Q110 16 110 34 L110 150 L74 206 Q66 216 58 206 L22 150 Z" fill="none" stroke="#0B1F33" stroke-width="3.5" stroke-linejoin="round"/>
+              <rect x="52" y="8" width="28" height="10" rx="3" fill="#0B1F33"/>
+            </svg>
+            <div class="silo-read">
+              <div class="big">۴۱<u>٪</u></div>
+              <div class="cap">با نرخ مصرف امروز، تا حدود ۹ ساعت دیگر به حد هشدار می‌رسد.</div>
+              <div class="rows">
+                <div><b class="mono">۱۸.۴ t</b><span>موجودی</span></div>
+                <div><b class="mono">۴۵ t</b><span>ظرفیت</span></div>
+              </div>
+              <button class="btn btn-soft btn-sm" style="margin-top:14px" data-toast="درخواست شارژ سیلو برای تأمین‌کننده ارسال شد">درخواست شارژ سیلو</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid g-main">
+        <div class="card flush">
+          <div class="card-head"><h3>سفارش‌های در جریان</h3><button class="btn btn-ghost btn-sm" data-goto="orders">مشاهده همه</button></div>
+          <div class="t-scroll">
+            <table data-searchable>
+              <thead><tr><th>کد</th><th>مشتری</th><th>طرح</th><th>حجم</th><th>پیشرفت</th><th>وضعیت</th></tr></thead>
+              <tbody>
+                <tr class="clickable" data-order="ORD-1042"><td class="mono">ORD-1042</td><td>راهسازی البرز</td><td class="mono">C30</td><td class="mono">۶۰ m³</td>
+                  <td style="min-width:110px"><div class="track"><i style="width:45%"></i></div><span class="t-sub">۲۷ از ۶۰ m³</span></td>
+                  <td><span class="badge b-blue">در حال تولید</span></td></tr>
+                <tr class="clickable" data-order="ORD-1043"><td class="mono">ORD-1043</td><td>انبوه‌سازان مهرگان</td><td class="mono">C25</td><td class="mono">۴۵ m³</td>
+                  <td><div class="track"><i style="width:0%"></i></div><span class="t-sub">در صف</span></td>
+                  <td><span class="badge b-deep">تأیید شده</span></td></tr>
+                <tr class="clickable" data-order="ORD-1044"><td class="mono">ORD-1044</td><td>انبوه‌سازان مهرگان</td><td class="mono">C35</td><td class="mono">۸۰ m³</td>
+                  <td><div class="track"><i style="width:0%"></i></div><span class="t-sub">در صف</span></td>
+                  <td><span class="badge b-deep">تأیید شده</span></td></tr>
+                <tr class="clickable" data-order="ORD-1045"><td class="mono">ORD-1045</td><td>شهرداری منطقه ۴</td><td class="mono">C20</td><td class="mono">۳۰ m³</td>
+                  <td><div class="track"><i style="width:0%"></i></div><span class="t-sub">در انتظار تأیید شما</span></td>
+                  <td><span class="badge b-mute">ثبت شده</span></td></tr>
+              </tbody>
+            </table>
+            <div class="empty"><b>سفارشی پیدا نشد</b><span>عبارت جستجو را تغییر دهید.</span></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head"><h3>هشدارهای امروز</h3><button class="btn btn-ghost btn-sm" data-goto="notifications">مرکز اعلان‌ها</button></div>
+          <div class="alert"><span class="ic err">!</span><div><div class="t">افزودنی روان‌کننده رو به اتمام است</div><div class="d">۹۰ لیتر باقی مانده — کمتر از حد هشدار ۱۵۰ لیتر</div></div><span class="time mono">۱۰:۲۲</span></div>
+          <div class="alert"><span class="ic warn">◔</span><div><div class="t">رسید تحویل ORD-1039 ثبت نشده</div><div class="d">۵۲ دقیقه از زمان تحویل گذشته است</div></div><span class="time mono">۰۹:۴۵</span></div>
+          <div class="alert"><span class="ic warn">⛭</span><div><div class="t">خطای موقت سنسور وزن شن</div><div class="d">بچ #۳۸ پس از ۲ دقیقه اصلاح و ادامه یافت</div></div><span class="time mono">۰۸:۱۱</span></div>
+          <div class="alert"><span class="ic ok">✓</span><div><div class="t">سفارش ORD-1041 تحویل شد</div><div class="d">تأیید نماینده کارفرما ثبت شد</div></div><span class="time mono">۰۷:۳۰</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CUSTOMERS ================= -->
+    <section class="page" id="page-customers">
+      <div class="tabs">
+        <button class="tab active" data-pane="cu-list">مشتریان</button>
+        <button class="tab" data-pane="cu-proj">پروژه‌ها</button>
+      </div>
+
+      <div class="pane active" id="pane-cu-list">
+        <div class="card flush">
+          <div class="card-head"><h3>مشتریان</h3><button class="btn btn-primary btn-sm" data-toast="فرم افزودن مشتری باز شد">افزودن مشتری</button></div>
+          <div class="t-scroll">
+            <table data-searchable>
+              <thead><tr><th>نام مشتری</th><th>کد</th><th>تلفن</th><th>پروژه‌ها</th><th>مانده حساب</th><th>وضعیت</th><th></th></tr></thead>
+              <tbody>
+                <tr class="clickable" data-customer="1"><td><div class="person"><span class="av">ال</span> شرکت راهسازی البرز</div></td><td class="mono">CU-014</td><td class="mono">۰۲۱-۴۴۵۵۶۶</td><td class="mono">۳</td><td class="mono">۱,۸۰۰,۰۰۰,۰۰۰</td><td><span class="badge b-ok">فعال</span></td><td><button class="btn btn-ghost btn-sm">جزئیات</button></td></tr>
+                <tr class="clickable" data-customer="2"><td><div class="person"><span class="av">مه</span> انبوه‌سازان مهرگان</div></td><td class="mono">CU-021</td><td class="mono">۰۲۱-۸۸۷۷۶۶</td><td class="mono">۵</td><td class="mono">۰</td><td><span class="badge b-ok">فعال</span></td><td><button class="btn btn-ghost btn-sm">جزئیات</button></td></tr>
+                <tr class="clickable" data-customer="3"><td><div class="person"><span class="av">ش۴</span> شهرداری منطقه ۴</div></td><td class="mono">CU-008</td><td class="mono">۰۲۱-۶۶۵۵۴۴</td><td class="mono">۱</td><td class="mono">۱,۵۰۰,۰۰۰,۰۰۰</td><td><span class="badge b-ok">فعال</span></td><td><button class="btn btn-ghost btn-sm">جزئیات</button></td></tr>
+                <tr class="clickable" data-customer="4"><td><div class="person"><span class="av">ست</span> پیمانکاری ستاره شرق</div></td><td class="mono">CU-002</td><td class="mono">۰۵۱-۲۲۳۳۴۴</td><td class="mono">۲</td><td class="mono">۰</td><td><span class="badge b-mute">غیرفعال</span></td><td><button class="btn btn-ghost btn-sm">جزئیات</button></td></tr>
+              </tbody>
+            </table>
+            <div class="empty"><b>مشتری‌ای پیدا نشد</b><span>عبارت دیگری را جستجو کنید.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pane" id="pane-cu-proj">
+        <div class="card flush">
+          <div class="card-head"><h3>پروژه‌ها</h3><button class="btn btn-primary btn-sm" data-toast="فرم افزودن پروژه باز شد">افزودن پروژه</button></div>
+          <div class="t-scroll">
+            <table data-searchable>
+              <thead><tr><th>نام پروژه</th><th>مشتری</th><th>آدرس</th><th>حجم تحویلی</th><th>وضعیت</th><th></th></tr></thead>
+              <tbody>
+                <tr><td>برج نگین شمال</td><td>انبوه‌سازان مهرگان</td><td>اتوبان بابایی، فاز ۲</td><td class="mono">۱,۴۵۰ m³</td><td><span class="badge b-blue">در حال اجرا</span></td><td><button class="btn btn-ghost btn-sm">جزئیات</button></td></tr>
+                <tr><td>روگذر میدان آزادی</td><td>شرکت راهسازی البرز</td><td>میدان آزادی</td><td class="mono">۹۸۰ m³</td><td><span class="badge b-blue">در حال اجرا</span></td><td><button class="btn btn-ghost btn-sm">جزئیات</button></td></tr>
+                <tr><td>پیاده‌روسازی منطقه ۴</td><td>شهرداری منطقه ۴</td><td>بلوار کشاورز</td><td class="mono">۴۹۰ m³</td><td><span class="badge b-mute">متوقف موقت</span></td><td><button class="btn btn-ghost btn-sm">جزئیات</button></td></tr>
+              </tbody>
+            </table>
+            <div class="empty"><b>پروژه‌ای پیدا نشد</b><span>عبارت دیگری را جستجو کنید.</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FORMULAS ================= -->
+    <section class="page" id="page-formulas">
+      <div class="grid g-side">
+        <div class="stack">
+          <div class="card-head" style="margin:0"><h3>طرح‌های اختلاط</h3><button class="btn btn-primary btn-sm" data-toast="فرم طرح اختلاط جدید باز شد">طرح جدید</button></div>
+          <div>
+            <div class="f-card on" data-formula="C25"><div class="top"><span class="code mono">C25</span><span class="badge b-ok">فعال</span></div><div class="meta">بتن معمولی · ۲۵ مگاپاسکال · اسلامپ ۸±۱۰ سانتی‌متر · نسخه ۳</div></div>
+            <div class="f-card" data-formula="C30"><div class="top"><span class="code mono">C30</span><span class="badge b-ok">فعال</span></div><div class="meta">بتن سازه‌ای · ۳۰ مگاپاسکال · اسلامپ ۱۰±۱۲ سانتی‌متر · نسخه ۲</div></div>
+            <div class="f-card" data-formula="C35"><div class="top"><span class="code mono">C35</span><span class="badge b-ok">فعال</span></div><div class="meta">مقاومت بالا · ۳۵ مگاپاسکال · اسلامپ ۱۲±۱۲ سانتی‌متر · نسخه ۱</div></div>
+            <div class="f-card" data-formula="SCC-40"><div class="top"><span class="code mono">SCC-40</span><span class="badge b-mute">غیرفعال</span></div><div class="meta">خودتراکم · ۴۰ مگاپاسکال · اسلامپ‌فلو ۶۵±۲ سانتی‌متر · نسخه ۱</div></div>
+          </div>
+        </div>
+
+        <div class="stack">
+          <div class="card">
+            <div class="card-head">
+              <div><h3>ترکیب طرح <span class="mono" id="fTitle">C25</span></h3><div class="hint">مقادیر به ازای هر متر مکعب بتن</div></div>
+              <span class="badge b-blue">نسخه ۳</span>
+            </div>
+            <div class="mat"><span class="n">سیمان</span><span class="bar"><i style="width:88%;background:linear-gradient(90deg,#1360AF,#0D47A1)"></i></span><span class="v"><b class="mono">۳۵۰</b> kg <span class="muted">±۵</span></span></div>
+            <div class="mat"><span class="n">شن ۰-۲۵</span><span class="bar"><i style="width:100%;background:linear-gradient(90deg,#42A5F5,#1877D2)"></i></span><span class="v"><b class="mono">۱۰۵۰</b> kg <span class="muted">±۱۵</span></span></div>
+            <div class="mat"><span class="n">ماسه</span><span class="bar"><i style="width:74%;background:linear-gradient(90deg,#64B5F6,#2196F3)"></i></span><span class="v"><b class="mono">۷۲۰</b> kg <span class="muted">±۱۰</span></span></div>
+            <div class="mat"><span class="n">آب</span><span class="bar"><i style="width:34%;background:linear-gradient(90deg,#90CAF9,#64B5F6)"></i></span><span class="v"><b class="mono">۱۷۵</b> lit <span class="muted">±۳</span></span></div>
+            <div class="mat"><span class="n">افزودنی</span><span class="bar"><i style="width:12%;background:linear-gradient(90deg,#B3DAFB,#90CAF9)"></i></span><span class="v"><b class="mono">۴.۲</b> kg <span class="muted">±۰.۲</span></span></div>
+            <div class="row" style="margin-top:18px">
+              <button class="btn btn-deep btn-sm" data-toast="ویرایش طرح اختلاط باز شد">ویرایش طرح</button>
+              <button class="btn btn-ghost btn-sm" data-toast="نسخه جدید طرح ساخته شد">ساخت نسخه جدید</button>
+              <button class="btn btn-ghost btn-sm" data-toast="تاریخچه نسخه‌ها نمایش داده شد">تاریخچه نسخه‌ها</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-head"><h3>مشخصات فنی</h3></div>
+            <div class="kv"><span>نسبت آب به سیمان</span><span class="mono">۰.۵۰</span></div>
+            <div class="kv"><span>حداکثر اندازه سنگدانه</span><span class="mono">۲۵ mm</span></div>
+            <div class="kv"><span>زمان اختلاط استاندارد</span><span class="mono">۹۰ ثانیه</span></div>
+            <div class="kv"><span>قیمت هر متر مکعب</span><span class="mono">۳,۹۰۰,۰۰۰ ریال</span></div>
+            <div class="kv"><span>آخرین ویرایش</span><span>حسین محمدی — <span class="mono">۱۴۰۴/۰۵/۲۰</span></span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= ORDERS ================= -->
+    <section class="page" id="page-orders">
+      <div class="grid g-main">
+        <div class="card flush">
+          <div class="card-head"><h3>سفارش‌ها</h3><span class="hint">۱۸ سفارش در هفته جاری</span></div>
+          <div class="t-scroll">
+            <table data-searchable>
+              <thead><tr><th>کد</th><th>مشتری / پروژه</th><th>طرح</th><th>حجم</th><th>تحویل</th><th>وضعیت</th><th></th></tr></thead>
+              <tbody>
+                <tr class="clickable" data-order="ORD-1045"><td class="mono">ORD-1045</td><td>شهرداری منطقه ۴<span class="t-sub">پیاده‌روسازی</span></td><td class="mono">C20</td><td class="mono">۳۰ m³</td><td class="mono">فردا ۰۹:۰۰</td><td><span class="badge b-mute">ثبت شده</span></td><td><button class="btn btn-primary btn-sm" data-toast="سفارش ORD-1045 تأیید و به صف تولید رفت">تأیید</button></td></tr>
+                <tr class="clickable" data-order="ORD-1042"><td class="mono">ORD-1042</td><td>راهسازی البرز<span class="t-sub">روگذر میدان آزادی</span></td><td class="mono">C30</td><td class="mono">۶۰ m³</td><td class="mono">۱۴:۰۰</td><td><span class="badge b-blue">در حال تولید</span></td><td></td></tr>
+                <tr class="clickable" data-order="ORD-1043"><td class="mono">ORD-1043</td><td>انبوه‌سازان مهرگان<span class="t-sub">برج نگین شمال</span></td><td class="mono">C25</td><td class="mono">۴۵ m³</td><td class="mono">۱۵:۳۰</td><td><span class="badge b-deep">تأیید شده</span></td><td></td></tr>
+                <tr class="clickable" data-order="ORD-1041"><td class="mono">ORD-1041</td><td>شهرداری منطقه ۴<span class="t-sub">پیاده‌روسازی</span></td><td class="mono">C20</td><td class="mono">۲۵ m³</td><td class="mono">۱۱:۰۰</td><td><span class="badge b-ok">تکمیل شده</span></td><td></td></tr>
+                <tr class="clickable" data-order="ORD-1040"><td class="mono">ORD-1040</td><td>پیمانکاری ستاره شرق<span class="t-sub">انبار مرکزی</span></td><td class="mono">C25</td><td class="mono">۲۰ m³</td><td class="mono">۰۹:۰۰</td><td><span class="badge b-err">لغو شده</span></td><td></td></tr>
+              </tbody>
+            </table>
+            <div class="empty"><b>سفارشی پیدا نشد</b><span>عبارت دیگری را جستجو کنید.</span></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head"><h3>ثبت سفارش</h3></div>
+          <div class="field"><label>مشتری</label><select><option>انبوه‌سازان مهرگان</option><option>شرکت راهسازی البرز</option><option>شهرداری منطقه ۴</option></select></div>
+          <div class="field"><label>پروژه</label><select><option>برج نگین شمال</option><option>روگذر میدان آزادی</option></select></div>
+          <div class="field"><label>طرح اختلاط</label><select id="ordFormula"><option value="3900000">C25 — بتن معمولی</option><option value="4350000">C30 — بتن سازه‌ای</option><option value="4900000">C35 — مقاومت بالا</option></select></div>
+          <div class="f-row">
+            <div class="field"><label>حجم سفارش <em>متر مکعب</em></label><input type="text" id="ordVolume" value="۴۵" class="mono"></div>
+            <div class="field"><label>تعداد بچ <em>میکسر ۳ m³</em></label><input type="text" id="ordBatch" value="۱۵" class="mono" readonly></div>
+          </div>
+          <div class="field"><label>زمان تحویل</label><input type="text" value="امروز، ۱۵:۳۰" class="mono"></div>
+          <div class="field"><label>یادداشت <em>اختیاری</em></label><textarea placeholder="دسترسی محل، نیاز به پمپ، محدودیت تردد…"></textarea></div>
+          <div style="background:var(--b-50);border-radius:12px;padding:12px 14px;margin-bottom:14px;">
+            <div class="kv" style="border:0;padding:0"><span>مبلغ تقریبی سفارش</span><span class="mono" id="ordPrice" style="color:var(--b-900)">۱۷۵,۵۰۰,۰۰۰ ریال</span></div>
+          </div>
+          <button class="btn btn-primary btn-full" data-toast="سفارش ثبت شد و در انتظار تأیید است">ثبت سفارش</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FLEET ================= -->
+    <section class="page" id="page-fleet">
+      <div class="tabs">
+        <button class="tab active" data-pane="fl-drv">رانندگان</button>
+        <button class="tab" data-pane="fl-veh">خودروها</button>
+        <button class="tab" data-pane="fl-asg">تخصیص بار</button>
+      </div>
+
+      <div class="pane active" id="pane-fl-drv">
+        <div class="card flush">
+          <div class="card-head"><h3>رانندگان</h3><button class="btn btn-primary btn-sm" data-toast="فرم افزودن راننده باز شد">افزودن راننده</button></div>
+          <div class="t-scroll">
+            <table data-searchable>
+              <thead><tr><th>نام</th><th>کد پرسنلی</th><th>تلفن</th><th>مأموریت امروز</th><th>حجم حمل</th><th>وضعیت</th></tr></thead>
+              <tbody>
+                <tr><td><div class="person"><span class="av">ر.ک</span> رضا کریمی</div></td><td class="mono">DR-05</td><td class="mono">۰۹۱۲۳۴۵۶۷۸۹</td><td class="mono">۶</td><td class="mono">۳۶ m³</td><td><span class="badge b-blue">در مأموریت</span></td></tr>
+                <tr><td><div class="person"><span class="av">ع.ص</span> علی صادقی</div></td><td class="mono">DR-11</td><td class="mono">۰۹۱۹۸۷۶۵۴۳۲</td><td class="mono">۴</td><td class="mono">۳۲ m³</td><td><span class="badge b-blue">در مأموریت</span></td></tr>
+                <tr><td><div class="person"><span class="av">م.ر</span> محمد رستمی</div></td><td class="mono">DR-03</td><td class="mono">۰۹۱۵۱۱۲۲۳۳۴</td><td class="mono">۰</td><td class="mono">۰ m³</td><td><span class="badge b-ok">آماده به کار</span></td></tr>
+              </tbody>
+            </table>
+            <div class="empty"><b>راننده‌ای پیدا نشد</b><span>عبارت دیگری را جستجو کنید.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pane" id="pane-fl-veh">
+        <div class="card flush">
+          <div class="card-head"><h3>خودروها</h3><button class="btn btn-primary btn-sm" data-toast="فرم افزودن خودرو باز شد">افزودن خودرو</button></div>
+          <div class="t-scroll">
+            <table data-searchable>
+              <thead><tr><th>پلاک</th><th>نوع</th><th>ظرفیت</th><th>کارکرد امروز</th><th>وضعیت</th></tr></thead>
+              <tbody>
+                <tr><td class="mono">۱۲ ایران ۴۴۵ ب ۶۷</td><td>میکسر</td><td class="mono">۶ m³</td><td class="mono">۱۴۲ km</td><td><span class="badge b-ok">فعال</span></td></tr>
+                <tr><td class="mono">۳۳ ایران ۸۸۱ ج ۱۲</td><td>میکسر</td><td class="mono">۸ m³</td><td class="mono">۹۸ km</td><td><span class="badge b-ok">فعال</span></td></tr>
+                <tr><td class="mono">۱۵ ایران ۲۲۰ الف ۹۹</td><td>پمپ بتن</td><td class="mono">—</td><td class="mono">۰ km</td><td><span class="badge b-warn">در تعمیرگاه</span></td></tr>
+              </tbody>
+            </table>
+            <div class="empty"><b>خودرویی پیدا نشد</b><span>عبارت دیگری را جستجو کنید.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pane" id="pane-fl-asg">
+        <div class="card" style="max-width:540px;">
+          <div class="card-head"><h3>تخصیص بار</h3><span class="hint">راننده و خودرو را به بچ آماده وصل کنید</span></div>
+          <div class="field"><label>سفارش و بچ</label><select><option>ORD-1042 — بچ #۴۳</option><option>ORD-1043 — بچ #۴۴</option></select></div>
+          <div class="field"><label>راننده</label><select><option>محمد رستمی — آماده به کار</option><option>رضا کریمی — در مأموریت</option><option>علی صادقی — در مأموریت</option></select></div>
+          <div class="field"><label>خودرو</label><select><option>۱۲ ایران ۴۴۵ ب ۶۷ — میکسر ۶ m³</option><option>۳۳ ایران ۸۸۱ ج ۱۲ — میکسر ۸ m³</option></select></div>
+          <div class="f-row">
+            <div class="field"><label>زمان خروج</label><input type="text" class="mono" value="۱۴:۱۵"></div>
+            <div class="field"><label>حجم بار <em>متر مکعب</em></label><input type="text" class="mono" value="۶"></div>
+          </div>
+          <button class="btn btn-primary btn-full" data-toast="بار به راننده تخصیص یافت و در اپ راننده نمایش داده می‌شود">ثبت تخصیص</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= RECEIPTS ================= -->
+    <section class="page" id="page-receipts">
+      <div class="grid g2">
+        <div class="stack">
+          <div class="card-head" style="margin:0"><h3>رسید بارگیری</h3><span class="badge b-blue">صادر شده</span></div>
+          <div class="receipt">
+            <div class="r-head">
+              <div><h4>سامانه بچینگ پارس</h4><div class="no mono">رسید بارگیری · LD-2291</div></div>
+              <div class="mark">بچ</div>
+            </div>
+            <div class="r-row"><span>مشتری</span><span>انبوه‌سازان مهرگان</span></div>
+            <div class="r-row"><span>پروژه</span><span>برج نگین شمال</span></div>
+            <div class="r-row"><span>طرح اختلاط</span><span class="mono">C30 — نسخه ۲</span></div>
+            <div class="r-row"><span>تاریخ و ساعت</span><span class="mono">۱۴۰۴/۰۵/۲۷ — ۱۴:۱۸</span></div>
+            <div class="r-row"><span>راننده</span><span>رضا کریمی</span></div>
+            <div class="r-row"><span>خودرو</span><span class="mono">۱۲ ایران ۴۴۵ ب ۶۷</span></div>
+            <div class="r-vol"><div class="n mono">۶.۰</div><div class="u">متر مکعب بارگیری شد</div></div>
+            <div class="r-sign"><div>امضای اپراتور</div><div>امضای راننده</div></div>
+          </div>
+          <div class="row no-print">
+            <button class="btn btn-deep btn-sm" onclick="window.print()">چاپ رسید</button>
+            <button class="btn btn-ghost btn-sm" data-toast="فایل PDF رسید ساخته شد">خروجی PDF</button>
+            <button class="btn btn-ghost btn-sm" data-toast="رسید در واتساپ برای مشتری ارسال شد">ارسال در واتساپ</button>
+          </div>
+        </div>
+
+        <div class="stack">
+          <div class="card-head" style="margin:0"><h3>رسید تحویل در مقصد</h3><span class="badge b-warn">در انتظار تأیید کارفرما</span></div>
+          <div class="receipt">
+            <div class="r-head">
+              <div><h4>رسید تحویل بار</h4><div class="no mono">DL-2291</div></div>
+              <div class="mark" style="background:var(--ok-bg);color:var(--ok)">✓</div>
+            </div>
+            <div class="r-row"><span>سفارش مرتبط</span><span class="mono">ORD-1042</span></div>
+            <div class="r-row"><span>آدرس تحویل</span><span>اتوبان بابایی، فاز ۲</span></div>
+            <div class="r-row"><span>زمان رسیدن</span><span class="mono">۱۴:۴۷</span></div>
+            <div class="r-row"><span>زمان تخلیه</span><span class="mono">۲۲ دقیقه</span></div>
+            <div class="r-row"><span>تأیید راننده</span><span class="badge b-ok">ثبت شد</span></div>
+            <div class="r-row"><span>تأیید کارفرما</span><span class="badge b-warn">در انتظار</span></div>
+            <div class="photo-slot">عکس تحویل بار هنوز بارگذاری نشده است</div>
+          </div>
+          <div class="row no-print">
+            <button class="btn btn-primary btn-sm" data-toast="یادآوری تأیید برای نماینده کارفرما ارسال شد">یادآوری تأیید</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FINANCE ================= -->
+    <section class="page" id="page-finance">
+      <div class="grid g3" style="margin-bottom:16px;">
+        <div class="stat"><div class="top"><span class="label">دریافتی این ماه</span><span class="chip" style="background:var(--ok-bg);color:var(--ok)">↙</span></div><div class="value" style="font-size:23px">۴.۸ <u>میلیارد ریال</u></div><div class="sub up">▲ ۱۲٪ نسبت به ماه گذشته</div></div>
+        <div class="stat"><div class="top"><span class="label">هزینه‌های این ماه</span><span class="chip" style="background:var(--err-bg);color:var(--err)">↗</span></div><div class="value" style="font-size:23px">۱.۱ <u>میلیارد ریال</u></div><div class="sub">حمل، سوخت و تعمیرات</div></div>
+        <div class="stat accent"><div class="top"><span class="label">سود ناخالص</span><span class="chip">◱</span></div><div class="value" style="font-size:23px">۳.۷ <u>میلیارد ریال</u></div><div class="sub">حاشیه سود ۷۷٪</div></div>
+      </div>
+
+      <div class="tabs">
+        <button class="tab active" data-pane="fi-tx">تراکنش‌ها</button>
+        <button class="tab" data-pane="fi-price">نرخ‌نامه</button>
+        <button class="tab" data-pane="fi-new">ثبت تراکنش</button>
+      </div>
+
+      <div class="pane active" id="pane-fi-tx">
+        <div class="card flush">
+          <div class="card-head"><h3>تراکنش‌های اخیر</h3><button class="btn btn-ghost btn-sm" data-toast="فایل اکسل تراکنش‌ها ساخته شد">خروجی اکسل</button></div>
+          <div class="t-scroll">
+            <table data-searchable>
+              <thead><tr><th>نوع</th><th>طرف حساب</th><th>مبلغ (ریال)</th><th>تاریخ</th><th>شرح</th></tr></thead>
+              <tbody>
+                <tr><td><span class="badge b-ok">دریافت</span></td><td>راهسازی البرز <span class="t-sub mono">ORD-1042</span></td><td class="mono">۲۱۰,۰۰۰,۰۰۰</td><td class="mono">۱۴۰۴/۰۵/۲۷</td><td>پیش‌پرداخت سفارش</td></tr>
+                <tr><td><span class="badge b-err">پرداخت</span></td><td>رضا کریمی</td><td class="mono">۸,۵۰۰,۰۰۰</td><td class="mono">۱۴۰۴/۰۵/۲۶</td><td>کرایه حمل هفتگی</td></tr>
+                <tr><td><span class="badge b-err">پرداخت</span></td><td>هزینه کارگاه</td><td class="mono">۱۲,۰۰۰,۰۰۰</td><td class="mono">۱۴۰۴/۰۵/۲۵</td><td>سوخت ژنراتور</td></tr>
+                <tr><td><span class="badge b-ok">دریافت</span></td><td>انبوه‌سازان مهرگان</td><td class="mono">۳۹۰,۰۰۰,۰۰۰</td><td class="mono">۱۴۰۴/۰۵/۲۴</td><td>تسویه پروژه برج نگین</td></tr>
+              </tbody>
+            </table>
+            <div class="empty"><b>تراکنشی پیدا نشد</b><span>عبارت دیگری را جستجو کنید.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pane" id="pane-fi-price">
+        <div class="card">
+          <div class="card-head"><h3>نرخ هر متر مکعب</h3><button class="btn btn-ghost btn-sm" data-toast="ویرایش نرخ‌نامه باز شد">ویرایش نرخ‌ها</button></div>
+          <div class="kv"><span>C20 — بتن مگر</span><span class="mono">۳,۵۰۰,۰۰۰</span></div>
+          <div class="kv"><span>C25 — بتن معمولی</span><span class="mono">۳,۹۰۰,۰۰۰</span></div>
+          <div class="kv"><span>C30 — بتن سازه‌ای</span><span class="mono">۴,۳۵۰,۰۰۰</span></div>
+          <div class="kv"><span>C35 — مقاومت بالا</span><span class="mono">۴,۹۰۰,۰۰۰</span></div>
+          <div class="kv"><span>SCC-40 — خودتراکم</span><span class="mono">۶,۲۰۰,۰۰۰</span></div>
+        </div>
+      </div>
+
+      <div class="pane" id="pane-fi-new">
+        <div class="card" style="max-width:540px;">
+          <div class="card-head"><h3>ثبت تراکنش</h3></div>
+          <div class="field"><label>نوع</label><select><option>دریافت از مشتری</option><option>پرداخت به راننده</option><option>هزینه کارگاه</option></select></div>
+          <div class="field"><label>سفارش یا پروژه <em>اختیاری</em></label><select><option>—</option><option>ORD-1042</option><option>ORD-1043</option></select></div>
+          <div class="f-row">
+            <div class="field"><label>مبلغ <em>ریال</em></label><input type="text" class="mono" placeholder="۰"></div>
+            <div class="field"><label>تاریخ</label><input type="text" class="mono" value="۱۴۰۴/۰۵/۲۷"></div>
+          </div>
+          <div class="field"><label>شرح</label><textarea placeholder="بابت…"></textarea></div>
+          <button class="btn btn-primary btn-full" data-toast="تراکنش مالی ثبت شد">ثبت تراکنش</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= WAREHOUSE ================= -->
+    <section class="page" id="page-warehouse">
+      <div class="grid g-main">
+        <div class="card">
+          <div class="card-head"><h3>موجودی مواد اولیه</h3><span class="hint">به‌روزرسانی لحظه‌ای</span></div>
+
+          <div class="wh">
+            <div class="ring" style="width:66px;height:66px">
+              <svg width="66" height="66" viewBox="0 0 66 66">
+                <circle cx="33" cy="33" r="27" fill="none" stroke="#EAF2FA" stroke-width="7"/>
+                <circle cx="33" cy="33" r="27" fill="none" stroke="#0D47A1" stroke-width="7" stroke-linecap="round" stroke-dasharray="169.6" stroke-dashoffset="100"/>
+              </svg><span class="lbl" style="color:var(--b-900)">۴۱٪</span>
+            </div>
+            <div style="flex:1;min-width:0"><div class="nm">سیمان تیپ ۲</div><div class="mt">۱۸.۴ از ۴۵ تن · حد هشدار ۱۰ تن</div></div>
+            <span class="badge b-ok">کافی</span>
+          </div>
+
+          <div class="wh">
+            <div class="ring" style="width:66px;height:66px">
+              <svg width="66" height="66" viewBox="0 0 66 66">
+                <circle cx="33" cy="33" r="27" fill="none" stroke="#EAF2FA" stroke-width="7"/>
+                <circle cx="33" cy="33" r="27" fill="none" stroke="#2196F3" stroke-width="7" stroke-linecap="round" stroke-dasharray="169.6" stroke-dashoffset="51"/>
+              </svg><span class="lbl" style="color:var(--b-500)">۷۰٪</span>
+            </div>
+            <div style="flex:1;min-width:0"><div class="nm">شن ۰-۲۵</div><div class="mt">۱۴۰ از ۲۰۰ تن · حد هشدار ۳۰ تن</div></div>
+            <span class="badge b-ok">کافی</span>
+          </div>
+
+          <div class="wh">
+            <div class="ring" style="width:66px;height:66px">
+              <svg width="66" height="66" viewBox="0 0 66 66">
+                <circle cx="33" cy="33" r="27" fill="none" stroke="#EAF2FA" stroke-width="7"/>
+                <circle cx="33" cy="33" r="27" fill="none" stroke="#A56A00" stroke-width="7" stroke-linecap="round" stroke-dasharray="169.6" stroke-dashoffset="85"/>
+              </svg><span class="lbl" style="color:var(--warn)">۵۰٪</span>
+            </div>
+            <div style="flex:1;min-width:0"><div class="nm">ماسه</div><div class="mt">۶۰ از ۱۲۰ تن · حد هشدار ۲۰ تن</div></div>
+            <span class="badge b-warn">رو به کاهش</span>
+          </div>
+
+          <div class="wh">
+            <div class="ring" style="width:66px;height:66px">
+              <svg width="66" height="66" viewBox="0 0 66 66">
+                <circle cx="33" cy="33" r="27" fill="none" stroke="#EAF2FA" stroke-width="7"/>
+                <circle cx="33" cy="33" r="27" fill="none" stroke="#BE3A32" stroke-width="7" stroke-linecap="round" stroke-dasharray="169.6" stroke-dashoffset="144"/>
+              </svg><span class="lbl" style="color:var(--err)">۱۵٪</span>
+            </div>
+            <div style="flex:1;min-width:0"><div class="nm">افزودنی روان‌کننده</div><div class="mt">۹۰ از ۶۰۰ لیتر · حد هشدار ۱۵۰ لیتر</div></div>
+            <span class="badge b-err">بحرانی</span>
+          </div>
+        </div>
+
+        <div class="stack">
+          <div class="card">
+            <div class="card-head"><h3>ثبت ورود یا مصرف</h3></div>
+            <div class="field"><label>ماده اولیه</label><select><option>سیمان تیپ ۲</option><option>شن ۰-۲۵</option><option>ماسه</option><option>افزودنی روان‌کننده</option></select></div>
+            <div class="field"><label>نوع تراکنش</label><select><option>ورود به انبار</option><option>مصرف در تولید</option><option>اصلاح موجودی</option></select></div>
+            <div class="f-row">
+              <div class="field"><label>مقدار</label><input type="text" class="mono" placeholder="۰"></div>
+              <div class="field"><label>واحد</label><select><option>تن</option><option>کیلوگرم</option><option>لیتر</option></select></div>
+            </div>
+            <button class="btn btn-primary btn-full" data-toast="تراکنش انبار ثبت شد">ثبت تراکنش</button>
+          </div>
+
+          <div class="card">
+            <div class="card-head"><h3>تأمین‌کنندگان</h3></div>
+            <div class="kv"><span>سیمان فارس — شعبه مرکزی</span><span class="badge b-ok">فعال</span></div>
+            <div class="kv"><span>معدن شن و ماسه البرز</span><span class="badge b-ok">فعال</span></div>
+            <div class="kv"><span>شیمی ساختمان کیمیا</span><span class="badge b-ok">فعال</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= REPORTS ================= -->
+    <section class="page" id="page-reports">
+      <div class="card" style="margin-bottom:16px;">
+        <div style="display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap;">
+          <div class="field" style="margin:0;min-width:130px"><label>از تاریخ</label><input type="text" class="mono" value="۱۴۰۴/۰۵/۰۱"></div>
+          <div class="field" style="margin:0;min-width:130px"><label>تا تاریخ</label><input type="text" class="mono" value="۱۴۰۴/۰۵/۲۷"></div>
+          <div class="field" style="margin:0;min-width:150px"><label>مشتری</label><select><option>همه مشتریان</option></select></div>
+          <div class="field" style="margin:0;min-width:150px"><label>طرح اختلاط</label><select><option>همه طرح‌ها</option></select></div>
+          <button class="btn btn-primary" data-toast="گزارش با فیلتر جدید ساخته شد">اعمال فیلتر</button>
+          <button class="btn btn-ghost" data-toast="فایل اکسل گزارش ساخته شد">اکسل</button>
+          <button class="btn btn-ghost" onclick="window.print()">چاپ</button>
+        </div>
+      </div>
+
+      <div class="grid g3" style="margin-bottom:16px;">
+        <div class="stat"><div class="top"><span class="label">حجم تولید بازه</span><span class="chip">◱</span></div><div class="value">۴,۹۲۰ <u>m³</u></div><div class="sub">در ۳۲۱ بچ</div></div>
+        <div class="stat"><div class="top"><span class="label">مبلغ فاکتور شده</span><span class="chip">﷼</span></div><div class="value" style="font-size:23px">۱۱.۲ <u>میلیارد ریال</u></div><div class="sub">۳ مشتری</div></div>
+        <div class="stat"><div class="top"><span class="label">میانگین حمل هر راننده</span><span class="chip">▥</span></div><div class="value">۵۸ <u>m³</u></div><div class="sub">۱۲ راننده فعال</div></div>
+      </div>
+
+      <div class="tabs">
+        <button class="tab active" data-pane="rp-f">تفکیک طرح</button>
+        <button class="tab" data-pane="rp-p">مشتری و پروژه</button>
+        <button class="tab" data-pane="rp-d">رانندگان</button>
+        <button class="tab" data-pane="rp-m">مالی تفصیلی</button>
+        <button class="tab" data-pane="rp-e">خطاها و توقف‌ها</button>
+        <button class="tab" data-pane="rp-c">مصرف مواد</button>
+      </div>
+
+      <div class="pane active" id="pane-rp-f">
+        <div class="card">
+          <div class="card-head"><h3>تولید بر اساس طرح اختلاط</h3></div>
+          <div class="mat"><span class="n mono">C25</span><span class="bar"><i style="width:100%;background:linear-gradient(90deg,#1360AF,#0D47A1)"></i></span><span class="v"><b class="mono">۱,۸۴۰</b> m³</span></div>
+          <div class="mat"><span class="n mono">C30</span><span class="bar"><i style="width:87%;background:linear-gradient(90deg,#1877D2,#2196F3)"></i></span><span class="v"><b class="mono">۱,۶۱۰</b> m³</span></div>
+          <div class="mat"><span class="n mono">C35</span><span class="bar"><i style="width:53%;background:linear-gradient(90deg,#42A5F5,#64B5F6)"></i></span><span class="v"><b class="mono">۹۸۰</b> m³</span></div>
+          <div class="mat"><span class="n mono">C20</span><span class="bar"><i style="width:27%;background:linear-gradient(90deg,#90CAF9,#B3DAFB)"></i></span><span class="v"><b class="mono">۴۹۰</b> m³</span></div>
+        </div>
+      </div>
+
+      <div class="pane" id="pane-rp-p">
+        <div class="card flush">
+          <div class="card-head"><h3>حجم تحویلی هر پروژه</h3></div>
+          <div class="t-scroll"><table data-searchable>
+            <thead><tr><th>پروژه</th><th>مشتری</th><th>حجم</th><th>تعداد بار</th><th>رانندگان</th></tr></thead>
+            <tbody>
+              <tr><td>برج نگین شمال</td><td>انبوه‌سازان مهرگان</td><td class="mono">۱,۴۵۰ m³</td><td class="mono">۹۶</td><td class="mono">۴</td></tr>
+              <tr><td>روگذر میدان آزادی</td><td>شرکت راهسازی البرز</td><td class="mono">۹۸۰ m³</td><td class="mono">۶۵</td><td class="mono">۳</td></tr>
+              <tr><td>پیاده‌روسازی منطقه ۴</td><td>شهرداری منطقه ۴</td><td class="mono">۴۹۰ m³</td><td class="mono">۳۲</td><td class="mono">۲</td></tr>
+            </tbody>
+          </table><div class="empty"><b>داده‌ای در این بازه نیست</b><span>بازه تاریخ را تغییر دهید.</span></div></div>
+        </div>
+      </div>
+
+      <div class="pane" id="pane-rp-d">
+        <div class="card flush">
+          <div class="card-head"><h3>عملکرد رانندگان</h3></div>
+          <div class="t-scroll"><table data-searchable>
+            <thead><tr><th>راننده</th><th>مأموریت</th><th>حجم حمل</th><th>میانگین رفت‌وبرگشت</th></tr></thead>
+            <tbody>
+              <tr><td><div class="person"><span class="av">ر.ک</span> رضا کریمی</div></td><td class="mono">۷۴</td><td class="mono">۴۴۰ m³</td><td class="mono">۵۲ دقیقه</td></tr>
+              <tr><td><div class="person"><span class="av">ع.ص</span> علی صادقی</div></td><td class="mono">۶۶</td><td class="mono">۳۸۵ m³</td><td class="mono">۵۸ دقیقه</td></tr>
+              <tr><td><div class="person"><span class="av">م.ر</span> محمد رستمی</div></td><td class="mono">۵۸</td><td class="mono">۳۳۰ m³</td><td class="mono">۶۱ دقیقه</td></tr>
+            </tbody>
+          </table><div class="empty"><b>داده‌ای در این بازه نیست</b><span>بازه تاریخ را تغییر دهید.</span></div></div>
+        </div>
+      </div>
+
+      <div class="pane" id="pane-rp-m">
+        <div class="card flush">
+          <div class="card-head"><h3>وضعیت حساب مشتریان</h3></div>
+          <div class="t-scroll"><table data-searchable>
+            <thead><tr><th>مشتری</th><th>فاکتور شده</th><th>دریافت شده</th><th>مانده</th><th>وضعیت</th></tr></thead>
+            <tbody>
+              <tr><td>انبوه‌سازان مهرگان</td><td class="mono">۵,۸۰۰,۰۰۰,۰۰۰</td><td class="mono">۵,۸۰۰,۰۰۰,۰۰۰</td><td class="mono">۰</td><td><span class="badge b-ok">تسویه شده</span></td></tr>
+              <tr><td>شرکت راهسازی البرز</td><td class="mono">۳,۹۰۰,۰۰۰,۰۰۰</td><td class="mono">۲,۱۰۰,۰۰۰,۰۰۰</td><td class="mono">۱,۸۰۰,۰۰۰,۰۰۰</td><td><span class="badge b-warn">پرداخت جزئی</span></td></tr>
+              <tr><td>شهرداری منطقه ۴</td><td class="mono">۱,۵۰۰,۰۰۰,۰۰۰</td><td class="mono">۰</td><td class="mono">۱,۵۰۰,۰۰۰,۰۰۰</td><td><span class="badge b-err">پرداخت نشده</span></td></tr>
+            </tbody>
+          </table><div class="empty"><b>داده‌ای در این بازه نیست</b><span>بازه تاریخ را تغییر دهید.</span></div></div>
+        </div>
+      </div>
+
+      <div class="pane" id="pane-rp-e">
+        <div class="card flush">
+          <div class="card-head"><h3>خطاها و توقف‌های تولید</h3></div>
+          <div class="t-scroll"><table data-searchable>
+            <thead><tr><th>بچ</th><th>نوع</th><th>شرح</th><th>مدت</th><th>تاریخ</th></tr></thead>
+            <tbody>
+              <tr><td class="mono">#۳۸</td><td><span class="badge b-warn">خطای سنسور</span></td><td>خطای موقت سنسور وزن شن</td><td class="mono">۲ دقیقه</td><td class="mono">۱۴۰۴/۰۵/۲۷</td></tr>
+              <tr><td class="mono">#۲۹</td><td><span class="badge b-err">کمبود ماده</span></td><td>اتمام افزودنی روان‌کننده</td><td class="mono">۱۸ دقیقه</td><td class="mono">۱۴۰۴/۰۵/۲۵</td></tr>
+              <tr><td class="mono">#۱۷</td><td><span class="badge b-mute">توقف برنامه‌ریزی‌شده</span></td><td>تعویض شیفت اپراتور</td><td class="mono">۶ دقیقه</td><td class="mono">۱۴۰۴/۰۵/۲۲</td></tr>
+            </tbody>
+          </table><div class="empty"><b>توقفی ثبت نشده</b><span>در این بازه خطایی گزارش نشده است.</span></div></div>
+        </div>
+      </div>
+
+      <div class="pane" id="pane-rp-c">
+        <div class="card">
+          <div class="card-head"><h3>مصرف مواد اولیه در بازه</h3></div>
+          <div class="kv"><span>سیمان تیپ ۲</span><span class="mono">۱,۷۲۲ تن</span></div>
+          <div class="kv"><span>شن ۰-۲۵</span><span class="mono">۵,۱۶۶ تن</span></div>
+          <div class="kv"><span>ماسه</span><span class="mono">۳,۵۴۲ تن</span></div>
+          <div class="kv"><span>افزودنی روان‌کننده</span><span class="mono">۲۰.۷ تن</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= NOTIFICATIONS ================= -->
+    <section class="page" id="page-notifications">
+      <div class="grid g-main">
+        <div class="card">
+          <div class="card-head"><h3>مرکز اعلان‌ها</h3><button class="btn btn-ghost btn-sm" data-toast="همه اعلان‌ها خوانده شد">خواندن همه</button></div>
+          <div class="alert"><span class="ic err">!</span><div><div class="t">افزودنی روان‌کننده رو به اتمام است</div><div class="d">۹۰ لیتر باقی مانده — برای ادامه تولید فردا سفارش دهید</div></div><span class="time mono">۱۰:۲۲</span></div>
+          <div class="alert"><span class="ic warn">◔</span><div><div class="t">رسید تحویل ORD-1039 ثبت نشده</div><div class="d">راننده هنوز تحویل بار را تأیید نکرده است</div></div><span class="time mono">۰۹:۴۵</span></div>
+          <div class="alert"><span class="ic warn">⛭</span><div><div class="t">خطای موقت سنسور وزن شن</div><div class="d">بچ #۳۸ پس از ۲ دقیقه اصلاح شد</div></div><span class="time mono">۰۸:۱۱</span></div>
+          <div class="alert"><span class="ic ok">✓</span><div><div class="t">سفارش ORD-1041 تکمیل شد</div><div class="d">تحویل نهایی توسط نماینده کارفرما تأیید شد</div></div><span class="time">دیروز</span></div>
+          <div class="alert"><span class="ic info">◨</span><div><div class="t">نسخه جدید طرح C35 ثبت شد</div><div class="d">توسط حسین محمدی — نسخه ۱ جایگزین شد</div></div><span class="time">دیروز</span></div>
+        </div>
+
+        <div class="card">
+          <div class="card-head"><h3>چه چیزی به من اطلاع داده شود</h3></div>
+          <div class="toggle"><div><div class="tt">کمبود مواد اولیه</div><div class="td">وقتی موجودی به حد هشدار می‌رسد</div></div><button class="switch on" aria-pressed="true"><i></i></button></div>
+          <div class="toggle"><div><div class="tt">تأخیر در تحویل</div><div class="td">وقتی رسید تحویل به موقع ثبت نشود</div></div><button class="switch on" aria-pressed="true"><i></i></button></div>
+          <div class="toggle"><div><div class="tt">خطای دستگاه</div><div class="td">خطای سنسور وزن یا قطع ارتباط PLC</div></div><button class="switch on" aria-pressed="true"><i></i></button></div>
+          <div class="toggle"><div><div class="tt">دریافت وجه</div><div class="td">وقتی پرداخت جدیدی از مشتری ثبت شود</div></div><button class="switch" aria-pressed="false"><i></i></button></div>
+          <div class="toggle"><div><div class="tt">پیامک به مدیر کارگاه</div><div class="td">فقط برای هشدارهای بحرانی</div></div><button class="switch on" aria-pressed="true"><i></i></button></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= SETTINGS ================= -->
+    <section class="page" id="page-settings">
+      <div class="grid g2">
+        <div class="stack">
+          <div class="card">
+            <div class="card-head"><h3>واحدها و تلرانس</h3></div>
+            <div class="f-row">
+              <div class="field"><label>واحد حجم</label><select><option>متر مکعب (m³)</option></select></div>
+              <div class="field"><label>واحد وزن</label><select><option>کیلوگرم</option><option>تن</option></select></div>
+            </div>
+            <div class="f-row">
+              <div class="field"><label>تلرانس پیش‌فرض مواد</label><input type="text" class="mono" value="±۱.۵٪"></div>
+              <div class="field"><label>ظرفیت میکسر</label><input type="text" class="mono" value="۳ m³"></div>
+            </div>
+            <button class="btn btn-primary btn-sm" data-toast="تنظیمات ذخیره شد">ذخیره تغییرات</button>
+          </div>
+
+          <div class="card flush">
+            <div class="card-head"><h3>نقش‌ها و دسترسی</h3><button class="btn btn-ghost btn-sm" data-toast="فرم دعوت کاربر باز شد">دعوت کاربر</button></div>
+            <div class="t-scroll"><table data-searchable>
+              <thead><tr><th>نقش</th><th>کاربران</th><th>دسترسی</th><th></th></tr></thead>
+              <tbody>
+                <tr><td>مدیر کارگاه</td><td class="mono">۲</td><td>همه بخش‌ها</td><td><button class="btn btn-ghost btn-sm">مدیریت</button></td></tr>
+                <tr><td>اپراتور بچینگ</td><td class="mono">۴</td><td>تولید، انبار</td><td><button class="btn btn-ghost btn-sm">مدیریت</button></td></tr>
+                <tr><td>راننده</td><td class="mono">۱۲</td><td>مأموریت‌ها و رسیدها</td><td><button class="btn btn-ghost btn-sm">مدیریت</button></td></tr>
+                <tr><td>ادمین سیستم</td><td class="mono">۱</td><td>همه بخش‌ها و تنظیمات</td><td><button class="btn btn-ghost btn-sm">مدیریت</button></td></tr>
+              </tbody>
+            </table><div class="empty"><b>نقشی پیدا نشد</b><span>عبارت دیگری را جستجو کنید.</span></div></div>
+          </div>
+        </div>
+
+        <div class="stack">
+          <div class="card">
+            <div class="card-head"><h3>سربرگ و چاپ</h3></div>
+            <div class="field"><label>لوگوی سربرگ</label>
+              <div class="row">
+                <div style="width:56px;height:56px;border-radius:12px;background:var(--b-50);border:1px dashed var(--b-200);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--b-700)">لوگو</div>
+                <button class="btn btn-ghost btn-sm" data-toast="پنجره انتخاب تصویر باز شد">تغییر تصویر</button>
+              </div>
+            </div>
+            <div class="field"><label>متن پایین رسید</label><textarea>با تشکر از همکاری شما — سامانه بچینگ پارس</textarea></div>
+            <button class="btn btn-primary btn-sm" data-toast="تنظیمات چاپ ذخیره شد">ذخیره تغییرات</button>
+          </div>
+
+          <div class="card">
+            <div class="card-head"><h3>اتصال دستگاه</h3><span class="badge b-ok">آنلاین</span></div>
+            <div class="kv"><span>پروتکل</span><span class="mono">Modbus TCP</span></div>
+            <div class="kv"><span>آدرس کنترلر</span><span class="mono">192.168.1.40</span></div>
+            <div class="kv"><span>آخرین همگام‌سازی</span><span class="mono">۱۴:۱۷:۵۵</span></div>
+            <div class="kv"><span>تأخیر پاسخ</span><span class="mono">۲۴ ms</span></div>
+            <button class="btn btn-ghost btn-sm" style="margin-top:14px" data-toast="اتصال دستگاه بررسی شد — همه چیز سالم است">بررسی اتصال</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<!-- ============ DRAWER: order ============ -->
+<div class="overlay side" id="ovOrder">
+  <div class="drawer" role="dialog" aria-modal="true">
+    <div class="ov-head">
+      <div>
+        <div class="eyebrow">سفارش</div>
+        <h2 id="odTitle" class="mono">ORD-1042</h2>
+        <div class="sub">شرکت راهسازی البرز · روگذر میدان آزادی</div>
+      </div>
+      <button class="ov-close" data-close="ovOrder" aria-label="بستن">✕</button>
+    </div>
+    <div class="ov-body">
+      <div class="kv"><span>طرح اختلاط</span><span class="mono">C30 — نسخه ۲</span></div>
+      <div class="kv"><span>حجم سفارش</span><span class="mono">۶۰ m³</span></div>
+      <div class="kv"><span>تولید شده</span><span class="mono">۲۷ m³ (۴۵٪)</span></div>
+      <div class="kv"><span>زمان تحویل</span><span>امروز، ۱۴:۰۰</span></div>
+      <div class="kv"><span>وضعیت</span><span class="badge b-blue">در حال تولید</span></div>
+
+      <div class="section-title">بچ‌های تولیدشده — ۳ از ۲۰</div>
+      <div class="tl">
+        <div class="tl-i"><span class="tl-d done"></span><div class="tl-b"><div class="t">بچ #۴۱ — ۳.۰ m³</div><div class="d">تکمیل شده · ۱۳:۴۰</div></div></div>
+        <div class="tl-i"><span class="tl-d done"></span><div class="tl-b"><div class="t">بچ #۴۲ — ۳.۰ m³</div><div class="d">تکمیل شده · ۱۳:۴۹</div></div></div>
+        <div class="tl-i"><span class="tl-d live"></span><div class="tl-b"><div class="t">بچ #۴۳ — ۳.۰ m³</div><div class="d">در حال بارگیری مواد · از ۱۳:۵۸</div></div></div>
+      </div>
+
+      <div class="section-title">بارهای ارسالی</div>
+      <div class="t-scroll">
+        <table>
+          <thead><tr><th>راننده</th><th>خودرو</th><th>خروج</th><th>وضعیت</th></tr></thead>
+          <tbody>
+            <tr><td>رضا کریمی</td><td class="mono">۱۲ ایران ۴۴۵ ب ۶۷</td><td class="mono">۱۳:۴۵</td><td><span class="badge b-ok">تحویل شد</span></td></tr>
+            <tr><td>علی صادقی</td><td class="mono">۳۳ ایران ۸۸۱ ج ۱۲</td><td class="mono">۱۴:۱۵</td><td><span class="badge b-blue">در مسیر</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="ov-foot">
+      <button class="btn btn-primary btn-sm" data-toast="خلاصه سفارش برای چاپ آماده شد">چاپ خلاصه</button>
+      <button class="btn btn-ghost btn-sm" data-toast="ویرایش سفارش باز شد">ویرایش سفارش</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ DRAWER: customer ============ -->
+<div class="overlay side" id="ovCustomer">
+  <div class="drawer" role="dialog" aria-modal="true">
+    <div class="ov-head">
+      <div>
+        <div class="eyebrow">مشتری</div>
+        <h2 id="cdTitle">شرکت راهسازی البرز</h2>
+        <div class="sub mono" id="cdCode">CU-014</div>
+      </div>
+      <button class="ov-close" data-close="ovCustomer" aria-label="بستن">✕</button>
+    </div>
+    <div class="ov-body">
+      <div class="section-title">اطلاعات تماس</div>
+      <div class="kv"><span>تلفن</span><span class="mono">۰۲۱-۴۴۵۵۶۶</span></div>
+      <div class="kv"><span>دفتر مرکزی</span><span>تهران، بزرگراه رسالت</span></div>
+      <div class="kv"><span>نماینده قرارداد</span><span>مهندس رضایی</span></div>
+      <div class="kv"><span>مانده حساب</span><span class="mono" style="color:var(--err)">۱,۸۰۰,۰۰۰,۰۰۰ ریال</span></div>
+
+      <div class="section-title">پروژه‌ها</div>
+      <div class="t-scroll">
+        <table>
+          <thead><tr><th>پروژه</th><th>آدرس</th><th>وضعیت</th></tr></thead>
+          <tbody>
+            <tr><td>روگذر میدان آزادی</td><td>میدان آزادی</td><td><span class="badge b-blue">در حال اجرا</span></td></tr>
+            <tr><td>تقاطع غیرهمسطح بابایی</td><td>اتوبان شهید بابایی</td><td><span class="badge b-ok">تکمیل شده</span></td></tr>
+            <tr><td>محور دسترسی جنوب</td><td>جاده قدیم کرج</td><td><span class="badge b-mute">متوقف موقت</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="ov-foot">
+      <button class="btn btn-primary btn-sm" data-toast="فرم سفارش جدید برای این مشتری باز شد">سفارش جدید</button>
+      <button class="btn btn-ghost btn-sm" data-toast="ویرایش مشتری باز شد">ویرایش مشتری</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ MODAL: notifications ============ -->
+<div class="overlay mid" id="ovNotif">
+  <div class="modal" role="dialog" aria-modal="true">
+    <div class="ov-head">
+      <div><h2 style="font-size:15px">اعلان‌های تازه</h2><div class="sub">۳ مورد خوانده‌نشده</div></div>
+      <button class="ov-close" data-close="ovNotif" aria-label="بستن">✕</button>
+    </div>
+    <div class="ov-body" style="padding:8px 20px;">
+      <div class="alert"><span class="ic err">!</span><div><div class="t">افزودنی روان‌کننده رو به اتمام است</div><div class="d">۹۰ لیتر باقی مانده</div></div><span class="time mono">۱۰:۲۲</span></div>
+      <div class="alert"><span class="ic warn">◔</span><div><div class="t">رسید تحویل ORD-1039 ثبت نشده</div><div class="d">۵۲ دقیقه تأخیر</div></div><span class="time mono">۰۹:۴۵</span></div>
+      <div class="alert"><span class="ic warn">⛭</span><div><div class="t">خطای موقت سنسور وزن شن</div><div class="d">بچ #۳۸ اصلاح شد</div></div><span class="time mono">۰۸:۱۱</span></div>
+    </div>
+    <div class="ov-foot"><button class="btn btn-primary btn-full btn-sm" id="allNotif">رفتن به مرکز اعلان‌ها</button></div>
+  </div>
+</div>
+
+<div class="toasts" id="toasts"></div>
+
+<script>
+(function(){
+  'use strict';
+  const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>Array.from(r.querySelectorAll(s));
+  const FA='۰۱۲۳۴۵۶۷۸۹';
+  const toEn=s=>String(s).replace(/[۰-۹]/g,d=>FA.indexOf(d));
+  const toFa=n=>String(n).replace(/\d/g,d=>FA[+d]);
+  const group=n=>toFa(Number(n).toLocaleString('en-US'));
+
+  const titles={
+    dashboard:['داشبورد','نمای کلی'], customers:['مشتریان و پروژه‌ها','تعریف پایه'],
+    formulas:['طرح اختلاط','تعریف پایه'], orders:['سفارشات','عملیات'],
+    fleet:['رانندگان و ناوگان','عملیات'], receipts:['رسیدها و اسناد','عملیات'],
+    finance:['مدیریت مالی','مالی و انبار'], warehouse:['انبار مواد اولیه','مالی و انبار'],
+    reports:['گزارش‌ها','مدیریت'], notifications:['اعلان‌ها','مدیریت'], settings:['تنظیمات','مدیریت']
+  };
+  function go(page){
+    $$('.nav-item').forEach(n=>n.classList.toggle('active',n.dataset.page===page));
+    $$('.page').forEach(p=>p.classList.toggle('active',p.id==='page-'+page));
+    const t=titles[page]||['',''];
+    $('#pageTitle').textContent=t[0];
+    $('#pageCrumb').textContent=t[1]+' / '+t[0];
+    $('#globalSearch').value=''; filterTables('');
+    closeSidebar(); window.scrollTo(0,0);
+  }
+  $$('.nav-item').forEach(n=>n.addEventListener('click',()=>go(n.dataset.page)));
+  $$('[data-goto]').forEach(b=>b.addEventListener('click',()=>go(b.dataset.goto)));
+
+  const sidebar=$('#sidebar'), scrim=$('#scrim');
+  function closeSidebar(){sidebar.classList.remove('open');scrim.classList.remove('open');}
+  $('#burger').addEventListener('click',()=>{sidebar.classList.add('open');scrim.classList.add('open');});
+  scrim.addEventListener('click',closeSidebar);
+
+  $$('.tab').forEach(tab=>tab.addEventListener('click',()=>{
+    const scope=tab.closest('.page');
+    $$('.tab',scope).forEach(t=>t.classList.remove('active'));
+    $$('.pane',scope).forEach(p=>p.classList.remove('active'));
+    tab.classList.add('active');
+    const pane=$('#pane-'+tab.dataset.pane,scope); if(pane) pane.classList.add('active');
+  }));
+
+  $$('.f-card').forEach(card=>card.addEventListener('click',()=>{
+    $$('.f-card').forEach(c=>c.classList.remove('on'));
+    card.classList.add('on');
+    $('#fTitle').textContent=card.dataset.formula;
+  }));
+
+  $$('.switch').forEach(sw=>sw.addEventListener('click',()=>{
+    sw.setAttribute('aria-pressed', sw.classList.toggle('on'));
+  }));
+
+  let lastFocus=null;
+  function open(id){lastFocus=document.activeElement;const ov=$('#'+id);ov.classList.add('open');const f=ov.querySelector('button');if(f)f.focus();}
+  function close(id){$('#'+id).classList.remove('open');if(lastFocus)lastFocus.focus();}
+  $$('[data-close]').forEach(b=>b.addEventListener('click',()=>close(b.dataset.close)));
+  $$('.overlay').forEach(ov=>ov.addEventListener('click',e=>{if(e.target===ov)ov.classList.remove('open');}));
+  document.addEventListener('keydown',e=>{
+    if(e.key==='Escape'){$$('.overlay.open').forEach(o=>o.classList.remove('open'));closeSidebar();}
+    if(e.key==='/'&&!['INPUT','TEXTAREA'].includes(document.activeElement.tagName)){e.preventDefault();$('#globalSearch').focus();}
+  });
+
+  $$('[data-order]').forEach(row=>row.addEventListener('click',()=>{
+    $('#odTitle').textContent=row.dataset.order; open('ovOrder');
+  }));
+  const customers={1:['شرکت راهسازی البرز','CU-014'],2:['انبوه‌سازان مهرگان','CU-021'],3:['شهرداری منطقه ۴','CU-008'],4:['پیمانکاری ستاره شرق','CU-002']};
+  $$('[data-customer]').forEach(row=>row.addEventListener('click',()=>{
+    const c=customers[row.dataset.customer];
+    $('#cdTitle').textContent=c[0]; $('#cdCode').textContent=c[1]; open('ovCustomer');
+  }));
+  $('#bellBtn').addEventListener('click',()=>open('ovNotif'));
+  $('#allNotif').addEventListener('click',()=>{close('ovNotif');go('notifications');});
+
+  function toast(msg){
+    const el=document.createElement('div');
+    el.className='toast'; el.innerHTML='<i></i><span></span>';
+    el.querySelector('span').textContent=msg;
+    $('#toasts').appendChild(el);
+    setTimeout(()=>{el.style.transition='.25s';el.style.opacity='0';el.style.transform='translateY(8px)';},2600);
+    setTimeout(()=>el.remove(),2950);
+  }
+  $$('[data-toast]').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();toast(b.dataset.toast);}));
+
+  function filterTables(q){
+    const page=$('.page.active'); if(!page) return;
+    q=q.trim().toLowerCase();
+    $$('table[data-searchable]',page).forEach(tbl=>{
+      let shown=0;
+      $$('tbody tr',tbl).forEach(tr=>{
+        const hit=!q||tr.textContent.toLowerCase().includes(q);
+        tr.style.display=hit?'':'none'; if(hit)shown++;
+      });
+      const wrap=tbl.closest('.t-scroll'), empty=wrap?wrap.querySelector('.empty'):null;
+      if(empty){empty.style.display=shown?'none':'block';tbl.style.display=shown?'':'none';}
+    });
+  }
+  $('#globalSearch').addEventListener('input',e=>filterTables(e.target.value));
+
+  const vol=$('#ordVolume'),batch=$('#ordBatch'),price=$('#ordPrice'),formula=$('#ordFormula');
+  function recalc(){
+    const v=parseFloat(toEn(vol.value))||0;
+    batch.value=toFa(Math.ceil(v/3));
+    price.textContent=group(v*Number(formula.value))+' ریال';
+  }
+  vol.addEventListener('input',recalc); formula.addEventListener('change',recalc); recalc();
+
+  function tick(){
+    const d=new Date();
+    $('#clock').textContent=toFa(String(d.getHours()).padStart(2,'0'))+':'+toFa(String(d.getMinutes()).padStart(2,'0'));
+  }
+  tick(); setInterval(tick,20000);
+})();
+</script>
+</body>
+</html>

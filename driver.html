@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>اپلیکیشن راننده — سامانه بچینگ پارس</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/core.css">
+<link rel="stylesheet" href="assets/driver.css">
+</head>
+<body class="dv">
+
+<div class="phone">
+  <div class="notch"></div>
+
+  <!-- ================= LOGIN ================= -->
+  <section class="dv-screen active" id="scr-login">
+    <div class="dv-login">
+      <!-- گام ۱: شماره موبایل -->
+      <div id="loginStep1">
+        <div class="mark">بچ</div>
+        <h1>اپلیکیشن راننده</h1>
+        <p>شماره موبایلی که مدیر کارگاه برای شما ثبت کرده را وارد کنید. کد ورود پیامک می‌شود.</p>
+        <div class="field">
+          <label>شماره موبایل</label>
+          <input type="tel" class="mono" id="loginMobile" value="۰۹۱۲۳۴۵۶۷۸۹" inputmode="numeric">
+        </div>
+        <button class="btn btn-primary btn-lg btn-full" id="sendOtp">دریافت کد ورود</button>
+        <div class="foot">نسخه ۱.۰ · سامانه بچینگ پارس</div>
+      </div>
+
+      <!-- گام ۲: کد تأیید -->
+      <div id="loginStep2" class="hidden">
+        <div class="mark">بچ</div>
+        <h1>کد ورود را بزنید</h1>
+        <p>کد ۴ رقمی به شماره <b class="mono">۰۹۱۲۳۴۵۶۷۸۹</b> ارسال شد.</p>
+        <div class="otp">
+          <input type="text" maxlength="1" value="۴"><input type="text" maxlength="1" value="۹">
+          <input type="text" maxlength="1" value="۲"><input type="text" maxlength="1" value="۷">
+        </div>
+        <button class="btn btn-primary btn-lg btn-full" id="doLogin">ورود به اپلیکیشن</button>
+        <div class="foot">ارسال دوباره کد تا <b class="mono" id="otpTimer">۰۰:۴۵</b></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= MISSIONS ================= -->
+  <section class="dv-screen" id="scr-missions">
+    <div class="dv-hero">
+      <div class="who">
+        <div class="av">ر.ک</div>
+        <div>
+          <div class="nm">رضا کریمی</div>
+          <div class="rl">کد پرسنلی DR-05 · میکسر ۱۲ ایران ۴۴۵ ب ۶۷</div>
+        </div>
+        <label class="duty">آماده به کار <button class="switch on" id="dutySwitch" aria-pressed="true"><i></i></button></label>
+      </div>
+      <div class="kpis">
+        <div><b class="mono">۶</b><span>مأموریت امروز</span></div>
+        <div><b class="mono">۳۶</b><span>متر مکعب</span></div>
+        <div><b class="mono">۱۴۲</b><span>کیلومتر</span></div>
+      </div>
+    </div>
+
+    <div class="dv-body">
+      <div class="section-title">مأموریت جاری</div>
+
+      <div class="m-card live" data-go="detail">
+        <div class="mh">
+          <div>
+            <div class="code mono">ORD-1042 · بچ #۴۳</div>
+            <div class="dest">روگذر میدان آزادی — راهسازی البرز</div>
+          </div>
+          <span class="badge plain">در مسیر</span>
+        </div>
+        <div class="mrow">
+          <div><b class="mono">C30</b><span>طرح اختلاط</span></div>
+          <div><b class="mono">۶.۰ m³</b><span>حجم بار</span></div>
+          <div><b class="mono">۱۴:۲۰</b><span>خروج از بچینگ</span></div>
+        </div>
+        <div class="trip">
+          <div class="st done"><div class="dot">✓</div><div class="lb">بارگیری</div><div class="tm mono">۱۴:۱۸</div></div>
+          <div class="st done"><div class="dot">✓</div><div class="lb">خروج</div><div class="tm mono">۱۴:۲۰</div></div>
+          <div class="st now"><div class="dot">●</div><div class="lb">در مسیر</div><div class="tm mono">۱۸ دقیقه</div></div>
+          <div class="st"><div class="dot"></div><div class="lb">تحویل</div><div class="tm mono">۱۴:۵۰</div></div>
+        </div>
+      </div>
+
+      <div class="section-title">مأموریت‌های بعدی</div>
+
+      <div class="m-card" data-go="detail">
+        <div class="mh">
+          <div>
+            <div class="code mono">ORD-1043 · بچ #۴۴</div>
+            <div class="dest">برج نگین شمال — انبوه‌سازان مهرگان</div>
+          </div>
+          <span class="badge b-deep">در انتظار بارگیری</span>
+        </div>
+        <div class="mrow">
+          <div><b class="mono">C25</b><span>طرح اختلاط</span></div>
+          <div><b class="mono">۶.۰ m³</b><span>حجم بار</span></div>
+          <div><b class="mono">۱۵:۳۰</b><span>زمان تحویل</span></div>
+        </div>
+        <button class="btn btn-primary btn-full" style="margin-top:12px" data-sheet="sheetPickup">تأیید دریافت بار از بچینگ</button>
+      </div>
+
+      <div class="m-card" data-go="detail">
+        <div class="mh">
+          <div>
+            <div class="code mono">ORD-1045 · بچ #۴۶</div>
+            <div class="dest">پیاده‌روسازی منطقه ۴ — شهرداری منطقه ۴</div>
+          </div>
+          <span class="badge b-mute">برنامه‌ریزی شده</span>
+        </div>
+        <div class="mrow">
+          <div><b class="mono">C20</b><span>طرح اختلاط</span></div>
+          <div><b class="mono">۵.۰ m³</b><span>حجم بار</span></div>
+          <div><b class="mono">۱۶:۴۵</b><span>زمان تحویل</span></div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:14px">
+        <div class="card-head" style="margin-bottom:10px"><h3>پیام کارگاه</h3><span class="hint mono">۱۳:۵۰</span></div>
+        <div style="font-size:12.4px;color:var(--ink-2);line-height:1.9">
+          ورودی شمالی پروژه نگین بسته است؛ از درب سرویس ضلع شرقی وارد شوید. تماس با سرپرست کارگاه: <b class="mono">۰۹۱۲۷۷۷۸۸۹۹</b>
+        </div>
+      </div>
+    </div>
+
+    <nav class="tabbar">
+      <button class="on" data-tab="missions"><span class="ic">▤</span>مأموریت‌ها</button>
+      <button data-tab="receipts"><span class="ic">▦</span>رسیدها</button>
+      <button data-tab="history"><span class="ic">◫</span>تاریخچه</button>
+      <button data-tab="profile"><span class="ic">◔</span>پروفایل</button>
+    </nav>
+  </section>
+
+  <!-- ================= MISSION DETAIL ================= -->
+  <section class="dv-screen" id="scr-detail">
+    <div class="dv-head">
+      <button class="dv-back" data-go="missions" aria-label="بازگشت">→</button>
+      <div><h2>مأموریت ORD-1042</h2><div class="sub">بچ #۴۳ · رسید بارگیری LD-2292</div></div>
+      <span class="badge b-blue" style="margin-inline-start:auto">در مسیر</span>
+    </div>
+
+    <div class="dv-body">
+      <div class="dest-box">
+        <div class="pin">◎</div>
+        <div>
+          <div class="ad">روگذر میدان آزادی — ضلع جنوبی، پایه شماره ۷</div>
+          <div class="ct">۱۲ کیلومتر · حدود ۲۴ دقیقه</div>
+        </div>
+      </div>
+      <div class="row" style="margin-bottom:16px">
+        <button class="btn btn-soft btn-sm" style="flex:1" data-toast="مسیر در برنامه نقشه باز شد">مسیریابی</button>
+        <button class="btn btn-ghost btn-sm" style="flex:1" data-toast="در حال تماس با سرپرست پروژه">تماس با کارفرما</button>
+        <button class="btn btn-ghost btn-sm" style="flex:1" data-toast="در حال تماس با اپراتور بچینگ">تماس با بچینگ</button>
+      </div>
+
+      <div class="card" style="margin-bottom:14px">
+        <div class="card-head" style="margin-bottom:8px"><h3>مشخصات بار</h3></div>
+        <div class="kv"><span>مشتری</span><span>شرکت راهسازی البرز</span></div>
+        <div class="kv"><span>پروژه</span><span>روگذر میدان آزادی</span></div>
+        <div class="kv"><span>طرح اختلاط</span><span class="mono">C30 — نسخه ۲</span></div>
+        <div class="kv"><span>حجم بار</span><span class="mono">۶.۰ متر مکعب</span></div>
+        <div class="kv"><span>اسلامپ</span><span class="mono">۱۰ ± ۲ cm</span></div>
+        <div class="kv"><span>خروج از بچینگ</span><span class="mono">۱۴:۲۰</span></div>
+        <div class="kv"><span>مهلت تخلیه</span><span class="mono">تا ۱۵:۱۰</span></div>
+      </div>
+
+      <div class="card" style="margin-bottom:14px">
+        <div class="card-head" style="margin-bottom:4px"><h3>مراحل مأموریت</h3></div>
+        <div class="tl">
+          <div class="tl-i"><span class="tl-d done"></span><div class="tl-b"><div class="t">بارگیری در بچینگ</div><div class="d">۱۴:۱۸ · اپراتور علی نوروزی</div></div></div>
+          <div class="tl-i"><span class="tl-d done"></span><div class="tl-b"><div class="t">تأیید دریافت بار توسط شما</div><div class="d">۱۴:۲۰ · رسید LD-2292</div></div></div>
+          <div class="tl-i"><span class="tl-d live"></span><div class="tl-b"><div class="t">در مسیر مقصد</div><div class="d">۱۸ دقیقه از خروج گذشته است</div></div></div>
+          <div class="tl-i"><span class="tl-d"></span><div class="tl-b"><div class="t">تحویل و ثبت رسید</div><div class="d">در انتظار تأیید نماینده کارفرما</div></div></div>
+        </div>
+      </div>
+
+      <button class="btn btn-ghost btn-full" style="margin-bottom:12px" data-go="receipt-view">مشاهده رسید بارگیری</button>
+      <button class="btn btn-primary btn-lg btn-full" data-go="delivery">ثبت تحویل در مقصد</button>
+    </div>
+  </section>
+
+  <!-- ================= DELIVERY ================= -->
+  <section class="dv-screen" id="scr-delivery">
+    <div class="dv-head">
+      <button class="dv-back" data-go="detail" aria-label="بازگشت">→</button>
+      <div><h2>ثبت تحویل بار</h2><div class="sub">ORD-1042 · بچ #۴۳ · ۶.۰ m³</div></div>
+    </div>
+
+    <div class="dv-body">
+      <div class="card" style="margin-bottom:14px">
+        <div class="card-head" style="margin-bottom:10px"><h3>زمان و مقدار</h3><span class="hint">در محل تخلیه ثبت شود</span></div>
+        <div class="f-row">
+          <div class="field"><label>زمان رسیدن</label><input type="text" class="mono" value="۱۴:۴۷"></div>
+          <div class="field"><label>زمان پایان تخلیه</label><input type="text" class="mono" value="۱۵:۰۵"></div>
+        </div>
+        <div class="field"><label>حجم تحویل‌شده <em>متر مکعب</em></label><input type="text" class="mono" value="۶.۰"></div>
+        <div class="field"><label>نام نماینده کارفرما</label><input type="text" placeholder="نام و سمت تحویل‌گیرنده"></div>
+        <div class="field"><label>توضیح <em>اختیاری</em></label><textarea placeholder="تأخیر، افت اسلامپ، برگشت بار…"></textarea></div>
+      </div>
+
+      <div class="card" style="margin-bottom:14px">
+        <div class="card-head" style="margin-bottom:10px"><h3>عکس رسید تحویل</h3><span class="badge b-warn">الزامی</span></div>
+        <div class="shot" id="shotBox">
+          <div class="ic">⎙</div>
+          <b>گرفتن عکس از رسید امضاشده</b>
+          <span>رسید را روی سطح صاف بگذارید و کامل در کادر قرار دهید</span>
+        </div>
+      </div>
+
+      <div class="swipe" id="swipeDeliver" role="button" tabindex="0" aria-label="کشیدن برای ثبت تحویل">
+        <span class="fill"></span>
+        <span class="txt">برای ثبت تحویل بکشید ←</span>
+        <span class="knob">←</span>
+      </div>
+      <div class="muted" style="font-size:11px;text-align:center;margin-top:10px">
+        پس از ثبت، رسید برای مدیر کارگاه و مشتری ارسال می‌شود.
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= RECEIPT VIEW ================= -->
+  <section class="dv-screen" id="scr-receipt-view">
+    <div class="dv-head">
+      <button class="dv-back" data-go="receipts" aria-label="بازگشت">→</button>
+      <div><h2>رسید بارگیری</h2><div class="sub mono">LD-2292 · بچ #۴۳</div></div>
+    </div>
+    <div class="dv-body">
+      <div class="receipt" style="max-width:100%">
+        <div class="r-head">
+          <div><h4>سامانه بچینگ پارس</h4><div class="no mono">رسید بارگیری · LD-2292</div></div>
+          <div class="mark">بچ</div>
+        </div>
+        <div class="r-row"><span>مشتری</span><span>شرکت راهسازی البرز</span></div>
+        <div class="r-row"><span>پروژه</span><span>روگذر میدان آزادی</span></div>
+        <div class="r-row"><span>طرح اختلاط</span><span class="mono">C30 — نسخه ۲</span></div>
+        <div class="r-row"><span>تاریخ و ساعت</span><span class="mono">۱۴۰۴/۰۵/۲۷ — ۱۴:۱۸</span></div>
+        <div class="r-row"><span>راننده</span><span>رضا کریمی</span></div>
+        <div class="r-row"><span>خودرو</span><span class="mono">۱۲ ایران ۴۴۵ ب ۶۷</span></div>
+        <div class="r-vol"><div class="n mono">۶.۰</div><div class="u">متر مکعب بارگیری شد</div></div>
+        <div class="r-sign"><div>امضای اپراتور</div><div>امضای راننده</div></div>
+      </div>
+      <div class="row no-print" style="margin-top:14px">
+        <button class="btn btn-deep btn-sm" style="flex:1" data-toast="فایل PDF رسید ذخیره شد">ذخیره PDF</button>
+        <button class="btn btn-ghost btn-sm" style="flex:1" data-toast="رسید برای نماینده کارفرما ارسال شد">اشتراک‌گذاری</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= RECEIPTS ================= -->
+  <section class="dv-screen" id="scr-receipts">
+    <div class="dv-head">
+      <div><h2>رسیدهای من</h2><div class="sub">۳ رسید امروز · ۱۸ متر مکعب</div></div>
+      <span class="badge b-ok" style="margin-inline-start:auto">همه همگام شد</span>
+    </div>
+    <div class="dv-body">
+      <div class="card flush" style="margin-bottom:14px">
+        <div class="card-head"><h3>امروز</h3></div>
+        <div style="padding:4px 16px 12px">
+          <div class="h-row" data-go="receipt-view">
+            <div class="dt"><b class="mono">۴۳</b><span>بچ</span></div>
+            <div><div class="ttl">LD-2292 · راهسازی البرز</div><div class="mt">بارگیری ۱۴:۱۸ — در انتظار رسید تحویل</div></div>
+            <div class="vv mono">۶.۰<span>m³</span></div>
+          </div>
+          <div class="h-row" data-go="receipt-view">
+            <div class="dt"><b class="mono">۴۲</b><span>بچ</span></div>
+            <div><div class="ttl">LD-2291 · مهرگان</div><div class="mt">تحویل ۱۳:۴۹ — رسید ثبت شد</div></div>
+            <div class="vv mono">۶.۰<span>m³</span></div>
+          </div>
+          <div class="h-row" data-go="receipt-view">
+            <div class="dt"><b class="mono">۴۱</b><span>بچ</span></div>
+            <div><div class="ttl">LD-2290 · مهرگان</div><div class="mt">تحویل ۱۳:۰۵ — رسید ثبت شد</div></div>
+            <div class="vv mono">۶.۰<span>m³</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="alert" style="border:0"><span class="ic warn">◔</span>
+        <div><div class="t">یک رسید تحویل ناقص است</div><div class="d">برای بچ #۴۳ هنوز عکس رسید ثبت نشده است.</div></div>
+      </div>
+      <button class="btn btn-primary btn-full" data-go="delivery">تکمیل رسید بچ #۴۳</button>
+    </div>
+
+    <nav class="tabbar">
+      <button data-tab="missions"><span class="ic">▤</span>مأموریت‌ها</button>
+      <button class="on" data-tab="receipts"><span class="ic">▦</span>رسیدها</button>
+      <button data-tab="history"><span class="ic">◫</span>تاریخچه</button>
+      <button data-tab="profile"><span class="ic">◔</span>پروفایل</button>
+    </nav>
+  </section>
+
+  <!-- ================= HISTORY ================= -->
+  <section class="dv-screen" id="scr-history">
+    <div class="dv-head">
+      <div><h2>تاریخچه بارها</h2><div class="sub">مرداد ۱۴۰۴</div></div>
+      <button class="btn btn-ghost btn-sm" style="margin-inline-start:auto" data-toast="گزارش ماهانه برای شما ارسال شد">خروجی</button>
+    </div>
+    <div class="dv-body">
+      <div class="grid" style="grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:16px">
+        <div class="card" style="padding:12px;text-align:center"><b class="mono" style="font-size:20px">۹۴</b><div class="muted" style="font-size:10.5px">مأموریت</div></div>
+        <div class="card" style="padding:12px;text-align:center"><b class="mono" style="font-size:20px">۵۶۴</b><div class="muted" style="font-size:10.5px">متر مکعب</div></div>
+        <div class="card" style="padding:12px;text-align:center"><b class="mono" style="font-size:20px">۲,۱۰۸</b><div class="muted" style="font-size:10.5px">کیلومتر</div></div>
+      </div>
+
+      <div class="section-title">امروز · ۲۷ مرداد</div>
+      <div class="card">
+        <div class="h-row"><div class="dt"><b class="mono">۲۷</b><span>مرداد</span></div>
+          <div><div class="ttl">ORD-1042 · راهسازی البرز</div><div class="mt">روگذر میدان آزادی — در مسیر</div></div>
+          <div class="vv mono">۶.۰<span>m³</span></div></div>
+        <div class="h-row"><div class="dt"><b class="mono">۲۷</b><span>مرداد</span></div>
+          <div><div class="ttl">ORD-1041 · مهرگان</div><div class="mt">برج نگین شمال — تحویل شد</div></div>
+          <div class="vv mono">۶.۰<span>m³</span></div></div>
+        <div class="h-row"><div class="dt"><b class="mono">۲۷</b><span>مرداد</span></div>
+          <div><div class="ttl">ORD-1041 · مهرگان</div><div class="mt">برج نگین شمال — تحویل شد</div></div>
+          <div class="vv mono">۶.۰<span>m³</span></div></div>
+      </div>
+
+      <div class="section-title">دیروز · ۲۶ مرداد</div>
+      <div class="card">
+        <div class="h-row"><div class="dt"><b class="mono">۲۶</b><span>مرداد</span></div>
+          <div><div class="ttl">ORD-1038 · شهرداری منطقه ۴</div><div class="mt">بلوار کشاورز — تحویل شد</div></div>
+          <div class="vv mono">۵.۰<span>m³</span></div></div>
+        <div class="h-row"><div class="dt"><b class="mono">۲۶</b><span>مرداد</span></div>
+          <div><div class="ttl">ORD-1037 · راهسازی البرز</div><div class="mt">میدان آزادی — تحویل شد</div></div>
+          <div class="vv mono">۶.۰<span>m³</span></div></div>
+        <div class="h-row"><div class="dt"><b class="mono">۲۶</b><span>مرداد</span></div>
+          <div><div class="ttl">ORD-1036 · مهرگان</div><div class="mt">برج نگین شمال — برگشت جزئی ۰.۵ m³</div></div>
+          <div class="vv mono">۵.۵<span>m³</span></div></div>
+      </div>
+    </div>
+
+    <nav class="tabbar">
+      <button data-tab="missions"><span class="ic">▤</span>مأموریت‌ها</button>
+      <button data-tab="receipts"><span class="ic">▦</span>رسیدها</button>
+      <button class="on" data-tab="history"><span class="ic">◫</span>تاریخچه</button>
+      <button data-tab="profile"><span class="ic">◔</span>پروفایل</button>
+    </nav>
+  </section>
+
+  <!-- ================= PROFILE ================= -->
+  <section class="dv-screen" id="scr-profile">
+    <div class="dv-hero" style="padding-bottom:22px">
+      <div class="who">
+        <div class="av">ر.ک</div>
+        <div>
+          <div class="nm">رضا کریمی</div>
+          <div class="rl">راننده میکسر · کارگاه بچینگ شماره ۱ تهران</div>
+        </div>
+      </div>
+      <div class="kpis">
+        <div><b class="mono">DR-05</b><span>کد پرسنلی</span></div>
+        <div><b class="mono">۳ سال</b><span>سابقه</span></div>
+        <div><b class="mono">۹۸٪</b><span>تحویل به‌موقع</span></div>
+      </div>
+    </div>
+
+    <div class="dv-body">
+      <div class="card" style="margin-bottom:14px">
+        <div class="card-head" style="margin-bottom:8px"><h3>خودروی تخصیص‌یافته</h3><span class="badge b-ok">فعال</span></div>
+        <div class="kv"><span>پلاک</span><span class="mono">۱۲ ایران ۴۴۵ ب ۶۷</span></div>
+        <div class="kv"><span>نوع و ظرفیت</span><span>میکسر · ۶ متر مکعب</span></div>
+        <div class="kv"><span>گواهینامه</span><span class="mono">پایه یک — اعتبار تا ۱۴۰۶/۰۳</span></div>
+      </div>
+
+      <div class="card" style="margin-bottom:14px">
+        <div class="card-head" style="margin-bottom:4px"><h3>تنظیمات</h3></div>
+        <div class="toggle"><div><div class="tt">اعلان مأموریت جدید</div><div class="td">هنگام تخصیص بار اطلاع بده</div></div><button class="switch on" aria-pressed="true"><i></i></button></div>
+        <div class="toggle"><div><div class="tt">یادآور ثبت رسید</div><div class="td">اگر ۱۵ دقیقه بعد از رسیدن ثبت نشد</div></div><button class="switch on" aria-pressed="true"><i></i></button></div>
+        <div class="toggle"><div><div class="tt">ارسال موقعیت در مأموریت</div><div class="td">فقط در زمان حمل بار فعال است</div></div><button class="switch" aria-pressed="false"><i></i></button></div>
+      </div>
+
+      <button class="btn btn-ghost btn-full" style="margin-bottom:10px" data-toast="درخواست پشتیبانی برای مدیر کارگاه ارسال شد">تماس با پشتیبانی کارگاه</button>
+      <button class="btn btn-danger btn-full" data-go="login">خروج از حساب</button>
+    </div>
+
+    <nav class="tabbar">
+      <button data-tab="missions"><span class="ic">▤</span>مأموریت‌ها</button>
+      <button data-tab="receipts"><span class="ic">▦</span>رسیدها</button>
+      <button data-tab="history"><span class="ic">◫</span>تاریخچه</button>
+      <button class="on" data-tab="profile"><span class="ic">◔</span>پروفایل</button>
+    </nav>
+  </section>
+
+  <!-- ================= SHEET: تأیید دریافت بار ================= -->
+  <div class="dv-sheet" id="sheetPickup">
+    <div class="inner">
+      <div class="grab"></div>
+      <div class="card-head" style="margin-bottom:10px">
+        <div><h3 style="font-size:15px">تأیید دریافت بار</h3><div class="hint">بچ #۴۳ · ۶.۰ متر مکعب</div></div>
+        <span class="badge b-blue">LD-2292</span>
+      </div>
+      <div class="kv"><span>طرح اختلاط</span><span class="mono">C30 — نسخه ۲</span></div>
+      <div class="kv"><span>مقصد</span><span>روگذر میدان آزادی</span></div>
+      <div class="kv"><span>زمان خروج</span><span class="mono">۱۴:۲۰</span></div>
+      <div class="row" style="margin-top:16px">
+        <button class="btn btn-ghost" style="flex:1" data-sheet-close="sheetPickup">انصراف</button>
+        <button class="btn btn-primary btn-lg" style="flex:2" data-sheet-close="sheetPickup" data-toast="دریافت بار تأیید شد — مأموریت آغاز شد">تأیید دریافت بار</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toasts" id="toasts" style="position:absolute;bottom:82px;inset-inline:16px;"></div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+  const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>Array.from(r.querySelectorAll(s));
+  const FA='۰۱۲۳۴۵۶۷۸۹';
+  const toFa=n=>String(n).replace(/\d/g,d=>FA[+d]);
+
+  /* ---- ناوبری بین صفحه‌ها ---- */
+  function show(name){
+    $$('.dv-screen').forEach(s=>s.classList.toggle('active',s.id==='scr-'+name));
+    $$('.tabbar button').forEach(b=>b.classList.toggle('on',b.dataset.tab===name));
+    const body=$('#scr-'+name+' .dv-body'); if(body) body.scrollTop=0;
+    if(name==='login'){ $('#loginStep1').classList.remove('hidden'); $('#loginStep2').classList.add('hidden'); }
+  }
+  $$('[data-go]').forEach(el=>el.addEventListener('click',e=>{
+    if(e.target.closest('[data-toast],[data-sheet]')) return;
+    show(el.dataset.go);
+  }));
+  $$('.tabbar button').forEach(b=>b.addEventListener('click',()=>show(b.dataset.tab)));
+
+  /* ---- ورود ---- */
+  $('#sendOtp').addEventListener('click',()=>{
+    $('#loginStep1').classList.add('hidden');
+    $('#loginStep2').classList.remove('hidden');
+    let t=45;
+    const iv=setInterval(()=>{
+      t--; $('#otpTimer').textContent='۰۰:'+toFa(String(Math.max(t,0)).padStart(2,'0'));
+      if(t<=0) clearInterval(iv);
+    },1000);
+  });
+  $('#doLogin').addEventListener('click',()=>show('missions'));
+
+  /* ---- کلیدهای دوحالته ---- */
+  $$('.switch').forEach(sw=>sw.addEventListener('click',e=>{
+    e.stopPropagation();
+    sw.setAttribute('aria-pressed', sw.classList.toggle('on'));
+  }));
+
+  /* ---- عکس رسید ---- */
+  $('#shotBox').addEventListener('click',function(){
+    this.classList.add('filled');
+    this.innerHTML='<div class="ic">✓</div><b>عکس رسید ثبت شد</b><span>برای گرفتن دوباره لمس کنید</span>';
+    toast('عکس رسید ذخیره شد');
+  });
+
+  /* ---- شیت ---- */
+  $$('[data-sheet]').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();$('#'+b.dataset.sheet).classList.add('open');}));
+  $$('[data-sheet-close]').forEach(b=>b.addEventListener('click',()=>$('#'+b.dataset.sheetClose).classList.remove('open')));
+  $$('.dv-sheet').forEach(s=>s.addEventListener('click',e=>{if(e.target===s)s.classList.remove('open');}));
+
+  /* ---- کشیدن برای تأیید ---- */
+  function initSwipe(el,onDone){
+    const knob=el.querySelector('.knob'), fill=el.querySelector('.fill'), txt=el.querySelector('.txt');
+    let dragging=false, max=0, done=false;
+    const rtlStart=e=>{
+      if(done) return;
+      dragging=true; max=el.clientWidth-knob.clientWidth-10;
+      knob.setPointerCapture&&knob.setPointerCapture(e.pointerId);
+    };
+    const move=e=>{
+      if(!dragging||done) return;
+      const r=el.getBoundingClientRect();
+      let d=r.right-e.clientX-knob.clientWidth/2-5;      /* راست به چپ */
+      d=Math.max(0,Math.min(d,max));
+      knob.style.insetInlineStart=(5+d)+'px';
+      fill.style.width=(d+55)+'px';
+      if(d>=max-4) finish();
+    };
+    const up=()=>{
+      if(!dragging||done) return;
+      dragging=false;
+      knob.style.insetInlineStart='5px'; fill.style.width='0';
+    };
+    function finish(){
+      done=true; dragging=false;
+      el.classList.add('done');
+      fill.style.width='100%';
+      knob.style.insetInlineStart=(el.clientWidth-knob.clientWidth-5)+'px';
+      knob.textContent='✓'; txt.textContent='ثبت شد';
+      onDone();
+    }
+    knob.addEventListener('pointerdown',rtlStart);
+    window.addEventListener('pointermove',move);
+    window.addEventListener('pointerup',up);
+    el.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&!done){e.preventDefault();finish();}});
+  }
+  initSwipe($('#swipeDeliver'),()=>{
+    toast('تحویل ثبت شد — رسید برای مدیر کارگاه ارسال شد');
+    setTimeout(()=>show('receipts'),900);
+  });
+
+  /* ---- توست ---- */
+  function toast(msg){
+    const el=document.createElement('div');
+    el.className='toast'; el.innerHTML='<i></i><span></span>';
+    el.querySelector('span').textContent=msg;
+    $('#toasts').appendChild(el);
+    setTimeout(()=>{el.style.transition='.25s';el.style.opacity='0';},2600);
+    setTimeout(()=>el.remove(),2950);
+  }
+  $$('[data-toast]').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();toast(b.dataset.toast);}));
+})();
+</script>
+</body>
+</html>
