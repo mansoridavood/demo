@@ -1,0 +1,261 @@
+/* ============================================================
+   اپلیکیشن راننده — موبایل‌فرست، مناسب لمس با دستکش
+   وابسته به core.css
+   ============================================================ */
+
+body.dv{
+  background:
+    radial-gradient(900px 520px at 78% -12%, rgba(33,150,243,.20), transparent 62%),
+    linear-gradient(170deg,#082C60 0%,#061A33 100%);
+  min-height:100dvh;
+  display:flex;align-items:center;justify-content:center;
+  padding:26px 16px;
+}
+
+/* ---------- قاب گوشی (فقط روی دسکتاپ دیده می‌شود) ---------- */
+.phone{
+  width:412px;max-width:100%;
+  height:min(880px,calc(100dvh - 52px));
+  background:var(--page);
+  border-radius:38px;
+  border:9px solid #061428;
+  box-shadow:var(--sh-3),0 0 0 1px rgba(144,202,249,.22);
+  position:relative;overflow:hidden;
+  display:flex;flex-direction:column;
+}
+.notch{
+  position:absolute;top:0;inset-inline-start:50%;transform:translateX(50%);
+  width:122px;height:22px;background:#061428;
+  border-radius:0 0 14px 14px;z-index:40;
+}
+
+/* ---------- صفحه‌ها ---------- */
+.dv-screen{display:none;flex-direction:column;height:100%;min-height:0;}
+.dv-screen.active{display:flex;animation:fade .2s ease;}
+
+.dv-head{
+  padding:30px 18px 13px;background:var(--surface);
+  border-bottom:1px solid var(--line);
+  display:flex;align-items:center;gap:11px;flex:0 0 auto;
+}
+.dv-head h2{margin:0;font-size:15.5px;font-weight:700;letter-spacing:-.2px;}
+.dv-head .sub{font-size:11px;color:var(--ink-3);margin-top:1px;}
+.dv-back{
+  width:34px;height:34px;flex:0 0 34px;border-radius:11px;
+  border:1px solid var(--line-2);background:#fff;color:var(--ink-2);
+  font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;
+}
+.dv-back:hover{background:var(--b-50);color:var(--b-900);}
+.dv-body{flex:1;min-height:0;overflow-y:auto;padding:16px 16px 26px;}
+.dv-body::-webkit-scrollbar{width:0;}
+
+/* ---------- نوار پایین ---------- */
+.tabbar{
+  flex:0 0 auto;display:grid;grid-template-columns:repeat(4,1fr);
+  background:var(--surface);border-top:1px solid var(--line);
+  padding:7px 6px calc(9px + env(safe-area-inset-bottom));
+}
+.tabbar button{
+  border:0;background:none;cursor:pointer;padding:7px 2px;border-radius:12px;
+  display:flex;flex-direction:column;align-items:center;gap:3px;
+  font-size:10.5px;font-weight:600;color:var(--ink-3);transition:.14s;
+}
+.tabbar button .ic{font-size:17px;line-height:1;}
+.tabbar button.on{color:var(--b-700);background:var(--b-50);}
+
+/* ---------- ورود ---------- */
+.dv-login{
+  height:100%;display:flex;flex-direction:column;justify-content:center;
+  padding:34px 24px;
+  background:linear-gradient(168deg,#0D47A1,#082C60 62%,#061A33);
+  color:#DCEBFB;
+}
+.dv-login .mark{
+  width:56px;height:56px;border-radius:17px;
+  background:linear-gradient(150deg,#90CAF9,#2196F3 65%);
+  color:#062247;font-weight:800;font-size:20px;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 12px 30px -12px rgba(33,150,243,.95);
+}
+.dv-login h1{margin:20px 0 4px;font-size:22px;font-weight:800;color:#fff;letter-spacing:-.4px;}
+.dv-login p{margin:0 0 26px;font-size:12.6px;color:#8FB4DC;line-height:1.8;}
+.dv-login .field label{color:#9FC4EA;}
+.dv-login .field input{
+  background:rgba(255,255,255,.07);border-color:rgba(144,202,249,.28);
+  color:#fff;font-size:15px;padding:13px 14px;
+}
+.dv-login .field input::placeholder{color:#6D8FB0;}
+.dv-login .field input:focus{background:rgba(255,255,255,.12);box-shadow:0 0 0 3px rgba(33,150,243,.22);}
+.dv-login .foot{margin-top:22px;font-size:11px;color:#6D8FB0;text-align:center;}
+.otp{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;direction:ltr;margin-bottom:16px;}
+.otp input{
+  height:56px;text-align:center;font-size:22px;font-weight:700;
+  border-radius:14px;border:1px solid rgba(144,202,249,.28);
+  background:rgba(255,255,255,.07);color:#fff;
+}
+.otp input:focus{outline:none;border-color:var(--b-300);background:rgba(255,255,255,.14);}
+
+/* ---------- سربرگ راننده ---------- */
+.dv-hero{
+  background:linear-gradient(165deg,#0D47A1,#082C60);
+  color:#DCEBFB;padding:32px 18px 18px;flex:0 0 auto;
+}
+.dv-hero .who{display:flex;align-items:center;gap:11px;}
+.dv-hero .av{
+  width:42px;height:42px;border-radius:14px;flex:0 0 42px;
+  background:rgba(255,255,255,.14);color:#fff;font-weight:700;font-size:13px;
+  display:flex;align-items:center;justify-content:center;
+}
+.dv-hero .nm{font-size:15px;font-weight:700;color:#fff;}
+.dv-hero .rl{font-size:11px;color:#8FB4DC;}
+.dv-hero .duty{
+  margin-inline-start:auto;display:flex;align-items:center;gap:8px;
+  font-size:11px;color:#9FC4EA;
+}
+.dv-hero .kpis{display:flex;gap:9px;margin-top:16px;}
+.dv-hero .kpis div{
+  flex:1;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.12);
+  border-radius:13px;padding:9px 10px;text-align:center;
+}
+.dv-hero .kpis b{display:block;font-size:17px;font-weight:700;color:#fff;line-height:1.35;}
+.dv-hero .kpis span{font-size:10px;color:#9FC4EA;}
+
+/* ---------- کارت مأموریت ---------- */
+.m-card{
+  background:var(--surface);border:1px solid var(--line);
+  border-radius:var(--r-lg);padding:15px 16px;margin-bottom:12px;
+  cursor:pointer;transition:.15s;box-shadow:var(--sh-1);
+}
+.m-card:hover{border-color:var(--b-200);}
+.m-card.live{
+  background:linear-gradient(163deg,#1877D2,#0D47A1 72%);
+  border-color:transparent;color:#EAF3FD;
+  box-shadow:0 18px 34px -20px rgba(13,71,161,.9);
+}
+.m-card .mh{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;}
+.m-card .code{font-size:15px;font-weight:800;letter-spacing:.2px;}
+.m-card.live .code{color:#fff;}
+.m-card .dest{font-size:12px;color:var(--ink-3);margin-top:2px;}
+.m-card.live .dest{color:#B6D6F5;}
+.m-card .mrow{display:flex;gap:8px;margin-top:13px;}
+.m-card .mrow div{
+  flex:1;background:var(--surface-2);border:1px solid var(--line);
+  border-radius:11px;padding:8px 9px;text-align:center;
+}
+.m-card.live .mrow div{background:rgba(255,255,255,.11);border-color:rgba(255,255,255,.14);}
+.m-card .mrow b{display:block;font-size:14.5px;font-weight:700;line-height:1.4;}
+.m-card.live .mrow b{color:#fff;}
+.m-card .mrow span{font-size:10px;color:var(--ink-3);}
+.m-card.live .mrow span{color:#A9CDEF;}
+.m-card.live .badge{background:rgba(255,255,255,.18);color:#fff;}
+
+/* ---------- مسیر مأموریت (خط زمانی افقی) ---------- */
+.trip{display:flex;align-items:flex-start;margin:16px 0 4px;}
+.trip .st{flex:1;text-align:center;position:relative;}
+.trip .st::before{
+  content:'';position:absolute;top:8px;inset-inline-start:50%;
+  width:100%;height:2px;background:var(--line-2);
+}
+.trip .st:last-child::before{display:none;}
+.trip .dot{
+  width:18px;height:18px;border-radius:50%;margin:0 auto 7px;position:relative;z-index:2;
+  background:#fff;border:2px solid var(--line-2);
+  display:flex;align-items:center;justify-content:center;font-size:9px;color:var(--ink-3);
+}
+.trip .st.done .dot{background:var(--b-500);border-color:var(--b-500);color:#fff;}
+.trip .st.done::before{background:var(--b-500);}
+.trip .st.now .dot{border-color:var(--b-500);color:var(--b-700);box-shadow:0 0 0 4px var(--b-50);}
+.trip .lb{font-size:10.5px;font-weight:600;color:var(--ink-3);}
+.trip .st.done .lb,.trip .st.now .lb{color:var(--ink);}
+.trip .tm{font-size:9.5px;color:var(--ink-3);}
+.m-card.live .trip .dot{background:rgba(255,255,255,.22);border-color:rgba(255,255,255,.35);color:#fff;}
+.m-card.live .trip .st.done .dot{background:#fff;border-color:#fff;color:var(--b-900);}
+.m-card.live .trip .st::before{background:rgba(255,255,255,.3);}
+.m-card.live .trip .st.done::before{background:#fff;}
+.m-card.live .trip .lb{color:#C6DFF8;}
+.m-card.live .trip .st.done .lb,.m-card.live .trip .st.now .lb{color:#fff;}
+.m-card.live .trip .tm{color:#9FC4EA;}
+
+/* ---------- آدرس مقصد ---------- */
+.dest-box{
+  background:var(--b-50);border:1px solid var(--b-100);border-radius:var(--r);
+  padding:13px 14px;display:flex;gap:11px;align-items:flex-start;margin-bottom:12px;
+}
+.dest-box .pin{
+  width:32px;height:32px;flex:0 0 32px;border-radius:10px;background:var(--b-900);
+  color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;
+}
+.dest-box .ad{font-size:12.5px;font-weight:600;line-height:1.7;}
+.dest-box .ct{font-size:11px;color:var(--b-700);}
+
+/* ---------- کشیدن برای تأیید (اقدام اصلی راننده) ---------- */
+.swipe{
+  position:relative;height:60px;border-radius:18px;overflow:hidden;
+  background:linear-gradient(90deg,var(--b-900),var(--b-600));
+  color:#fff;user-select:none;touch-action:none;margin-top:6px;
+}
+.swipe .fill{position:absolute;inset:0;width:0;background:rgba(255,255,255,.18);}
+.swipe .txt{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-size:14px;font-weight:700;gap:8px;pointer-events:none;
+}
+.swipe .knob{
+  position:absolute;top:5px;inset-inline-start:5px;width:50px;height:50px;
+  border-radius:15px;background:#fff;color:var(--b-900);
+  display:flex;align-items:center;justify-content:center;font-size:19px;
+  cursor:grab;box-shadow:0 6px 16px -6px rgba(0,0,0,.5);
+}
+.swipe.done{background:linear-gradient(90deg,#1E7A55,#28966A);}
+.swipe.done .knob{color:#1E7A55;}
+.swipe.ghost{background:linear-gradient(90deg,#4E6C88,#63819C);}
+
+/* ---------- عکس رسید ---------- */
+.shot{
+  border:1px dashed var(--line-2);background:var(--surface-2);border-radius:var(--r);
+  padding:26px 16px;text-align:center;cursor:pointer;transition:.15s;
+}
+.shot:hover{border-color:var(--b-300);background:var(--b-50);}
+.shot .ic{font-size:26px;color:var(--b-500);}
+.shot b{display:block;font-size:12.6px;margin-top:6px;}
+.shot span{font-size:11px;color:var(--ink-3);}
+.shot.filled{border-style:solid;border-color:var(--ok);background:var(--ok-bg);}
+.shot.filled .ic{color:var(--ok);}
+
+/* ---------- ردیف تاریخچه ---------- */
+.h-row{
+  display:flex;align-items:center;gap:12px;padding:12px 0;
+  border-bottom:1px solid var(--line);
+}
+.h-row:last-child{border-bottom:none;}
+.h-row .dt{
+  width:44px;flex:0 0 44px;text-align:center;border-radius:11px;
+  background:var(--surface-2);border:1px solid var(--line);padding:5px 0;
+}
+.h-row .dt b{display:block;font-size:15px;font-weight:800;line-height:1.2;}
+.h-row .dt span{font-size:9.5px;color:var(--ink-3);}
+.h-row .ttl{font-size:12.8px;font-weight:600;}
+.h-row .mt{font-size:11px;color:var(--ink-3);}
+.h-row .vv{margin-inline-start:auto;text-align:left;font-size:13px;font-weight:700;}
+.h-row .vv span{display:block;font-size:10px;color:var(--ink-3);font-weight:500;}
+
+/* ---------- شیت پایین ---------- */
+.dv-sheet{
+  position:absolute;inset:0;z-index:50;display:none;
+  background:rgba(6,20,40,.5);backdrop-filter:blur(2px);
+}
+.dv-sheet.open{display:flex;align-items:flex-end;}
+.dv-sheet .inner{
+  width:100%;background:#fff;border-radius:24px 24px 0 0;padding:18px 18px 22px;
+  animation:sheetUp .24s cubic-bezier(.3,.9,.3,1);max-height:88%;overflow-y:auto;
+}
+@keyframes sheetUp{from{transform:translateY(30px);opacity:0}to{transform:none;opacity:1}}
+.dv-sheet .grab{width:38px;height:4px;border-radius:4px;background:var(--line-2);margin:0 auto 14px;}
+
+/* ---------- موبایل واقعی: حذف قاب ---------- */
+@media (max-width:520px){
+  body.dv{padding:0;align-items:stretch;background:var(--page);}
+  .phone{width:100%;height:100dvh;border:0;border-radius:0;box-shadow:none;}
+  .notch{display:none;}
+  .dv-head{padding-top:16px;}
+  .dv-hero{padding-top:18px;}
+}
